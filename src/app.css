@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+:root {
+	--color-primary: 59 130 246;
+	--color-secondary: 139 92 246;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	@apply antialiased;
+}
