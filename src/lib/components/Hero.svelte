@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import TypewriterEffect from './TypewriterEffect.svelte';
+	import type { PersonalInfo } from '$lib/types/portfolio';
 
+	interface Props {
+		personal: PersonalInfo;
+	}
+
+	let { personal }: Props = $props();
 	let visible = $state(false);
 
 	onMount(() => {
@@ -27,22 +34,22 @@
 
 	<div class="container mx-auto px-4 text-center">
 		<div class="transform transition-all duration-1000 {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
-			<h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4">
-				Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Ajinkya Taranekar</span>
+			<h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4">
+				Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">{personal.name}</span>
 			</h1>
-			<p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
-				Computer Science Engineer | Full Stack Developer | Tech Enthusiast
-			</p>
+			<div class="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 min-h-[2em]">
+				<TypewriterEffect text={personal.tagline} speed={50} delay={500} />
+			</div>
 			<div class="flex flex-wrap justify-center gap-4 mb-8">
 				<a
 					href="#projects"
-					class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg"
+					class="px-6 sm:px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg text-sm sm:text-base"
 				>
 					View My Work
 				</a>
 				<a
 					href="#contact"
-					class="px-8 py-3 bg-transparent border-2 border-blue-500 text-blue-500 dark:text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105"
+					class="px-6 sm:px-8 py-3 bg-transparent border-2 border-blue-500 text-blue-500 dark:text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105 text-sm sm:text-base"
 				>
 					Get In Touch
 				</a>

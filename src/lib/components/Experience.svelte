@@ -1,37 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { Experience } from '$lib/types/portfolio';
 
+	interface Props {
+		experiences: Experience[];
+	}
+
+	let { experiences }: Props = $props();
 	let visible = $state(false);
-
-	const experiences = [
-		{
-			title: 'Senior Software Engineer',
-			company: 'Tech Corp',
-			period: '2023 - Present',
-			description:
-				'Leading development of scalable web applications using modern tech stack. Mentoring junior developers and implementing best practices.',
-			technologies: ['React', 'Node.js', 'TypeScript', 'AWS'],
-			type: 'work'
-		},
-		{
-			title: 'Full Stack Developer',
-			company: 'Innovation Labs',
-			period: '2021 - 2023',
-			description:
-				'Built and maintained multiple client projects. Implemented CI/CD pipelines and improved application performance by 40%.',
-			technologies: ['Vue.js', 'Python', 'Docker', 'PostgreSQL'],
-			type: 'work'
-		},
-		{
-			title: 'Software Development Intern',
-			company: 'StartUp Inc',
-			period: '2020 - 2021',
-			description:
-				'Contributed to the development of core features. Worked on frontend and backend components.',
-			technologies: ['JavaScript', 'Express.js', 'MongoDB', 'Git'],
-			type: 'internship'
-		}
-	];
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -49,10 +25,10 @@
 	});
 </script>
 
-<section id="experience" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+<section id="experience" class="py-12 sm:py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
 	<div class="container mx-auto px-4">
 		<div class="transform transition-all duration-1000 {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
-			<h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+			<h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12">
 				My <span class="text-blue-500">Experience</span>
 			</h2>
 
@@ -60,7 +36,7 @@
 				<div class="relative">
 					<!-- Timeline line -->
 					<div
-						class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-blue-500"
+						class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-500"
 					></div>
 
 					{#each experiences as exp, i}
@@ -70,11 +46,11 @@
 						>
 							<div class="flex items-center mb-4">
 								<div
-									class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center z-10 shrink-0 {i % 2 === 0 ? 'md:ml-auto md:mr-8' : 'md:ml-8'}"
+									class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500 flex items-center justify-center z-10 shrink-0 {i % 2 === 0 ? 'md:ml-auto md:mr-8' : 'md:ml-8'}"
 								>
 									{#if exp.type === 'work'}
 										<svg
-											class="w-8 h-8 text-white"
+											class="w-6 h-6 sm:w-8 sm:h-8 text-white"
 											fill="none"
 											stroke="currentColor"
 											viewBox="0 0 24 24"
@@ -88,7 +64,7 @@
 										</svg>
 									{:else}
 										<svg
-											class="w-8 h-8 text-white"
+											class="w-6 h-6 sm:w-8 sm:h-8 text-white"
 											fill="none"
 											stroke="currentColor"
 											viewBox="0 0 24 24"
@@ -105,28 +81,28 @@
 							</div>
 
 							<div
-								class="ml-24 md:ml-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl"
+								class="ml-16 md:ml-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 transition-all duration-300 hover:shadow-xl"
 							>
-								<div class="flex justify-between items-start mb-2">
-									<h3 class="text-xl font-bold text-gray-900 dark:text-white">
+								<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
+									<h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
 										{exp.title}
 									</h3>
 									<span
-										class="text-sm px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full"
+										class="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full w-fit"
 									>
 										{exp.period}
 									</span>
 								</div>
-								<p class="text-blue-500 dark:text-blue-400 font-semibold mb-3">
+								<p class="text-sm sm:text-base text-blue-500 dark:text-blue-400 font-semibold mb-3">
 									{exp.company}
 								</p>
-								<p class="text-gray-600 dark:text-gray-300 mb-4">
+								<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
 									{exp.description}
 								</p>
 								<div class="flex flex-wrap gap-2">
 									{#each exp.technologies as tech}
 										<span
-											class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-sm"
+											class="px-2 sm:px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-xs sm:text-sm"
 										>
 											{tech}
 										</span>

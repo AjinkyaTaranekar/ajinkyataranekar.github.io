@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { portfolio } from '$lib/stores/portfolio';
 	import QRCode from '$lib/components/QRCode.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import About from '$lib/components/About.svelte';
@@ -37,19 +38,19 @@
 	<Navigation {darkMode} {toggleTheme} bind:showQR />
 	
 	<main>
-		<Hero />
-		<About />
-		<Experience />
-		<Projects />
-		<Education />
-		<Skills />
-		<Contact />
+		<Hero personal={$portfolio.personal} />
+		<About personal={$portfolio.personal} stats={$portfolio.stats} />
+		<Experience experiences={$portfolio.experiences} />
+		<Projects projects={$portfolio.projects} />
+		<Education education={$portfolio.education} />
+		<Skills skillCategories={$portfolio.skillCategories} additionalSkills={$portfolio.additionalSkills} />
+		<Contact personal={$portfolio.personal} social={$portfolio.social} />
 	</main>
 
-	<footer class="bg-gray-100 dark:bg-gray-800 py-8 transition-colors duration-300">
+	<footer class="bg-gray-100 dark:bg-gray-800 py-6 sm:py-8 transition-colors duration-300">
 		<div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
-			<p>&copy; {new Date().getFullYear()} Ajinkya Taranekar. All rights reserved.</p>
-			<p class="mt-2 text-sm">Built with ❤️ using SvelteKit & Tailwind CSS</p>
+			<p class="text-sm sm:text-base">&copy; {new Date().getFullYear()} {$portfolio.personal.name}. All rights reserved.</p>
+			<p class="mt-2 text-xs sm:text-sm">Built with ❤️ using SvelteKit & Tailwind CSS</p>
 		</div>
 	</footer>
 

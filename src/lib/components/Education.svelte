@@ -1,32 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { Education } from '$lib/types/portfolio';
 
+	interface Props {
+		education: Education[];
+	}
+
+	let { education }: Props = $props();
 	let visible = $state(false);
-
-	const education = [
-		{
-			degree: 'Bachelor of Engineering in Computer Science',
-			institution: 'University of Technology',
-			period: '2018 - 2022',
-			grade: 'CGPA: 8.5/10',
-			description:
-				'Focused on software engineering, data structures, algorithms, and web technologies. Active member of coding club and tech societies.',
-			achievements: [
-				'Dean\'s List - All Semesters',
-				'Best Final Year Project Award',
-				'Published research paper on Machine Learning'
-			]
-		},
-		{
-			degree: 'Higher Secondary Certificate (HSC)',
-			institution: 'Science College',
-			period: '2016 - 2018',
-			grade: '92%',
-			description:
-				'Specialized in Science stream with Mathematics, Physics, and Chemistry.',
-			achievements: ['School Science Fair Winner', 'Mathematics Olympiad Participant']
-		}
-	];
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -44,27 +25,27 @@
 	});
 </script>
 
-<section id="education" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+<section id="education" class="py-12 sm:py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
 	<div class="container mx-auto px-4">
 		<div class="transform transition-all duration-1000 {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
-			<h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+			<h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12">
 				My <span class="text-blue-500">Education</span>
 			</h2>
 
-			<div class="max-w-4xl mx-auto space-y-8">
+			<div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
 				{#each education as edu, i}
 					<div
-						class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl"
+						class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 rounded-xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl"
 						style="animation-delay: {i * 200}ms"
 					>
-						<div class="flex flex-col md:flex-row justify-between items-start mb-4">
-							<div class="flex-1">
-								<div class="flex items-center gap-3 mb-2">
+						<div class="flex flex-col sm:flex-row justify-between items-start mb-4 gap-4">
+							<div class="flex-1 w-full">
+								<div class="flex items-start gap-3 mb-2">
 									<div
-										class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center shrink-0"
+										class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center shrink-0"
 									>
 										<svg
-											class="w-6 h-6 text-white"
+											class="w-5 h-5 sm:w-6 sm:h-6 text-white"
 											fill="none"
 											stroke="currentColor"
 											viewBox="0 0 24 24"
@@ -89,39 +70,39 @@
 											/>
 										</svg>
 									</div>
-									<h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+									<h3 class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
 										{edu.degree}
 									</h3>
 								</div>
-								<p class="text-lg text-blue-600 dark:text-blue-400 font-semibold mb-2">
+								<p class="text-base sm:text-lg text-blue-600 dark:text-blue-400 font-semibold mb-2 ml-13">
 									{edu.institution}
 								</p>
 							</div>
-							<div class="flex flex-col items-end gap-2">
+							<div class="flex flex-row sm:flex-col gap-2 w-full sm:w-auto sm:items-end">
 								<span
-									class="px-4 py-1 bg-blue-500 text-white rounded-full text-sm font-semibold"
+									class="px-3 sm:px-4 py-1 bg-blue-500 text-white rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap"
 								>
 									{edu.period}
 								</span>
 								<span
-									class="px-4 py-1 bg-green-500 text-white rounded-full text-sm font-semibold"
+									class="px-3 sm:px-4 py-1 bg-green-500 text-white rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap"
 								>
 									{edu.grade}
 								</span>
 							</div>
 						</div>
 
-						<p class="text-gray-600 dark:text-gray-300 mb-4">
+						<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
 							{edu.description}
 						</p>
 
 						<div class="space-y-2">
-							<h4 class="font-semibold text-gray-900 dark:text-white">Achievements:</h4>
+							<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Achievements:</h4>
 							<ul class="space-y-1">
 								{#each edu.achievements as achievement}
-									<li class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+									<li class="flex items-start gap-2 text-sm sm:text-base text-gray-600 dark:text-gray-300">
 										<svg
-											class="w-5 h-5 text-green-500 shrink-0"
+											class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 shrink-0 mt-0.5"
 											fill="currentColor"
 											viewBox="0 0 20 20"
 										>
@@ -131,7 +112,7 @@
 												clip-rule="evenodd"
 											/>
 										</svg>
-										{achievement}
+										<span>{achievement}</span>
 									</li>
 								{/each}
 							</ul>
