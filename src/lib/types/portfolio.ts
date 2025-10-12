@@ -14,6 +14,7 @@ export interface SocialLinks {
   linkedin: string;
   twitter?: string;
   website?: string;
+  resume?: string;
 }
 
 export interface Experience {

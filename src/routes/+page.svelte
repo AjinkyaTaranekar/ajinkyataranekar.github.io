@@ -49,7 +49,7 @@
   <Navigation {darkMode} {toggleTheme} bind:showQR />
 
   <main class="w-full">
-    <Hero personal={data.portfolio.personal} />
+    <Hero personal={data.portfolio.personal} social={data.portfolio.social} />
     <About personal={data.portfolio.personal} stats={data.portfolio.stats} />
     <Experience experiences={data.portfolio.experiences} />
     <Projects projects={data.portfolio.projects} />

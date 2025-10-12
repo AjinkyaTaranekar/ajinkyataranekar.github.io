@@ -1,13 +1,14 @@
 <script lang="ts">
-  import type { PersonalInfo } from "$lib/types/portfolio";
+  import type { PersonalInfo, SocialLinks } from "$lib/types/portfolio";
   import { onMount } from "svelte";
   import TypewriterEffect from "./TypewriterEffect.svelte";
 
   interface Props {
     personal: PersonalInfo;
+    social?: SocialLinks;
   }
 
-  let { personal }: Props = $props();
+  let { personal, social }: Props = $props();
   let visible = $state(false);
 
   onMount(() => {
@@ -51,6 +52,16 @@
         >
           Get In Touch
         </a>
+        {#if social?.resume}
+          <a
+            href={social.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-secondary btn-md sm:btn-lg text-xs sm:text-sm md:text-base px-3 sm:px-6"
+          >
+            View Resume
+          </a>
+        {/if}
       </div>
 
       <!-- Scroll Indicator -->
