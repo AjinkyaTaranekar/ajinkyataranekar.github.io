@@ -57,7 +57,7 @@
 	});
 </script>
 
-<section id="contact" class="py-12 sm:py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+<section id="contact" class="py-12 sm:py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
 	<div class="container mx-auto px-4">
 		<div class="transform transition-all duration-1000 {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
 			<h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">
@@ -69,164 +69,112 @@
 			</p>
 
 			<div class="max-w-4xl mx-auto">
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-					<!-- Contact Info -->
-					<div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 rounded-xl p-6 sm:p-8">
-						<h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h3>
+				<!-- Contact Info -->
+				<div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-900 rounded-xl p-6 sm:p-8">
+					<h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h3>
 
-						<div class="space-y-4">
-							<div class="flex items-start gap-4">
-								<div
-									class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-lg flex items-center justify-center shrink-0"
+					<div class="space-y-4">
+						<div class="flex items-start gap-4">
+							<div
+								class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-lg flex items-center justify-center shrink-0"
+							>
+								<svg
+									class="w-5 h-5 sm:w-6 sm:h-6 text-white"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
 								>
-									<svg
-										class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-										/>
-									</svg>
-								</div>
-								<div>
-									<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Email</h4>
-									<a
-										href="mailto:{personal.email}"
-										class="text-sm sm:text-base text-blue-500 dark:text-blue-400 hover:underline break-all"
-										>{personal.email}</a
-									>
-								</div>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+									/>
+								</svg>
 							</div>
-
-							<div class="flex items-start gap-4">
-								<div
-									class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500 rounded-lg flex items-center justify-center shrink-0"
+							<div>
+								<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Email</h4>
+								<a
+									href="mailto:{personal.email}"
+									class="text-sm sm:text-base text-blue-500 dark:text-blue-400 hover:underline break-all"
+									>{personal.email}</a
 								>
-									<svg
-										class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-										/>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-										/>
-									</svg>
-								</div>
-								<div>
-									<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Location</h4>
-									<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300">{personal.location}</p>
-								</div>
-							</div>
-
-							<div class="flex items-start gap-4">
-								<div
-									class="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-lg flex items-center justify-center shrink-0"
-								>
-									<svg
-										class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-										/>
-									</svg>
-								</div>
-								<div>
-									<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Availability</h4>
-									<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300">{personal.availability}</p>
-								</div>
 							</div>
 						</div>
 
-						<!-- Social Links -->
-						<div class="mt-6 sm:mt-8">
-							<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-4">Connect with me</h4>
-							<div class="flex flex-wrap gap-3">
-								{#each socialLinksData as socialLink}
-									<a
-										href={socialLink.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center transition-all duration-300 {socialLink.color} hover:scale-110"
-										aria-label={socialLink.name}
-									>
-										<svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
-											<path d={socialLink.icon} />
-										</svg>
-									</a>
-								{/each}
+						<div class="flex items-start gap-4">
+							<div
+								class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500 rounded-lg flex items-center justify-center shrink-0"
+							>
+								<svg
+									class="w-5 h-5 sm:w-6 sm:h-6 text-white"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+									/>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Location</h4>
+								<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300">{personal.location}</p>
+							</div>
+						</div>
+
+						<div class="flex items-start gap-4">
+							<div
+								class="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-lg flex items-center justify-center shrink-0"
+							>
+								<svg
+									class="w-5 h-5 sm:w-6 sm:h-6 text-white"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">Availability</h4>
+								<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300">{personal.availability}</p>
 							</div>
 						</div>
 					</div>
 
-					<!-- Contact Form -->
-					<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sm:p-8">
-						<h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
-
-						<form class="space-y-4">
-							<div>
-								<label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-									>Your Name</label
+					<!-- Social Links -->
+					<div class="mt-6 sm:mt-8">
+						<h4 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-4">Connect with me</h4>
+						<div class="flex flex-wrap gap-3">
+							{#each socialLinksData as socialLink}
+								<a
+									href={socialLink.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center transition-all duration-300 {socialLink.color} hover:scale-110"
+									aria-label={socialLink.name}
 								>
-								<input
-									type="text"
-									id="name"
-									class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
-									placeholder="John Doe"
-								/>
-							</div>
-
-							<div>
-								<label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-									>Your Email</label
-								>
-								<input
-									type="email"
-									id="email"
-									class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
-									placeholder="john@example.com"
-								/>
-							</div>
-
-							<div>
-								<label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-									>Message</label
-								>
-								<textarea
-									id="message"
-									rows="4"
-									class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-sm sm:text-base"
-									placeholder="Your message here..."
-								></textarea>
-							</div>
-
-							<button
-								type="submit"
-								class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all transform hover:scale-105 font-semibold text-sm sm:text-base"
-							>
-								Send Message
-							</button>
-						</form>
+									<svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
+										<path d={socialLink.icon} />
+									</svg>
+								</a>
+							{/each}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -43,6 +43,7 @@ export interface Project {
 export interface Education {
   degree: string;
   institution: string;
+  institutionLogo?: string;
   period: string;
   grade: string;
   description: string;

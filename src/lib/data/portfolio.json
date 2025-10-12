@@ -113,7 +113,7 @@
         "GitHub Actions"
       ],
       "github": "https://github.com/AjinkyaTaranekar",
-	  "report": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
+      "report": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
       "featured": true
     },
     {
@@ -139,14 +139,14 @@
         "GoLang",
         "gRPC",
         "Milvus",
-		"Livekit",
-		"OpenAI",
+        "Livekit",
+        "OpenAI",
         "Azure AI",
         "GenAI",
         "Kubernetes"
       ],
       "link": "https://www.gonuclei.com/convo-ai",
-      "featured": true
+      "featured": false
     },
     {
       "title": "In-House Search Engine (Part of Convo AI)",
@@ -168,9 +168,9 @@
       "image": "/assets/projects/finneasy.png",
       "technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
       "github": "https://github.com/Brainstormers-HackItOut",
-	  "link": "https://devpost.com/software/finneasy",
-      "featured": false,
-	  "winner": "Best in Fintech at HackItOut"
+      "link": "https://devpost.com/software/finneasy",
+      "featured": true,
+      "winner": "Best in Fintech at HackItOut"
     },
     {
       "title": "M.I.T.R.A - Credit Worthiness Tool",
@@ -178,9 +178,9 @@
       "image": "/assets/projects/mitra.png",
       "technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
       "github": "https://github.com/M-I-T-R-A",
-	  "link": "https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/",
-      "featured": false,
-	  "winner": "2nd Runner-Up at TVS Credit EPIC Season 2"
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/",
+      "featured": true,
+      "winner": "2nd Runner-Up at TVS Credit EPIC Season 2"
     }
   ],
   "education": [

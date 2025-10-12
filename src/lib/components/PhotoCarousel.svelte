@@ -75,7 +75,7 @@
 
 <section
   id="photos"
-  class="py-12 sm:py-20 bg-base-100 transition-colors duration-300"
+  class="py-12 sm:py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
 >
   <div class="container mx-auto px-4">
     <div
@@ -84,12 +84,12 @@
         : 'translate-y-10 opacity-0'}"
     >
       <h2
-        class="text-3xl sm:text-4xl font-bold text-center text-base-content mb-4"
+        class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4"
       >
         My <span class="text-primary">Photography</span>
       </h2>
       <p
-        class="text-center text-sm sm:text-base text-base-content/70 mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
+        class="text-center text-sm sm:text-base text-gray-900 dark:text-white/70 mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
       >
         Capturing moments and places that inspire me. A glimpse into my
         adventures and explorations.
@@ -98,7 +98,7 @@
       <div class="max-w-5xl mx-auto">
         <!-- Carousel Container -->
         <div
-          class="carousel w-full rounded-2xl shadow-2xl bg-base-200 overflow-hidden"
+          class="carousel w-full rounded-2xl shadow-2xl bg-white dark:bg-gray-800 dark:bg-base-300 overflow-hidden"
           onmouseenter={handleMouseEnter}
           onmouseleave={handleMouseLeave}
         >
@@ -119,18 +119,18 @@
                 <!-- Photo Info Overlay -->
                 {#if photo.caption || photo.location || photo.date}
                   <div
-                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-300/95 to-transparent p-4 sm:p-6"
+                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-300/95 dark:from-base-200/95 to-transparent p-4 sm:p-6"
                   >
                     {#if photo.caption}
                       <h3
-                        class="text-lg sm:text-xl font-bold text-base-content"
+                        class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white"
                       >
                         {photo.caption}
                       </h3>
                     {/if}
                     {#if photo.location}
                       <p
-                        class="text-sm sm:text-base text-base-content/70 flex items-center gap-2 mt-1"
+                        class="text-sm sm:text-base text-gray-900 dark:text-white/70 flex items-center gap-2 mt-1"
                       >
                         <svg
                           class="w-4 h-4"
@@ -165,7 +165,7 @@
             <!-- Navigation Arrows -->
             <button
               onclick={prevSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-base-100/80 hover:bg-base-100 border-none z-20"
+              class="btn btn-circle btn-sm sm:btn-md absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 transition-colors duration-300 border-none z-20"
               aria-label="Previous photo"
             >
               <svg
@@ -184,7 +184,7 @@
             </button>
             <button
               onclick={nextSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-base-100/80 hover:bg-base-100 border-none z-20"
+              class="btn btn-circle btn-sm sm:btn-md absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 transition-colors duration-300 border-none z-20"
               aria-label="Next photo"
             >
               <svg
@@ -211,7 +211,7 @@
               onclick={() => goToSlide(index)}
               class="btn btn-xs {index === currentIndex
                 ? 'btn-primary'
-                : 'btn-outline'}"
+                : 'btn-outline dark:border-white border-gray-800'}"
               aria-label="Go to photo {index + 1}"
             >
             </button>
@@ -219,7 +219,7 @@
         </div>
 
         <!-- Photo Count -->
-        <div class="text-center mt-4 text-sm text-base-content/60">
+        <div class="text-center mt-4 text-sm text-gray-900 dark:text-white/60">
           {currentIndex + 1} / {photos.length}
         </div>
       </div>

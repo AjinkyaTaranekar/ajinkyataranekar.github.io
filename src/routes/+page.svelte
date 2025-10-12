@@ -51,15 +51,15 @@
     <About personal={data.portfolio.personal} stats={data.portfolio.stats} />
     <Experience experiences={data.portfolio.experiences} />
     <Projects projects={data.portfolio.projects} />
+    <Skills
+      skillCategories={data.portfolio.skillCategories}
+      additionalSkills={data.portfolio.additionalSkills}
+    />
+    <Education education={data.portfolio.education} />
     <PhotoCarousel
       photos={data.photos && data.photos.length
         ? data.photos
         : data.portfolio.photos}
-    />
-    <Education education={data.portfolio.education} />
-    <Skills
-      skillCategories={data.portfolio.skillCategories}
-      additionalSkills={data.portfolio.additionalSkills}
     />
     <Contact
       personal={data.portfolio.personal}
@@ -67,16 +67,18 @@
     />
   </main>
   <!-- Footer with DaisyUI classes -->
-  <footer class="footer footer-center bg-base-200 text-base-content p-10">
+  <footer
+    class="footer footer-center bg-white dark:bg-gray-900 transition-colors duration-300 text-gray-900 dark:text-white p-10"
+  >
     <aside>
       <p class="font-semibold text-lg">
         {data.portfolio.personal.name}
       </p>
-      <p class="text-base-content/60">
+      <p class="text-gray-900 dark:text-white/60">
         &copy; {new Date().getFullYear()}
         {data.portfolio.personal.name}. All rights reserved.
       </p>
-      <p class="text-base-content/60 text-sm mt-2">
+      <p class="text-gray-900 dark:text-white/60 text-sm mt-2">
         Built with ❤️ using Poha and Jalebi.
       </p>
     </aside>
