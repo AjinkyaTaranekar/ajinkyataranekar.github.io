@@ -1,347 +1,409 @@
 {
-	"personal": {
-		"name": "Ajinkya Taranekar",
-		"title": "Software Development Engineer 2",
-		"tagline": "Full Stack Developer | GenAI Specialist | Tech Leader",
-		"bio": [
-			"Results-driven Software Engineer with 3+ years of experience architecting scalable, data-intensive applications and leading cross-functional teams to deliver enterprise-grade solutions. Proven track record of driving innovation through GenAI integration, reducing system latencies by 90%, and mentoring teams to achieve 75% faster development cycles.",
-			"I specialize in full-stack development with expertise in microservices architecture, GenAI frameworks, and cloud platforms. Recognised for taking ownership of high-impact projects, from spearheading R&D initiatives to managing 1,400+ P0 alerts with a 91.7% resolution rate in SRE.",
-			"Currently pursuing MSc Computer Science at Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies."
-		],
-		"location": "Dublin, Ireland",
-		"email": "ajinkyataranekar26@gmail.com",
-		"availability": "Open to opportunities"
-	},
-	"social": {
-		"github": "https://github.com/AjinkyaTaranekar",
-		"linkedin": "https://www.linkedin.com/in/ajinkya-taranekar",
-		"twitter": "https://twitter.com/ajinkyataranekar"
-	},
-	"stats": {
-		"projects": "10+",
-		"technologies": "30+",
-		"dedication": "100%",
-		"learning": "∞"
-	},
-	"experiences": [
-		{
-			"title": "Software Development Engineer 2",
-			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
-			"period": "July 2024 - July 2025",
-			"description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks. Designed & built an in-house search engine combining semantic vector and fuzzy search, cutting retrieval latency from 1s to 100ms. Architected migration of Svelte micro-frontends from mobile-first to desktop-optimised versions. Developed a robust analytics engine to monitor performance for 100K+ daily active users. Pioneered an internal Figma plugin leveraging LLMs to generate heatmaps and optimise copy, accelerating design review cycles from weeks to days.",
-			"technologies": ["Milvus", "Azure AI", "Kafka", "GoLang", "Python", "Svelte", "gRPC", "Elasticsearch", "Clickhouse", "Kubernetes"],
-			"type": "work"
-		},
-		{
-			"title": "Full-Stack Developer",
-			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
-			"period": "July 2022 - July 2024",
-			"description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing report-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.",
-			"technologies": ["Svelte", "SpringBoot", "Kafka", "GoLang", "gRPC", "MySQL", "Clickhouse", "Kubernetes"],
-			"type": "work"
-		},
-		{
-			"title": "Full-Stack Developer Intern",
-			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
-			"period": "Jan 2022 - July 2022",
-			"description": "Optimised reconciliation services for two major banks, processing 45,000+ daily transactions and reducing manual efforts by 95%. Engineered robust ETL pipelines using Apache NiFi that cut new bank onboarding times for reconciliation from multiple weeks to 1 week. Created dynamic visualisations for on-call rotations and enhanced alerting systems in OpenSearch and Grafana with real-time CPU and memory insights.",
-			"technologies": ["Apache NiFi", "SpringBoot", "gRPC", "MySQL", "Superset", "OpenSearch", "Grafana"],
-			"type": "internship"
-		},
-		{
-			"title": "Flutter Developer Intern",
-			"company": "Multipl Wealth Management Pvt. Ltd.",
-			"period": "May 2021 - Dec 2021",
-			"description": "Developed secure mobile app lock and deferred deep linking features in Flutter to enhance app security. Designed interactive UI components for both Android and iOS platforms using Flutter, improving app responsiveness and user engagement.",
-			"technologies": ["Flutter", "Dart", "Android", "iOS"],
-			"type": "internship"
-		},
-		{
-			"title": "Technology Analyst - I (Trainee)",
-			"company": "Niograph Technology Consulting LLP",
-			"period": "Sep 2020 - Feb 2021",
-			"description": "Processed and enriched data for over 1.2 million doctor profiles using advanced pipelines, ensuring high-quality, accurate data for analytics. Integrated Elasticsearch to enhance search capabilities, reducing API response times by 50% and accelerating data access for decision-making.",
-			"technologies": ["Elasticsearch", "Python", "Data Pipelines"],
-			"type": "internship"
-		}
-	],
-	"projects": [
-		{
-			"title": "Dailify - Curbside Pickup Service",
-			"description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
-			"image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop",
-			"technologies": ["SpringBoot", "Flutter", "MySQL", "Elasticsearch", "Azure", "GitHub Actions"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"demo": "https://demo.example.com",
-			"featured": true
-		},
-		{
-			"title": "Department Information System",
-			"description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
-			"image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
-			"technologies": ["SpringBoot", "Flutter", "MySQL", "Angular", "GitHub Actions"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"demo": "https://demo.example.com",
-			"featured": true
-		},
-		{
-			"title": "VoiceBot Agent Management System",
-			"description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
-			"image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=600&h=400&fit=crop",
-			"technologies": ["GoLang", "gRPC", "Milvus", "Azure AI", "GenAI", "Kubernetes"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"featured": true
-		},
-		{
-			"title": "In-House Search Engine",
-			"description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 100ms. Implemented for high-performance data retrieval in production systems.",
-			"image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-			"technologies": ["Python", "Milvus", "Elasticsearch", "Vector Search", "Fuzzy Search"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"featured": false
-		},
-		{
-			"title": "FinnEasy - Gamified Stock Market Solution",
-			"description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
-			"image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
-			"technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"featured": false
-		},
-		{
-			"title": "M.I.T.R.A - Credit Worthiness Tool",
-			"description": "2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.",
-			"image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop",
-			"technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
-			"github": "https://github.com/AjinkyaTaranekar",
-			"featured": false
-		}
-	],
-	"education": [
-		{
-			"degree": "Master of Science in Computer Science - Future Networked Systems",
-			"institution": "Trinity College Dublin",
-			"period": "Sept 2025 - Present",
-			"grade": "In Progress",
-			"description": "Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.",
-			"achievements": [
-				"Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning"
-			]
-		},
-		{
-			"degree": "Bachelor of Technology in Computer Science",
-			"institution": "Shri G.S. Institute of Technology and Science",
-			"period": "Aug 2018 - May 2022",
-			"grade": "CGPA: 9.04/10.0",
-			"description": "Ranked 1st in Computer Science among 120+ students. Focused on cloud computing, data engineering, machine learning, database systems, operating systems, and networks. Active member of technical societies and coding clubs.",
-			"achievements": [
-				"Seksaria Gold Medal for Academic Excellence - Highest CGPA in Computer Science",
-				"Rank 1st in Computer Science Department",
-				"Relevant Coursework: Cloud Computing, Data Engineering, Machine Learning, Database, OS, Networks"
-			]
-		}
-	],
-	"skillCategories": [
-		{
-			"name": "Languages",
-			"icon": "💻",
-			"skills": [
-				{ "name": "Java", "level": 90 },
-				{ "name": "Python", "level": 88 },
-				{ "name": "Go", "level": 85 },
-				{ "name": "TypeScript", "level": 87 },
-				{ "name": "Dart", "level": 80 },
-				{ "name": "JavaScript", "level": 90 }
-			]
-		},
-		{
-			"name": "Backend Development",
-			"icon": "⚙️",
-			"skills": [
-				{ "name": "FastAPI", "level": 88 },
-				{ "name": "Spring Boot", "level": 90 },
-				{ "name": "gRPC & Protobuf", "level": 87 },
-				{ "name": "REST API", "level": 92 },
-				{ "name": "Microservices", "level": 90 },
-				{ "name": "Kafka", "level": 85 }
-			]
-		},
-		{
-			"name": "Frontend Development",
-			"icon": "🎨",
-			"skills": [
-				{ "name": "Svelte", "level": 92 },
-				{ "name": "Flutter", "level": 85 },
-				{ "name": "Angular", "level": 75 },
-				{ "name": "Tailwind CSS", "level": 88 },
-				{ "name": "HTML/CSS", "level": 90 },
-				{ "name": "Atomic Design", "level": 88 }
-			]
-		},
-		{
-			"name": "Database & Data Engineering",
-			"icon": "💾",
-			"skills": [
-				{ "name": "MySQL", "level": 88 },
-				{ "name": "ClickHouse", "level": 87 },
-				{ "name": "Elasticsearch", "level": 90 },
-				{ "name": "Apache NiFi", "level": 82 },
-				{ "name": "Redis", "level": 80 },
-				{ "name": "ETL Pipelines", "level": 85 }
-			]
-		},
-		{
-			"name": "DevOps & Cloud",
-			"icon": "☁️",
-			"skills": [
-				{ "name": "Docker", "level": 88 },
-				{ "name": "Kubernetes", "level": 85 },
-				{ "name": "Microsoft Azure", "level": 82 },
-				{ "name": "GitHub Actions", "level": 90 },
-				{ "name": "CI/CD", "level": 87 },
-				{ "name": "Linux", "level": 85 }
-			]
-		},
-		{
-			"name": "Analytics & Observability",
-			"icon": "📊",
-			"skills": [
-				{ "name": "Grafana", "level": 88 },
-				{ "name": "OpenSearch", "level": 85 },
-				{ "name": "PMM", "level": 80 },
-				{ "name": "Superset", "level": 82 },
-				{ "name": "GoAlert", "level": 78 },
-				{ "name": "Uptime Kuma", "level": 75 }
-			]
-		},
-		{
-			"name": "GenAI & ML",
-			"icon": "🤖",
-			"skills": [
-				{ "name": "Langchain", "level": 85 },
-				{ "name": "Milvus", "level": 87 },
-				{ "name": "OpenAI", "level": 82 },
-				{ "name": "Azure AI", "level": 85 },
-				{ "name": "GitHub Copilot", "level": 90 },
-				{ "name": "Cursor", "level": 88 }
-			]
-		},
-		{
-			"name": "Tools & Methodologies",
-			"icon": "🛠️",
-			"skills": [
-				{ "name": "Git", "level": 92 },
-				{ "name": "Agile", "level": 90 },
-				{ "name": "System Design", "level": 88 },
-				{ "name": "Team Leadership", "level": 85 },
-				{ "name": "Mentoring", "level": 87 },
-				{ "name": "SRE", "level": 83 }
-			]
-		}
-	],
-	"additionalSkills": [
-		"Java",
-		"Python",
-		"Go",
-		"TypeScript",
-		"Dart",
-		"JavaScript",
-		"FastAPI",
-		"Spring Boot",
-		"gRPC",
-		"Protobuf",
-		"REST API",
-		"Microservices",
-		"Svelte",
-		"Flutter",
-		"Angular",
-		"MySQL",
-		"ClickHouse",
-		"Elasticsearch",
-		"Apache NiFi",
-		"Redis",
-		"Docker",
-		"Kubernetes",
-		"Microsoft Azure",
-		"GitHub Actions",
-		"Kafka",
-		"Grafana",
-		"OpenSearch",
-		"PMM",
-		"Superset",
-		"GoAlert",
-		"Uptime Kuma",
-		"Slack Alerts",
-		"Langchain",
-		"Milvus",
-		"OpenAI",
-		"Azure AI",
-		"GitHub Copilot",
-		"Cursor",
-		"ETL Pipelines",
-		"CI/CD",
-		"Linux",
-		"Vector Search",
-		"Semantic Search",
-		"Fuzzy Search",
-		"System Design",
-		"Atomic Design",
-		"White-label Solutions",
-		"Multi-tenant Architecture",
-		"Site Reliability Engineering",
-		"Team Leadership",
-		"Mentoring",
-		"Agile Methodologies",
-		"CIS Benchmark",
-		"VM Hardening",
-		"Alert Management",
-		"NPM Packages",
-		"Fintech Solutions",
-		"Digital Banking",
-		"GenAI Integration"
-	],
-	"photos": [
-		{
-			"id": "1",
-			"url": "/assets/photos/photo1.jpg",
-			"caption": "Dublin City Streets",
-			"location": "Dublin, Ireland",
-			"date": "2024"
-		},
-		{
-			"id": "2",
-			"url": "/assets/photos/photo2.jpg",
-			"caption": "Trinity College Library",
-			"location": "Dublin, Ireland",
-			"date": "2024"
-		},
-		{
-			"id": "3",
-			"url": "/assets/photos/photo3.jpg",
-			"caption": "Cliffs of Moher",
-			"location": "County Clare, Ireland",
-			"date": "2024"
-		},
-		{
-			"id": "4",
-			"url": "/assets/photos/photo4.jpg",
-			"caption": "Phoenix Park",
-			"location": "Dublin, Ireland",
-			"date": "2024"
-		},
-		{
-			"id": "5",
-			"url": "/assets/photos/photo5.jpg",
-			"caption": "Temple Bar District",
-			"location": "Dublin, Ireland",
-			"date": "2024"
-		},
-		{
-			"id": "6",
-			"url": "/assets/photos/photo6.jpg",
-			"caption": "Irish Countryside",
-			"location": "Ireland",
-			"date": "2024"
-		}
-	]
+  "personal": {
+    "name": "Ajinkya Taranekar",
+    "title": "Software Development Engineer 2",
+    "tagline": "Full Stack Developer | GenAI Specialist | Tech Leader",
+    "bio": [
+      "Results-driven Software Engineer with 3+ years of experience architecting scalable, data-intensive applications and leading cross-functional teams to deliver enterprise-grade solutions. Proven track record of driving innovation through GenAI integration, reducing system latencies by 90%, and mentoring teams to achieve 75% faster development cycles.",
+      "I specialize in full-stack development with expertise in microservices architecture, GenAI frameworks, and cloud platforms. Recognised for taking ownership of high-impact projects, from spearheading R&D initiatives to managing 1,400+ P0 alerts with a 91.7% resolution rate in SRE.",
+      "Currently pursuing MSc Computer Science at Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies."
+    ],
+    "location": "Dublin, Ireland",
+    "email": "ajinkyataranekar26@gmail.com",
+    "availability": "Open to opportunities",
+    "profileImage": "/assets/photos/profile.jpg"
+  },
+  "social": {
+    "github": "https://github.com/AjinkyaTaranekar",
+    "linkedin": "https://www.linkedin.com/in/ajinkya-taranekar",
+    "twitter": "https://twitter.com/ajinkyataranekar"
+  },
+  "stats": {
+    "projects": "10+",
+    "technologies": "30+",
+    "dedication": "100%",
+    "learning": "∞"
+  },
+  "experiences": [
+    {
+      "title": "Software Development Engineer 2",
+      "company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+      "companyLogo": "/assets/companies/nuclei.png",
+      "period": "July 2024 - July 2025",
+      "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks. Designed & built an in-house search engine combining semantic vector and fuzzy search, cutting retrieval latency from 1s to 100ms. Architected migration of Svelte micro-frontends from mobile-first to desktop-optimised versions. Developed a robust analytics engine to monitor performance for 100K+ daily active users. Pioneered an internal Figma plugin leveraging LLMs to generate heatmaps and optimise copy, accelerating design review cycles from weeks to days.",
+      "technologies": [
+        "Milvus",
+        "Azure AI",
+        "Kafka",
+        "GoLang",
+        "Python",
+        "Svelte",
+        "gRPC",
+        "Elasticsearch",
+        "Clickhouse",
+        "Kubernetes"
+      ],
+      "type": "work"
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+      "companyLogo": "/assets/companies/nuclei.png",
+      "period": "July 2022 - July 2024",
+      "description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing report-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.",
+      "technologies": [
+        "Svelte",
+        "SpringBoot",
+        "Kafka",
+        "GoLang",
+        "gRPC",
+        "MySQL",
+        "Clickhouse",
+        "Kubernetes"
+      ],
+      "type": "work"
+    },
+    {
+      "title": "Full-Stack Developer Intern",
+      "company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+      "companyLogo": "/assets/companies/nuclei.png",
+      "period": "Jan 2022 - July 2022",
+      "description": "Optimised reconciliation services for two major banks, processing 45,000+ daily transactions and reducing manual efforts by 95%. Engineered robust ETL pipelines using Apache NiFi that cut new bank onboarding times for reconciliation from multiple weeks to 1 week. Created dynamic visualisations for on-call rotations and enhanced alerting systems in OpenSearch and Grafana with real-time CPU and memory insights.",
+      "technologies": [
+        "Apache NiFi",
+        "SpringBoot",
+        "gRPC",
+        "MySQL",
+        "Superset",
+        "OpenSearch",
+        "Grafana"
+      ],
+      "type": "internship"
+    },
+    {
+      "title": "Flutter Developer Intern",
+      "company": "Multipl Wealth Management Pvt. Ltd.",
+      "companyLogo": "/assets/companies/multipl.png",
+      "period": "May 2021 - Dec 2021",
+      "description": "Developed secure mobile app lock and deferred deep linking features in Flutter to enhance app security. Designed interactive UI components for both Android and iOS platforms using Flutter, improving app responsiveness and user engagement.",
+      "technologies": ["Flutter", "Dart", "Android", "iOS"],
+      "type": "internship"
+    },
+    {
+      "title": "Technology Analyst - I (Trainee)",
+      "company": "Niograph Technology Consulting LLP",
+      "companyLogo": "/assets/companies/niograph.png",
+      "period": "Sep 2020 - Feb 2021",
+      "description": "Processed and enriched data for over 1.2 million doctor profiles using advanced pipelines, ensuring high-quality, accurate data for analytics. Integrated Elasticsearch to enhance search capabilities, reducing API response times by 50% and accelerating data access for decision-making.",
+      "technologies": ["Elasticsearch", "Python", "Data Pipelines"],
+      "type": "internship"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Dailify - Curbside Pickup Service",
+      "description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
+      "image": "/assets/projects/dailify.png",
+      "technologies": [
+        "SpringBoot",
+        "Flutter",
+        "MySQL",
+        "Elasticsearch",
+        "Azure",
+        "GitHub Actions"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "demo": "https://demo.example.com",
+      "featured": true
+    },
+    {
+      "title": "Department Information System",
+      "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
+      "image": "/assets/projects/department.png",
+      "technologies": [
+        "SpringBoot",
+        "Flutter",
+        "MySQL",
+        "Angular",
+        "GitHub Actions"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "demo": "https://demo.example.com",
+      "featured": true
+    },
+    {
+      "title": "VoiceBot Agent Management System",
+      "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
+      "image": "/assets/projects/voicebot.png",
+      "technologies": [
+        "GoLang",
+        "gRPC",
+        "Milvus",
+        "Azure AI",
+        "GenAI",
+        "Kubernetes"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "featured": true
+    },
+    {
+      "title": "In-House Search Engine",
+      "description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 100ms. Implemented for high-performance data retrieval in production systems.",
+      "image": "/assets/projects/searchengine.png",
+      "technologies": [
+        "Python",
+        "Milvus",
+        "Elasticsearch",
+        "Vector Search",
+        "Fuzzy Search"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "featured": false
+    },
+    {
+      "title": "FinnEasy - Gamified Stock Market Solution",
+      "description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
+      "image": "/assets/projects/finneasy.png",
+      "technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "featured": false
+    },
+    {
+      "title": "M.I.T.R.A - Credit Worthiness Tool",
+      "description": "2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.",
+      "image": "/assets/projects/mitra.png",
+      "technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "featured": false
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science in Computer Science - Future Networked Systems",
+      "institution": "Trinity College Dublin",
+      "institutionLogo": "/assets/institutes/tcd.png",
+      "period": "Sept 2025 - Present",
+      "grade": "In Progress",
+      "description": "Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.",
+      "achievements": [
+        "Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning"
+      ]
+    },
+    {
+      "degree": "Bachelor of Technology in Computer Science",
+      "institution": "Shri G.S. Institute of Technology and Science",
+      "institutionLogo": "/assets/institutes/sgsits.png",
+      "period": "Aug 2018 - May 2022",
+      "grade": "CGPA: 9.04/10.0",
+      "description": "Ranked 1st in Computer Science among 120+ students. Focused on cloud computing, data engineering, machine learning, database systems, operating systems, and networks. Active member of technical societies and coding clubs.",
+      "achievements": [
+        "Seksaria Gold Medal for Academic Excellence - Highest CGPA in Computer Science",
+        "Rank 1st in Computer Science Department",
+        "Relevant Coursework: Cloud Computing, Data Engineering, Machine Learning, Database, OS, Networks"
+      ]
+    }
+  ],
+  "skillCategories": [
+    {
+      "name": "Languages",
+      "icon": "💻",
+      "skills": [
+        { "name": "Java", "level": 90 },
+        { "name": "Python", "level": 88 },
+        { "name": "Go", "level": 85 },
+        { "name": "TypeScript", "level": 87 },
+        { "name": "Dart", "level": 80 },
+        { "name": "JavaScript", "level": 90 }
+      ]
+    },
+    {
+      "name": "Backend Development",
+      "icon": "⚙️",
+      "skills": [
+        { "name": "FastAPI", "level": 88 },
+        { "name": "Spring Boot", "level": 90 },
+        { "name": "gRPC & Protobuf", "level": 87 },
+        { "name": "REST API", "level": 92 },
+        { "name": "Microservices", "level": 90 },
+        { "name": "Kafka", "level": 85 }
+      ]
+    },
+    {
+      "name": "Frontend Development",
+      "icon": "🎨",
+      "skills": [
+        { "name": "Svelte", "level": 92 },
+        { "name": "Flutter", "level": 85 },
+        { "name": "Angular", "level": 75 },
+        { "name": "Tailwind CSS", "level": 88 },
+        { "name": "HTML/CSS", "level": 90 },
+        { "name": "Atomic Design", "level": 88 }
+      ]
+    },
+    {
+      "name": "Database & Data Engineering",
+      "icon": "💾",
+      "skills": [
+        { "name": "MySQL", "level": 88 },
+        { "name": "ClickHouse", "level": 87 },
+        { "name": "Elasticsearch", "level": 90 },
+        { "name": "Apache NiFi", "level": 82 },
+        { "name": "Redis", "level": 80 },
+        { "name": "ETL Pipelines", "level": 85 }
+      ]
+    },
+    {
+      "name": "DevOps & Cloud",
+      "icon": "☁️",
+      "skills": [
+        { "name": "Docker", "level": 88 },
+        { "name": "Kubernetes", "level": 85 },
+        { "name": "Microsoft Azure", "level": 82 },
+        { "name": "GitHub Actions", "level": 90 },
+        { "name": "CI/CD", "level": 87 },
+        { "name": "Linux", "level": 85 }
+      ]
+    },
+    {
+      "name": "Analytics & Observability",
+      "icon": "📊",
+      "skills": [
+        { "name": "Grafana", "level": 88 },
+        { "name": "OpenSearch", "level": 85 },
+        { "name": "PMM", "level": 80 },
+        { "name": "Superset", "level": 82 },
+        { "name": "GoAlert", "level": 78 },
+        { "name": "Uptime Kuma", "level": 75 }
+      ]
+    },
+    {
+      "name": "GenAI & ML",
+      "icon": "🤖",
+      "skills": [
+        { "name": "Langchain", "level": 85 },
+        { "name": "Milvus", "level": 87 },
+        { "name": "OpenAI", "level": 82 },
+        { "name": "Azure AI", "level": 85 },
+        { "name": "GitHub Copilot", "level": 90 },
+        { "name": "Cursor", "level": 88 }
+      ]
+    },
+    {
+      "name": "Tools & Methodologies",
+      "icon": "🛠️",
+      "skills": [
+        { "name": "Git", "level": 92 },
+        { "name": "Agile", "level": 90 },
+        { "name": "System Design", "level": 88 },
+        { "name": "Team Leadership", "level": 85 },
+        { "name": "Mentoring", "level": 87 },
+        { "name": "SRE", "level": 83 }
+      ]
+    }
+  ],
+  "additionalSkills": [
+    "Java",
+    "Python",
+    "Go",
+    "TypeScript",
+    "Dart",
+    "JavaScript",
+    "FastAPI",
+    "Spring Boot",
+    "gRPC",
+    "Protobuf",
+    "REST API",
+    "Microservices",
+    "Svelte",
+    "Flutter",
+    "Angular",
+    "MySQL",
+    "ClickHouse",
+    "Elasticsearch",
+    "Apache NiFi",
+    "Redis",
+    "Docker",
+    "Kubernetes",
+    "Microsoft Azure",
+    "GitHub Actions",
+    "Kafka",
+    "Grafana",
+    "OpenSearch",
+    "PMM",
+    "Superset",
+    "GoAlert",
+    "Uptime Kuma",
+    "Slack Alerts",
+    "Langchain",
+    "Milvus",
+    "OpenAI",
+    "Azure AI",
+    "GitHub Copilot",
+    "Cursor",
+    "ETL Pipelines",
+    "CI/CD",
+    "Linux",
+    "Vector Search",
+    "Semantic Search",
+    "Fuzzy Search",
+    "System Design",
+    "Atomic Design",
+    "White-label Solutions",
+    "Multi-tenant Architecture",
+    "Site Reliability Engineering",
+    "Team Leadership",
+    "Mentoring",
+    "Agile Methodologies",
+    "CIS Benchmark",
+    "VM Hardening",
+    "Alert Management",
+    "NPM Packages",
+    "Fintech Solutions",
+    "Digital Banking",
+    "GenAI Integration"
+  ],
+  "photos": [
+    { "id": "1", "url": "/assets/photos/IMG-20251012-WA0006.jpg" },
+    { "id": "2", "url": "/assets/photos/IMG-20251012-WA0008.jpg" },
+    { "id": "3", "url": "/assets/photos/IMG-20251012-WA0009.jpg" },
+    { "id": "4", "url": "/assets/photos/IMG-20251012-WA0010.jpg" },
+    { "id": "5", "url": "/assets/photos/IMG-20251012-WA0011.jpg" },
+    { "id": "6", "url": "/assets/photos/IMG-20251012-WA0012.jpg" },
+    { "id": "7", "url": "/assets/photos/IMG-20251012-WA0013.jpg" },
+    { "id": "8", "url": "/assets/photos/IMG-20251012-WA0014.jpg" },
+    { "id": "9", "url": "/assets/photos/IMG-20251012-WA0015.jpg" },
+    { "id": "10", "url": "/assets/photos/IMG-20251012-WA0016.jpg" },
+    { "id": "11", "url": "/assets/photos/IMG-20251012-WA0017.jpg" },
+    { "id": "12", "url": "/assets/photos/IMG-20251012-WA0018.jpg" },
+    { "id": "13", "url": "/assets/photos/IMG-20251012-WA0019.jpg" },
+    { "id": "14", "url": "/assets/photos/IMG-20251012-WA0020.jpg" },
+    { "id": "15", "url": "/assets/photos/IMG-20251012-WA0022.jpg" },
+    { "id": "16", "url": "/assets/photos/IMG-20251012-WA0024.jpg" },
+    { "id": "17", "url": "/assets/photos/IMG-20251012-WA0025.jpg" },
+    { "id": "18", "url": "/assets/photos/IMG-20251012-WA0026.jpg" },
+    { "id": "19", "url": "/assets/photos/IMG-20251012-WA0028.jpg" },
+    { "id": "20", "url": "/assets/photos/IMG-20251012-WA0029.jpg" },
+    { "id": "21", "url": "/assets/photos/IMG-20251012-WA0030.jpg" },
+    { "id": "22", "url": "/assets/photos/IMG-20251012-WA0031.jpg" },
+    { "id": "23", "url": "/assets/photos/IMG-20251012-WA0032.jpg" },
+    { "id": "24", "url": "/assets/photos/IMG-20251012-WA0033.jpg" },
+    { "id": "25", "url": "/assets/photos/IMG-20251012-WA0034.jpg" },
+    { "id": "26", "url": "/assets/photos/IMG-20251012-WA0035.jpg" },
+    { "id": "27", "url": "/assets/photos/IMG-20251012-WA0036.jpg" },
+    { "id": "28", "url": "/assets/photos/IMG-20251012-WA0037.jpg" },
+    { "id": "29", "url": "/assets/photos/IMG-20251012-WA0038.jpg" },
+    { "id": "30", "url": "/assets/photos/IMG-20251012-WA0039.jpg" },
+    { "id": "31", "url": "/assets/photos/IMG-20251012-WA0040.jpg" },
+    { "id": "32", "url": "/assets/photos/IMG-20251012-WA0041.jpg" },
+    { "id": "33", "url": "/assets/photos/IMG-20251012-WA0042.jpg" },
+    { "id": "34", "url": "/assets/photos/IMG-20251012-WA0043.jpg" },
+    { "id": "35", "url": "/assets/photos/IMG-20251012-WA0044.jpg" },
+    { "id": "36", "url": "/assets/photos/IMG-20251012-WA0045.jpg" },
+    { "id": "37", "url": "/assets/photos/IMG-20251012-WA0046.jpg" },
+    { "id": "38", "url": "/assets/photos/IMG-20251012-WA0047.jpg" },
+    { "id": "39", "url": "/assets/photos/IMG-20251012-WA0048.jpg" },
+    { "id": "40", "url": "/assets/photos/IMG-20251012-WA0049.jpg" },
+    { "id": "41", "url": "/assets/photos/IMG-20251012-WA0050.jpg" },
+    { "id": "42", "url": "/assets/photos/IMG-20251012-WA0051.jpg" }
+  ]
 }
