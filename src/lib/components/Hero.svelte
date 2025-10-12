@@ -17,39 +17,39 @@
 
 <section
 	id="home"
-	class="min-h-screen flex items-center justify-center relative overflow-hidden"
+	class="min-h-screen flex items-center justify-center relative overflow-hidden bg-base-100"
 >
-	<!-- Animated Background -->
+	<!-- Animated Background - Using DaisyUI theme colors -->
 	<div class="absolute inset-0 -z-10">
 		<div
-			class="absolute top-20 left-10 w-72 h-72 bg-purple-300 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob"
+			class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"
 		></div>
 		<div
-			class="absolute top-40 right-10 w-72 h-72 bg-yellow-300 dark:bg-yellow-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob animation-delay-2000"
+			class="absolute top-40 right-10 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"
 		></div>
 		<div
-			class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 dark:bg-pink-900 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob animation-delay-4000"
+			class="absolute -bottom-8 left-1/2 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"
 		></div>
 	</div>
 
 	<div class="container mx-auto px-4 text-center">
 		<div class="transform transition-all duration-1000 {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
-			<h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4">
-				Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">{personal.name}</span>
+			<h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-base-content mb-4">
+				Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{personal.name}</span>
 			</h1>
-			<div class="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 min-h-[2em]">
+			<div class="text-lg sm:text-xl md:text-2xl text-base-content/80 mb-8 min-h-[2em]">
 				<TypewriterEffect text={personal.tagline} speed={50} delay={500} />
 			</div>
 			<div class="flex flex-wrap justify-center gap-4 mb-8">
 				<a
 					href="#projects"
-					class="px-6 sm:px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg text-sm sm:text-base"
+					class="btn btn-primary btn-lg text-sm sm:text-base"
 				>
 					View My Work
 				</a>
 				<a
 					href="#contact"
-					class="px-6 sm:px-8 py-3 bg-transparent border-2 border-blue-500 text-blue-500 dark:text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105 text-sm sm:text-base"
+					class="btn btn-outline btn-primary btn-lg text-sm sm:text-base"
 				>
 					Get In Touch
 				</a>
@@ -58,7 +58,7 @@
 			<!-- Scroll Indicator -->
 			<div class="mt-16 animate-bounce">
 				<svg
-					class="w-6 h-6 mx-auto text-gray-400 dark:text-gray-500"
+					class="w-6 h-6 mx-auto text-base-content/40"
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
