@@ -66,6 +66,31 @@ Preview the production build:
 npm run preview
 ```
 
+## 🚢 Deployment to GitHub Pages
+
+This project is configured to automatically deploy to GitHub Pages when changes are pushed to the main branch.
+
+### Manual Setup:
+
+1. Make sure your GitHub repository is named `username.github.io` or configure GitHub Pages to use the `main` branch and `/root` folder in repository settings.
+
+2. Enable GitHub Pages:
+   - Go to your repository settings
+   - Navigate to "Pages"
+   - Select "GitHub Actions" as the source
+   
+3. Push changes to the main branch to trigger deployment:
+   ```sh
+   git push origin main
+   ```
+
+The GitHub Action will automatically:
+- Install dependencies
+- Build the site using the static adapter
+- Deploy the built site to GitHub Pages
+
+Your site will be available at `https://username.github.io/` or `https://username.github.io/repository-name/` depending on your repository name.
+
 ## 🎨 Customization
 
 To customize the portfolio with your own information:
