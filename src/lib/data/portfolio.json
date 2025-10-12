@@ -1,15 +1,15 @@
 {
 	"personal": {
 		"name": "Ajinkya Taranekar",
-		"title": "Software Engineer",
-		"tagline": "Full Stack Developer | Problem Solver | Tech Enthusiast",
+		"title": "Software Development Engineer 2",
+		"tagline": "Full Stack Developer | GenAI Specialist | Tech Leader",
 		"bio": [
-			"I'm a passionate Software Engineer with a deep love for technology and innovation. My journey in the world of programming began with curiosity and evolved into a commitment to creating impactful solutions.",
-			"I specialize in full-stack development, with expertise in modern web technologies, cloud platforms, and software architecture. I believe in writing clean, efficient code and staying updated with the latest industry trends.",
-			"When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community."
+			"Results-driven Software Engineer with 3+ years of experience architecting scalable, data-intensive applications and leading cross-functional teams to deliver enterprise-grade solutions. Proven track record of driving innovation through GenAI integration, reducing system latencies by 90%, and mentoring teams to achieve 75% faster development cycles.",
+			"I specialize in full-stack development with expertise in microservices architecture, GenAI frameworks, and cloud platforms. Recognised for taking ownership of high-impact projects, from spearheading R&D initiatives to managing 1,400+ P0 alerts with a 91.7% resolution rate in SRE.",
+			"Currently pursuing MSc Computer Science at Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies."
 		],
-		"location": "India",
-		"email": "ajinkyataranekar@example.com",
+		"location": "Dublin, Ireland",
+		"email": "ajinkyataranekar26@gmail.com",
 		"availability": "Open to opportunities"
 	},
 	"social": {
@@ -19,180 +19,285 @@
 	},
 	"stats": {
 		"projects": "10+",
-		"technologies": "15+",
+		"technologies": "30+",
 		"dedication": "100%",
 		"learning": "∞"
 	},
 	"experiences": [
 		{
-			"title": "Software Engineer",
-			"company": "Tech Company",
-			"period": "2023 - Present",
-			"description": "Developing scalable web applications using modern tech stack. Working on frontend and backend components, implementing best practices, and collaborating with cross-functional teams.",
-			"technologies": ["React", "Node.js", "TypeScript", "MongoDB"],
+			"title": "Software Development Engineer 2",
+			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+			"period": "July 2024 - July 2025",
+			"description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks. Designed & built an in-house search engine combining semantic vector and fuzzy search, cutting retrieval latency from 1s to 100ms. Architected migration of Svelte micro-frontends from mobile-first to desktop-optimised versions. Developed a robust analytics engine to monitor performance for 100K+ daily active users. Pioneered an internal Figma plugin leveraging LLMs to generate heatmaps and optimise copy, accelerating design review cycles from weeks to days.",
+			"technologies": ["Milvus", "Azure AI", "Kafka", "GoLang", "Python", "Svelte", "gRPC", "Elasticsearch", "Clickhouse", "Kubernetes"],
 			"type": "work"
 		},
 		{
-			"title": "Full Stack Developer",
-			"company": "Startup Inc",
-			"period": "2021 - 2023",
-			"description": "Built and maintained web applications. Implemented new features, optimized performance, and worked closely with the design team to create user-friendly interfaces.",
-			"technologies": ["Vue.js", "Python", "PostgreSQL", "Docker"],
+			"title": "Full-Stack Developer",
+			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+			"period": "July 2022 - July 2024",
+			"description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing report-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.",
+			"technologies": ["Svelte", "SpringBoot", "Kafka", "GoLang", "gRPC", "MySQL", "Clickhouse", "Kubernetes"],
 			"type": "work"
 		},
 		{
-			"title": "Software Development Intern",
-			"company": "Tech Solutions",
-			"period": "2020 - 2021",
-			"description": "Contributed to the development of core features. Worked on frontend components, API integration, and database optimization.",
-			"technologies": ["JavaScript", "Express.js", "MySQL", "Git"],
+			"title": "Full-Stack Developer Intern",
+			"company": "Nuclei, CDNA Technologies Pvt. Ltd.",
+			"period": "Jan 2022 - July 2022",
+			"description": "Optimised reconciliation services for two major banks, processing 45,000+ daily transactions and reducing manual efforts by 95%. Engineered robust ETL pipelines using Apache NiFi that cut new bank onboarding times for reconciliation from multiple weeks to 1 week. Created dynamic visualisations for on-call rotations and enhanced alerting systems in OpenSearch and Grafana with real-time CPU and memory insights.",
+			"technologies": ["Apache NiFi", "SpringBoot", "gRPC", "MySQL", "Superset", "OpenSearch", "Grafana"],
+			"type": "internship"
+		},
+		{
+			"title": "Flutter Developer Intern",
+			"company": "Multipl Wealth Management Pvt. Ltd.",
+			"period": "May 2021 - Dec 2021",
+			"description": "Developed secure mobile app lock and deferred deep linking features in Flutter to enhance app security. Designed interactive UI components for both Android and iOS platforms using Flutter, improving app responsiveness and user engagement.",
+			"technologies": ["Flutter", "Dart", "Android", "iOS"],
+			"type": "internship"
+		},
+		{
+			"title": "Technology Analyst - I (Trainee)",
+			"company": "Niograph Technology Consulting LLP",
+			"period": "Sep 2020 - Feb 2021",
+			"description": "Processed and enriched data for over 1.2 million doctor profiles using advanced pipelines, ensuring high-quality, accurate data for analytics. Integrated Elasticsearch to enhance search capabilities, reducing API response times by 50% and accelerating data access for decision-making.",
+			"technologies": ["Elasticsearch", "Python", "Data Pipelines"],
 			"type": "internship"
 		}
 	],
 	"projects": [
 		{
-			"title": "E-Commerce Platform",
-			"description": "A full-featured e-commerce platform with real-time inventory management, payment integration, and admin dashboard. Built with modern web technologies for optimal performance.",
+			"title": "Dailify - Curbside Pickup Service",
+			"description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
 			"image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop",
-			"technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+			"technologies": ["SpringBoot", "Flutter", "MySQL", "Elasticsearch", "Azure", "GitHub Actions"],
 			"github": "https://github.com/AjinkyaTaranekar",
 			"demo": "https://demo.example.com",
 			"featured": true
 		},
 		{
-			"title": "Task Management App",
-			"description": "Collaborative task management application with real-time updates, team collaboration features, and analytics dashboard. Designed for productivity and ease of use.",
+			"title": "Department Information System",
+			"description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
 			"image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
-			"technologies": ["Vue.js", "Firebase", "Tailwind CSS"],
+			"technologies": ["SpringBoot", "Flutter", "MySQL", "Angular", "GitHub Actions"],
 			"github": "https://github.com/AjinkyaTaranekar",
 			"demo": "https://demo.example.com",
 			"featured": true
 		},
 		{
-			"title": "Portfolio Website",
-			"description": "Modern portfolio website built with SvelteKit and Tailwind CSS. Features dark mode, responsive design, and smooth animations.",
+			"title": "VoiceBot Agent Management System",
+			"description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
+			"image": "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=600&h=400&fit=crop",
+			"technologies": ["GoLang", "gRPC", "Milvus", "Azure AI", "GenAI", "Kubernetes"],
+			"github": "https://github.com/AjinkyaTaranekar",
+			"featured": true
+		},
+		{
+			"title": "In-House Search Engine",
+			"description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 100ms. Implemented for high-performance data retrieval in production systems.",
 			"image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-			"technologies": ["SvelteKit", "TypeScript", "Tailwind CSS"],
-			"github": "https://github.com/AjinkyaTaranekar/Personal-website",
+			"technologies": ["Python", "Milvus", "Elasticsearch", "Vector Search", "Fuzzy Search"],
+			"github": "https://github.com/AjinkyaTaranekar",
 			"featured": false
 		},
 		{
-			"title": "Weather Dashboard",
-			"description": "Real-time weather dashboard with forecasts, maps, and historical data visualization. Integrates with weather APIs for accurate data.",
-			"image": "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&h=400&fit=crop",
-			"technologies": ["React", "D3.js", "REST API"],
+			"title": "FinnEasy - Gamified Stock Market Solution",
+			"description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
+			"image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
+			"technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
+			"github": "https://github.com/AjinkyaTaranekar",
+			"featured": false
+		},
+		{
+			"title": "M.I.T.R.A - Credit Worthiness Tool",
+			"description": "2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.",
+			"image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop",
+			"technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
 			"github": "https://github.com/AjinkyaTaranekar",
 			"featured": false
 		}
 	],
 	"education": [
 		{
-			"degree": "Bachelor of Engineering in Computer Science",
-			"institution": "University of Technology",
-			"period": "2018 - 2022",
-			"grade": "CGPA: 8.5/10",
-			"description": "Focused on software engineering, data structures, algorithms, and web technologies. Active member of coding club and tech societies.",
+			"degree": "Master of Science in Computer Science - Future Networked Systems",
+			"institution": "Trinity College Dublin",
+			"period": "Sept 2025 - Present",
+			"grade": "In Progress",
+			"description": "Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.",
 			"achievements": [
-				"Dean's List - All Semesters",
-				"Best Final Year Project Award",
-				"Published research paper on Machine Learning"
+				"Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning"
 			]
 		},
 		{
-			"degree": "Higher Secondary Certificate (HSC)",
-			"institution": "Science College",
-			"period": "2016 - 2018",
-			"grade": "92%",
-			"description": "Specialized in Science stream with Mathematics, Physics, and Chemistry.",
+			"degree": "Bachelor of Technology in Computer Science",
+			"institution": "Shri G.S. Institute of Technology and Science",
+			"period": "Aug 2018 - May 2022",
+			"grade": "CGPA: 9.04/10.0",
+			"description": "Ranked 1st in Computer Science among 120+ students. Focused on cloud computing, data engineering, machine learning, database systems, operating systems, and networks. Active member of technical societies and coding clubs.",
 			"achievements": [
-				"School Science Fair Winner",
-				"Mathematics Olympiad Participant"
+				"Seksaria Gold Medal for Academic Excellence - Highest CGPA in Computer Science",
+				"Rank 1st in Computer Science Department",
+				"Relevant Coursework: Cloud Computing, Data Engineering, Machine Learning, Database, OS, Networks"
 			]
 		}
 	],
 	"skillCategories": [
 		{
-			"name": "Frontend Development",
-			"icon": "🎨",
+			"name": "Languages",
+			"icon": "💻",
 			"skills": [
-				{ "name": "React", "level": 90 },
-				{ "name": "Vue.js", "level": 85 },
-				{ "name": "Svelte", "level": 80 },
-				{ "name": "TypeScript", "level": 88 },
-				{ "name": "Tailwind CSS", "level": 92 },
-				{ "name": "HTML/CSS", "level": 95 }
+				{ "name": "Java", "level": 90 },
+				{ "name": "Python", "level": 88 },
+				{ "name": "Go", "level": 85 },
+				{ "name": "TypeScript", "level": 87 },
+				{ "name": "Dart", "level": 80 },
+				{ "name": "JavaScript", "level": 90 }
 			]
 		},
 		{
 			"name": "Backend Development",
 			"icon": "⚙️",
 			"skills": [
-				{ "name": "Node.js", "level": 88 },
-				{ "name": "Python", "level": 85 },
-				{ "name": "Express.js", "level": 87 },
-				{ "name": "FastAPI", "level": 78 },
-				{ "name": "REST APIs", "level": 90 },
-				{ "name": "GraphQL", "level": 75 }
+				{ "name": "FastAPI", "level": 88 },
+				{ "name": "Spring Boot", "level": 90 },
+				{ "name": "gRPC & Protobuf", "level": 87 },
+				{ "name": "REST API", "level": 92 },
+				{ "name": "Microservices", "level": 90 },
+				{ "name": "Kafka", "level": 85 }
 			]
 		},
 		{
-			"name": "Database & Cloud",
+			"name": "Frontend Development",
+			"icon": "🎨",
+			"skills": [
+				{ "name": "Svelte", "level": 92 },
+				{ "name": "Flutter", "level": 85 },
+				{ "name": "Angular", "level": 75 },
+				{ "name": "Tailwind CSS", "level": 88 },
+				{ "name": "HTML/CSS", "level": 90 },
+				{ "name": "Atomic Design", "level": 88 }
+			]
+		},
+		{
+			"name": "Database & Data Engineering",
+			"icon": "💾",
+			"skills": [
+				{ "name": "MySQL", "level": 88 },
+				{ "name": "ClickHouse", "level": 87 },
+				{ "name": "Elasticsearch", "level": 90 },
+				{ "name": "Apache NiFi", "level": 82 },
+				{ "name": "Redis", "level": 80 },
+				{ "name": "ETL Pipelines", "level": 85 }
+			]
+		},
+		{
+			"name": "DevOps & Cloud",
 			"icon": "☁️",
 			"skills": [
-				{ "name": "MongoDB", "level": 85 },
-				{ "name": "PostgreSQL", "level": 83 },
-				{ "name": "MySQL", "level": 80 },
-				{ "name": "AWS", "level": 75 },
-				{ "name": "Docker", "level": 82 },
-				{ "name": "Firebase", "level": 88 }
+				{ "name": "Docker", "level": 88 },
+				{ "name": "Kubernetes", "level": 85 },
+				{ "name": "Microsoft Azure", "level": 82 },
+				{ "name": "GitHub Actions", "level": 90 },
+				{ "name": "CI/CD", "level": 87 },
+				{ "name": "Linux", "level": 85 }
 			]
 		},
 		{
-			"name": "Tools & Others",
+			"name": "Analytics & Observability",
+			"icon": "📊",
+			"skills": [
+				{ "name": "Grafana", "level": 88 },
+				{ "name": "OpenSearch", "level": 85 },
+				{ "name": "PMM", "level": 80 },
+				{ "name": "Superset", "level": 82 },
+				{ "name": "GoAlert", "level": 78 },
+				{ "name": "Uptime Kuma", "level": 75 }
+			]
+		},
+		{
+			"name": "GenAI & ML",
+			"icon": "🤖",
+			"skills": [
+				{ "name": "Langchain", "level": 85 },
+				{ "name": "Milvus", "level": 87 },
+				{ "name": "OpenAI", "level": 82 },
+				{ "name": "Azure AI", "level": 85 },
+				{ "name": "GitHub Copilot", "level": 90 },
+				{ "name": "Cursor", "level": 88 }
+			]
+		},
+		{
+			"name": "Tools & Methodologies",
 			"icon": "🛠️",
 			"skills": [
-				{ "name": "Git", "level": 90 },
-				{ "name": "CI/CD", "level": 80 },
-				{ "name": "Linux", "level": 85 },
-				{ "name": "Jest", "level": 82 },
-				{ "name": "Webpack", "level": 78 },
-				{ "name": "Agile", "level": 88 }
+				{ "name": "Git", "level": 92 },
+				{ "name": "Agile", "level": 90 },
+				{ "name": "System Design", "level": 88 },
+				{ "name": "Team Leadership", "level": 85 },
+				{ "name": "Mentoring", "level": 87 },
+				{ "name": "SRE", "level": 83 }
 			]
 		}
 	],
 	"additionalSkills": [
-		"JavaScript",
-		"Python",
 		"Java",
-		"C++",
-		"React Native",
-		"Next.js",
-		"Nuxt.js",
-		"SvelteKit",
-		"Material-UI",
-		"Bootstrap",
-		"SASS",
-		"Vite",
-		"Webpack",
-		"Babel",
-		"ESLint",
-		"Prettier",
-		"Jest",
-		"Cypress",
-		"Playwright",
+		"Python",
+		"Go",
+		"TypeScript",
+		"Dart",
+		"JavaScript",
+		"FastAPI",
+		"Spring Boot",
+		"gRPC",
+		"Protobuf",
+		"REST API",
+		"Microservices",
+		"Svelte",
+		"Flutter",
+		"Angular",
+		"MySQL",
+		"ClickHouse",
+		"Elasticsearch",
+		"Apache NiFi",
+		"Redis",
+		"Docker",
+		"Kubernetes",
+		"Microsoft Azure",
 		"GitHub Actions",
-		"Jenkins",
-		"Nginx",
-		"Redux",
-		"Zustand",
-		"Prisma",
-		"Sequelize",
-		"JWT",
-		"OAuth",
-		"WebSockets",
-		"Socket.io",
-		"Vercel",
-		"Netlify",
-		"Heroku"
+		"Kafka",
+		"Grafana",
+		"OpenSearch",
+		"PMM",
+		"Superset",
+		"GoAlert",
+		"Uptime Kuma",
+		"Slack Alerts",
+		"Langchain",
+		"Milvus",
+		"OpenAI",
+		"Azure AI",
+		"GitHub Copilot",
+		"Cursor",
+		"ETL Pipelines",
+		"CI/CD",
+		"Linux",
+		"Vector Search",
+		"Semantic Search",
+		"Fuzzy Search",
+		"System Design",
+		"Atomic Design",
+		"White-label Solutions",
+		"Multi-tenant Architecture",
+		"Site Reliability Engineering",
+		"Team Leadership",
+		"Mentoring",
+		"Agile Methodologies",
+		"CIS Benchmark",
+		"VM Hardening",
+		"Alert Management",
+		"NPM Packages",
+		"Fintech Solutions",
+		"Digital Banking",
+		"GenAI Integration"
 	]
 }
