@@ -1,3 +1,4 @@
+import portfolioData from "$lib/data/portfolio.json";
 import type { Photo } from "$lib/types/portfolio";
 import fs from "node:fs";
 import path from "node:path";
@@ -23,5 +24,8 @@ export const load = async () => {
     photos = [];
   }
 
-  return { photos } as { photos: Photo[] };
+  return { photos, portfolio: portfolioData } as {
+    photos: Photo[];
+    portfolio: typeof portfolioData;
+  };
 };

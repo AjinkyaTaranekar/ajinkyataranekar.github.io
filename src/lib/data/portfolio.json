@@ -11,12 +11,12 @@
     "location": "Dublin, Ireland",
     "email": "ajinkyataranekar26@gmail.com",
     "availability": "Open to opportunities",
-    "profileImage": "/assets/photos/profile.jpg"
+    "profileImage": "/assets/profile.jpg"
   },
   "social": {
     "github": "https://github.com/AjinkyaTaranekar",
     "linkedin": "https://www.linkedin.com/in/ajinkya-taranekar",
-    "twitter": "https://twitter.com/ajinkyataranekar"
+    "twitter": "https://twitter.com/ajinkyataranekr"
   },
   "stats": {
     "projects": "10+",
@@ -113,13 +113,13 @@
         "GitHub Actions"
       ],
       "github": "https://github.com/AjinkyaTaranekar",
-      "demo": "https://demo.example.com",
+	  "report": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
       "featured": true
     },
     {
       "title": "Department Information System",
       "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
-      "image": "/assets/projects/department.png",
+      "image": "/assets/projects/dis.png",
       "technologies": [
         "SpringBoot",
         "Flutter",
@@ -127,27 +127,29 @@
         "Angular",
         "GitHub Actions"
       ],
-      "github": "https://github.com/AjinkyaTaranekar",
-      "demo": "https://demo.example.com",
+      "github": "https://github.com/Department-Information-System",
+      "report": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
       "featured": true
     },
     {
-      "title": "VoiceBot Agent Management System",
+      "title": "Convo AI - VoiceBot Agent Management System",
       "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
       "image": "/assets/projects/voicebot.png",
       "technologies": [
         "GoLang",
         "gRPC",
         "Milvus",
+		"Livekit",
+		"OpenAI",
         "Azure AI",
         "GenAI",
         "Kubernetes"
       ],
-      "github": "https://github.com/AjinkyaTaranekar",
+      "link": "https://www.gonuclei.com/convo-ai",
       "featured": true
     },
     {
-      "title": "In-House Search Engine",
+      "title": "In-House Search Engine (Part of Convo AI)",
       "description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 100ms. Implemented for high-performance data retrieval in production systems.",
       "image": "/assets/projects/searchengine.png",
       "technologies": [
@@ -157,7 +159,7 @@
         "Vector Search",
         "Fuzzy Search"
       ],
-      "github": "https://github.com/AjinkyaTaranekar",
+      "link": "https://www.gonuclei.com/convo-ai",
       "featured": false
     },
     {
@@ -165,16 +167,20 @@
       "description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
       "image": "/assets/projects/finneasy.png",
       "technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
-      "github": "https://github.com/AjinkyaTaranekar",
-      "featured": false
+      "github": "https://github.com/Brainstormers-HackItOut",
+	  "link": "https://devpost.com/software/finneasy",
+      "featured": false,
+	  "winner": "Best in Fintech at HackItOut"
     },
     {
       "title": "M.I.T.R.A - Credit Worthiness Tool",
       "description": "2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.",
       "image": "/assets/projects/mitra.png",
       "technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
-      "github": "https://github.com/AjinkyaTaranekar",
-      "featured": false
+      "github": "https://github.com/M-I-T-R-A",
+	  "link": "https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/",
+      "featured": false,
+	  "winner": "2nd Runner-Up at TVS Credit EPIC Season 2"
     }
   ],
   "education": [

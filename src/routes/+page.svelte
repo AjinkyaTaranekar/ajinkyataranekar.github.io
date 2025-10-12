@@ -1,8 +1,3 @@
-<script lang="ts" context="module">
-  import type { Photo } from "$lib/types/portfolio";
-  export type PageData = { photos?: Photo[] };
-</script>
-
 <script lang="ts">
   import About from "$lib/components/About.svelte";
   import Contact from "$lib/components/Contact.svelte";
@@ -14,12 +9,15 @@
   import Projects from "$lib/components/Projects.svelte";
   import QRCode from "$lib/components/QRCode.svelte";
   import Skills from "$lib/components/Skills.svelte";
-  import { portfolio } from "$lib/stores/portfolio";
   import { onMount } from "svelte";
-
+  import type { PageData } from "./$types";
   let showQR = $state(false);
   let darkMode = $state(false);
-  export let data: PageData = {} as PageData;
+
+  interface Props {
+    data: PageData;
+  }
+  let { data }: Props = $props();
 
   onMount(() => {
     // Check for saved theme preference or default to dark (luxury) mode
@@ -49,33 +47,39 @@
   <Navigation {darkMode} {toggleTheme} bind:showQR />
 
   <main>
-    <Hero personal={$portfolio.personal} />
-    <About personal={$portfolio.personal} stats={$portfolio.stats} />
-    <Experience experiences={$portfolio.experiences} />
-    <Projects projects={$portfolio.projects} />
+    <Hero personal={data.portfolio.personal} />
+    <About personal={data.portfolio.personal} stats={data.portfolio.stats} />
+    <Experience experiences={data.portfolio.experiences} />
+    <Projects projects={data.portfolio.projects} />
     <PhotoCarousel
       photos={data.photos && data.photos.length
         ? data.photos
-        : $portfolio.photos}
+        : data.portfolio.photos}
     />
-    <Education education={$portfolio.education} />
+    <Education education={data.portfolio.education} />
     <Skills
-      skillCategories={$portfolio.skillCategories}
-      additionalSkills={$portfolio.additionalSkills}
+      skillCategories={data.portfolio.skillCategories}
+      additionalSkills={data.portfolio.additionalSkills}
     />
-    <Contact personal={$portfolio.personal} social={$portfolio.social} />
+    <Contact
+      personal={data.portfolio.personal}
+      social={data.portfolio.social}
+    />
   </main>
-
-  <footer class="bg-base-200 py-6 sm:py-8 transition-colors duration-300">
-    <div class="container mx-auto px-4 text-center text-base-content/60">
-      <p class="text-sm sm:text-base">
+  <!-- Footer with DaisyUI classes -->
+  <footer class="footer footer-center bg-base-200 text-base-content p-10">
+    <aside>
+      <p class="font-semibold text-lg">
+        {data.portfolio.personal.name}
+      </p>
+      <p class="text-base-content/60">
         &copy; {new Date().getFullYear()}
-        {$portfolio.personal.name}. All rights reserved.
+        {data.portfolio.personal.name}. All rights reserved.
       </p>
-      <p class="mt-2 text-xs sm:text-sm">
-        Built with ❤️ using SvelteKit & Tailwind CSS
+      <p class="text-base-content/60 text-sm mt-2">
+        Built with ❤️ using Poha and Jalebi.
       </p>
-    </div>
+    </aside>
   </footer>
 
   {#if showQR}
