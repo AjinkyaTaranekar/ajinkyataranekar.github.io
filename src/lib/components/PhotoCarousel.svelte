@@ -95,14 +95,18 @@
         adventures and explorations.
       </p>
 
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-5xl mx-auto px-2 sm:px-4">
         <!-- Carousel Container -->
         <div
-          class="carousel w-full rounded-2xl shadow-2xl bg-white dark:bg-gray-800 dark:bg-base-300 overflow-hidden"
+          class="carousel w-full rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl sm:shadow-2xl bg-white dark:bg-gray-800 dark:bg-base-300 overflow-hidden"
           onmouseenter={handleMouseEnter}
           onmouseleave={handleMouseLeave}
+          ontouchstart={handleMouseEnter}
+          ontouchend={handleMouseLeave}
         >
-          <div class="relative w-full h-[400px] sm:h-[500px] lg:h-[600px]">
+          <div
+            class="relative w-full h-[300px] xs:h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px]"
+          >
             {#each photos as photo, index}
               <div
                 class="carousel-item absolute w-full h-full transition-opacity duration-700 {index ===
@@ -165,11 +169,11 @@
             <!-- Navigation Arrows -->
             <button
               onclick={prevSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 transition-colors duration-300 border-none z-20"
+              class="btn btn-circle btn-sm sm:btn-md absolute left-1 xs:left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border-none z-20 shadow-md"
               aria-label="Previous photo"
             >
               <svg
-                class="w-5 h-5 sm:w-6 sm:h-6"
+                class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -184,11 +188,11 @@
             </button>
             <button
               onclick={nextSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 transition-colors duration-300 border-none z-20"
+              class="btn btn-circle btn-sm sm:btn-md absolute right-1 xs:right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border-none z-20 shadow-md"
               aria-label="Next photo"
             >
               <svg
-                class="w-5 h-5 sm:w-6 sm:h-6"
+                class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -205,13 +209,16 @@
         </div>
 
         <!-- Indicators -->
-        <div class="flex justify-center gap-2 mt-6">
+        <div
+          class="flex justify-center flex-wrap gap-1 xs:gap-2 mt-4 sm:mt-6 px-2"
+        >
           {#each photos as photo, index}
             <button
               onclick={() => goToSlide(index)}
-              class="btn btn-xs {index === currentIndex
-                ? 'btn-primary'
-                : 'btn-outline dark:border-white border-gray-800'}"
+              class="w-2 h-2 xs:w-3 xs:h-3 sm:btn btn-xs rounded-full {index ===
+              currentIndex
+                ? 'bg-primary'
+                : 'bg-gray-300 dark:bg-gray-600'} sm:hover:opacity-80 transition-all"
               aria-label="Go to photo {index + 1}"
             >
             </button>
@@ -219,7 +226,9 @@
         </div>
 
         <!-- Photo Count -->
-        <div class="text-center mt-4 text-sm text-gray-900 dark:text-white/60">
+        <div
+          class="text-center mt-3 sm:mt-4 text-xs sm:text-sm text-gray-900 dark:text-white/60"
+        >
           {currentIndex + 1} / {photos.length}
         </div>
       </div>

@@ -91,7 +91,7 @@
         checked={darkMode}
         onchange={toggleTheme}
         aria-label="Toggle theme"
-		class="hidden"
+        class="hidden"
       />
 
       <!-- moon icon (shown when dark mode is ON) -->
@@ -136,13 +136,13 @@
       </label>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300 rounded-box w-52"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300 rounded-box w-64 right-0"
       >
         {#each navItems as item}
-          <li>
+          <li class="mb-1">
             <a
               href={item.href}
-              class="hover:text-primary text-gray-900 dark:text-white"
+              class="block py-2 px-4 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-primary text-gray-900 dark:text-white rounded-md transition-colors duration-200"
             >
               {item.name}
             </a>

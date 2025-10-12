@@ -1,6 +1,6 @@
 # Ajinkya Taranekar - Personal Portfolio
 
-A modern portfolio website showcasing my experience as a Software Development Engineer and GenAI Specialist.
+A fully responsive modern portfolio website showcasing my experience as a Software Development Engineer and GenAI Specialist.
 
 ## 👨‍💻 About Me
 

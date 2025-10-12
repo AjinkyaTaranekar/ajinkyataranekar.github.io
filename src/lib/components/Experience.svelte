@@ -41,27 +41,32 @@
         My <span class="text-blue-500">Experience</span>
       </h2>
 
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="relative">
           <!-- Timeline line -->
           <div
             class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-500"
           ></div>
 
+          <!-- Mobile timeline line (visible only on small screens) -->
+          <div
+            class="md:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-blue-500"
+          ></div>
+
           {#each experiences as exp, i}
             <div
               class="relative mb-8 md:mb-12 {i % 2 === 0
-                ? 'md:pr-1/2'
-                : 'md:pl-1/2 md:ml-auto'}"
+                ? 'md:pr-1/2 pl-12 md:pl-0'
+                : 'md:pl-1/2 md:ml-auto pl-12 md:pl-0'}"
               style="animation-delay: {i * 200}ms"
             >
               <div class="flex items-center mb-4">
                 <div
-                  class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center z-10 shrink-0 overflow-hidden {i %
+                  class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center z-10 shrink-0 overflow-hidden absolute md:static {i %
                     2 ===
                   0
-                    ? 'md:ml-auto md:mr-8'
-                    : 'md:ml-8'}"
+                    ? 'md:ml-auto md:mr-8 left-0 md:left-auto'
+                    : 'md:ml-8 left-0 md:left-auto'}"
                 >
                   {#if exp.companyLogo}
                     <img
@@ -102,7 +107,7 @@
               </div>
 
               <div
-                class="ml-16 md:ml-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 transition-all duration-300 hover:shadow-xl"
+                class="md:ml-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 transition-all duration-300 hover:shadow-xl"
               >
                 <div
                   class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2"

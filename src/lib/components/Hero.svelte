@@ -19,14 +19,14 @@
   id="home"
   class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
 >
-  <div class="container mx-auto px-4 text-center">
+  <div class="container mx-auto px-4 sm:px-6 text-center">
     <div
       class="transform transition-all duration-1000 {visible
         ? 'translate-y-0 opacity-100'
         : 'translate-y-10 opacity-0'}"
     >
       <h1
-        class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4"
+        class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 px-2"
       >
         Hi, I'm <span
           class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
@@ -34,17 +34,20 @@
         >
       </h1>
       <div
-        class="text-lg sm:text-xl md:text-2xl text-gray-900 dark:text-white/80 mb-8 min-h-[2em]"
+        class="text-base sm:text-xl md:text-2xl text-gray-900 dark:text-white/80 mb-8 min-h-[2em] px-4 sm:px-0"
       >
         <TypewriterEffect text={personal.tagline} speed={50} delay={500} />
       </div>
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <a href="#projects" class="btn btn-primary btn-lg text-sm sm:text-base">
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
+        <a
+          href="#projects"
+          class="btn btn-primary btn-md sm:btn-lg text-xs sm:text-sm md:text-base px-3 sm:px-6"
+        >
           View My Work
         </a>
         <a
           href="#contact"
-          class="btn btn-outline btn-primary btn-lg text-sm sm:text-base"
+          class="btn btn-outline btn-primary btn-md sm:btn-lg text-xs sm:text-sm md:text-base px-3 sm:px-6"
         >
           Get In Touch
         </a>

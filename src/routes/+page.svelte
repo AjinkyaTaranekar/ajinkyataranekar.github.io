@@ -43,10 +43,12 @@
   }
 </script>
 
-<div class="min-h-screen bg-base-100 transition-colors duration-300">
+<div
+  class="min-h-screen bg-base-100 transition-colors duration-300 overflow-x-hidden"
+>
   <Navigation {darkMode} {toggleTheme} bind:showQR />
 
-  <main>
+  <main class="w-full">
     <Hero personal={data.portfolio.personal} />
     <About personal={data.portfolio.personal} stats={data.portfolio.stats} />
     <Experience experiences={data.portfolio.experiences} />
@@ -68,17 +70,17 @@
   </main>
   <!-- Footer with DaisyUI classes -->
   <footer
-    class="footer footer-center bg-white dark:bg-gray-900 transition-colors duration-300 text-gray-900 dark:text-white p-10"
+    class="footer footer-center bg-white dark:bg-gray-900 transition-colors duration-300 text-gray-900 dark:text-white p-6 sm:p-8 md:p-10"
   >
     <aside>
-      <p class="font-semibold text-lg">
+      <p class="font-semibold text-base sm:text-lg">
         {data.portfolio.personal.name}
       </p>
-      <p class="text-gray-900 dark:text-white/60">
+      <p class="text-gray-900 dark:text-white/60 text-sm sm:text-base">
         &copy; {new Date().getFullYear()}
         {data.portfolio.personal.name}. All rights reserved.
       </p>
-      <p class="text-gray-900 dark:text-white/60 text-sm mt-2">
+      <p class="text-gray-900 dark:text-white/60 text-xs sm:text-sm mt-2">
         Built with ❤️ using Poha and Jalebi.
       </p>
     </aside>
