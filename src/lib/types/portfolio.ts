@@ -6,6 +6,7 @@ export interface PersonalInfo {
 	location: string;
 	email: string;
 	availability: string;
+	profileImage?: string;
 }
 
 export interface SocialLinks {
@@ -18,6 +19,7 @@ export interface SocialLinks {
 export interface Experience {
 	title: string;
 	company: string;
+	companyLogo?: string;
 	period: string;
 	description: string;
 	technologies: string[];
@@ -61,6 +63,14 @@ export interface Stats {
 	learning: string;
 }
 
+export interface Photo {
+	id: string;
+	url: string;
+	caption: string;
+	location?: string;
+	date?: string;
+}
+
 export interface PortfolioData {
 	personal: PersonalInfo;
 	social: SocialLinks;
@@ -70,4 +80,5 @@ export interface PortfolioData {
 	education: Education[];
 	skillCategories: SkillCategory[];
 	additionalSkills: string[];
+	photos: Photo[];
 }

@@ -1,11 +1,6 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
-
-:root {
-	--color-primary: 59 130 246;
-	--color-secondary: 139 92 246;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
 	scroll-behavior: smooth;
@@ -13,4 +8,14 @@ html {
 
 body {
 	@apply antialiased;
+}
+
+/* Custom animations */
+@layer utilities {
+	.animation-delay-2000 {
+		animation-delay: 2s;
+	}
+	.animation-delay-4000 {
+		animation-delay: 4s;
+	}
 }
