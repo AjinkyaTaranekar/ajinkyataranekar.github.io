@@ -122,7 +122,7 @@
       <label tabindex="0" class="btn-sm">
         <svg
           fill="none"
-          class="text-gray-900 dark:text-white w-6 h-6"
+          class="stroke-gray-900 dark:stroke-white w-6 h-6"
           viewBox="0 0 24 24"
         >
           <path
