@@ -192,7 +192,7 @@
                           stroke-linejoin="round"
                         />
                       </svg>
-                      <span class="hidden sm:inline">Link</span>
+                      <span class="inline">Link</span>
                     </a>
                   {/if}
                 </div>
