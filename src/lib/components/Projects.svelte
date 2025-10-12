@@ -145,9 +145,9 @@
                       <span class="inline">Demo</span>
                     </a>
                   {/if}
-                  {#if project.report}
+                  {#if project.document}
                     <a
-                      href={project.report}
+                      href={project.document}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-xs sm:text-sm flex-1 sm:flex-none"
@@ -164,7 +164,7 @@
                           d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                         /></svg
                       >
-                      <span class="inline">Report</span>
+                      <span class="inline">Document</span>
                     </a>
                   {/if}
                   {#if project.link}
@@ -188,7 +188,7 @@
                 <!-- Render any extra keys dynamically -->
                 <div class="mt-2 text-xs text-gray-500">
                   {#each Object.entries(project) as [key, value]}
-                    {#if !["title", "description", "image", "technologies", "github", "demo", "report", "link", "winner", "featured"].includes(key)}
+                    {#if !["title", "description", "image", "technologies", "github", "demo", "document", "link", "winner", "featured"].includes(key)}
                       <div>
                         <span class="font-semibold">{key}:</span>
                         {value}

@@ -33,7 +33,7 @@ export interface Project {
   technologies: string[];
   github?: string;
   demo?: string;
-  report?: string;
+  document?: string;
   link?: string;
   winner?: string;
   featured: boolean;

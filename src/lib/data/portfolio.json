@@ -50,7 +50,7 @@
       "company": "Nuclei, CDNA Technologies Pvt. Ltd.",
       "companyLogo": "/assets/companies/nuclei.png",
       "period": "July 2022 - July 2024",
-      "description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing report-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.",
+      "description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing document-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.",
       "technologies": [
         "Svelte",
         "SpringBoot",
@@ -113,12 +113,12 @@
         "GitHub Actions"
       ],
       "github": "https://github.com/AjinkyaTaranekar",
-      "report": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
+      "document": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
       "featured": true
     },
     {
       "title": "Department Information System",
-      "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
+      "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and documents, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
       "image": "/assets/projects/dis.png",
       "technologies": [
         "SpringBoot",
@@ -128,7 +128,7 @@
         "GitHub Actions"
       ],
       "github": "https://github.com/Department-Information-System",
-      "report": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
+      "document": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
       "featured": true
     },
     {
