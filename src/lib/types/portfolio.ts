@@ -52,6 +52,8 @@ export interface Education {
 export interface Skill {
   name: string;
   level: number;
+  experience?: "Expert" | "Advanced" | "Intermediate" | "Proficient";
+  years?: string;
 }
 
 export interface SkillCategory {
