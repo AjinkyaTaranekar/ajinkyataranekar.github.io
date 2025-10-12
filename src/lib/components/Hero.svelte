@@ -29,10 +29,9 @@
       <h1
         class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 px-2"
       >
-        Hi, I'm <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
-          >{personal.name}</span
-        >
+        Hi, I'm <span class="text-transparent bg-clip-text bg-primary">
+          {personal.name}
+        </span>
       </h1>
       <div
         class="text-base sm:text-xl md:text-2xl text-gray-900 dark:text-white/80 mb-8 min-h-[2em] px-4 sm:px-0"
