@@ -1,0 +1,183 @@
+# Ajinkya Taranekar - Personal Website
+
+## Personal Information
+- Name: Ajinkya Taranekar
+- Title: Software Development Engineer 2
+- Tagline: Full Stack Engineer | GenAI Specialist | Tech Leader
+- Location: Dublin, Ireland
+- Email: ajinkyataranekar26@gmail.com
+- Availability: Open to opportunities
+
+## Bio
+Results-driven Software Engineer with 3+ years of experience architecting scalable, data-intensive applications and leading cross-functional teams to deliver enterprise-grade solutions. Proven track record of driving innovation through GenAI integration, reducing system latencies by 90%, and mentoring teams to achieve 75% faster development cycles.
+
+I specialize in full-stack development with expertise in microservices architecture, GenAI frameworks, and cloud platforms. Recognised for taking ownership of high-impact projects, from spearheading R&D initiatives to managing 1,400+ P0 alerts with a 91.7% resolution rate in SRE.
+
+Currently pursuing MSc Computer Science at Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies.
+
+## Social Links
+- GitHub: https://github.com/AjinkyaTaranekar
+- LinkedIn: https://www.linkedin.com/in/ajinkya-taranekar
+- Twitter: https://twitter.com/ajinkyataranekr
+- Resume: https://drive.google.com/file/d/1J7--UOUDZx3nWBeGPJwDFLz0gFkdeCGd/view
+
+## Experience
+
+### Software Development Engineer 2
+- Company: Nuclei, CDNA Technologies Pvt. Ltd.
+- Period: July 2024 - July 2025
+- Description: Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks. Designed & built an in-house search engine combining semantic vector and fuzzy search, cutting retrieval latency from 1s to 100ms. Architected migration of Svelte micro-frontends from mobile-first to desktop-optimised versions. Developed a robust analytics engine to monitor performance for 100K+ daily active users. Pioneered an internal Figma plugin leveraging LLMs to generate heatmaps and optimise copy, accelerating design review cycles from weeks to days.
+- Technologies: Milvus, Azure AI, Kafka, GoLang, Python, Svelte, gRPC, Elasticsearch, Clickhouse, Kubernetes
+
+### Full-Stack Developer
+- Company: Nuclei, CDNA Technologies Pvt. Ltd.
+- Period: July 2022 - July 2024
+- Description: Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem, slashing new bank onboarding time from several weeks to 1 week. Engineered an Atomic Design templating system enabling fully white-label customisation. Researched & implemented ClickHouse for marketplace analytics, reducing document-generation time from hours to 30 seconds. Managed 1,400+ P0 alerts with a 91.7% resolution rate as Acting Reliability Engineer. Boosted performance in Flights & Hotels categories by 90% through Svelte-based micro-frontends. Led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture.
+- Technologies: Svelte, SpringBoot, Kafka, GoLang, gRPC, MySQL, Clickhouse, Kubernetes
+
+### Full-Stack Developer Intern
+- Company: Nuclei, CDNA Technologies Pvt. Ltd.
+- Period: Jan 2022 - July 2022
+- Description: Optimised reconciliation services for two major banks, processing 45,000+ daily transactions and reducing manual efforts by 95%. Engineered robust ETL pipelines using Apache NiFi that cut new bank onboarding times for reconciliation from multiple weeks to 1 week. Created dynamic visualisations for on-call rotations and enhanced alerting systems in OpenSearch and Grafana with real-time CPU and memory insights.
+- Technologies: Apache NiFi, SpringBoot, gRPC, MySQL, Superset, OpenSearch, Grafana
+
+### Flutter Developer Intern
+- Company: Multipl Wealth Management Pvt. Ltd.
+- Period: May 2021 - Dec 2021
+- Description: Developed secure mobile app lock and deferred deep linking features in Flutter to enhance app security. Designed interactive UI components for both Android and iOS platforms using Flutter, improving app responsiveness and user engagement.
+- Technologies: Flutter, Dart, Android, iOS
+
+### Technology Analyst - I (Trainee)
+- Company: Niograph Technology Consulting LLP
+- Period: Sep 2020 - Feb 2021
+- Description: Processed and enriched data for over 1.2 million doctor profiles using advanced pipelines, ensuring high-quality, accurate data for analytics. Integrated Elasticsearch to enhance search capabilities, reducing API response times by 50% and accelerating data access for decision-making.
+- Technologies: Elasticsearch, Python, Data Pipelines
+
+## Education
+
+### Master of Science in Computer Science - Future Networked Systems
+- Institution: Trinity College Dublin
+- Period: Sept 2025 - Present
+- Grade: In Progress
+- Description: Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.
+- Achievements: Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning
+
+### Bachelor of Technology in Computer Science
+- Institution: Shri G.S. Institute of Technology and Science
+- Period: Aug 2018 - May 2022
+- Grade: CGPA: 9.04/10.0
+- Description: Ranked 1st in Computer Science among 120+ students. Focused on cloud computing, data engineering, machine learning, database systems, operating systems, and networks. Active member of technical societies and coding clubs.
+- Achievements: Seksaria Gold Medal for Academic Excellence - Highest CGPA in Computer Science, Rank 1st in Computer Science Department, Relevant Coursework: Cloud Computing, Data Engineering, Machine Learning, Database, OS, Networks
+
+## Projects
+
+### Convo AI - VoiceBot Agent Management System
+- Description: Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.
+- Technologies: GoLang, gRPC, Milvus, Livekit, OpenAI, Azure AI, GenAI, Kubernetes
+- Link: https://www.gonuclei.com/convo-ai
+
+### In-House Search Engine (Part of Convo AI)
+- Description: Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 100ms. Implemented for high-performance data retrieval in production systems.
+- Technologies: Python, Milvus, Elasticsearch, Vector Search, Fuzzy Search
+- Link: https://www.gonuclei.com/convo-ai
+
+### Dailify - Curbside Pickup Service
+- Description: Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.
+- Technologies: SpringBoot, Flutter, MySQL, Elasticsearch, Azure, GitHub Actions
+- GitHub: https://github.com/AjinkyaTaranekar
+- Document: https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view
+
+### Department Information System
+- Description: Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and documents, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.
+- Technologies: SpringBoot, Flutter, MySQL, Angular, GitHub Actions
+- GitHub: https://github.com/Department-Information-System
+- Document: https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view
+
+### FinnEasy - Gamified Stock Market Solution
+- Description: Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.
+- Technologies: React, Node.js, Financial APIs, Gamification
+- GitHub: https://github.com/Brainstormers-HackItOut
+- Link: https://devpost.com/software/finneasy
+- Achievement: Best in Fintech at HackItOut
+
+### M.I.T.R.A - Credit Worthiness Tool
+- Description: 2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.
+- Technologies: Python, Machine Learning, Data Analytics, Flask
+- GitHub: https://github.com/M-I-T-R-A
+- Link: https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/
+- Achievement: 2nd Runner-Up at TVS Credit EPIC Season 2
+
+## Skills
+
+### Languages
+- Java (90%)
+- Python (88%)
+- Go (85%)
+- TypeScript (87%)
+- Dart (80%)
+- JavaScript (90%)
+
+### Backend Development
+- FastAPI (88%)
+- Spring Boot (90%)
+- gRPC & Protobuf (87%)
+- REST API (92%)
+- Microservices (90%)
+- Kafka (85%)
+
+### Frontend Development
+- Svelte (92%)
+- Flutter (85%)
+- Angular (75%)
+- Tailwind CSS (88%)
+- HTML/CSS (90%)
+- Atomic Design (88%)
+
+### Database & Data Engineering
+- MySQL (88%)
+- ClickHouse (87%)
+- Elasticsearch (90%)
+- Apache NiFi (82%)
+- Redis (80%)
+- ETL Pipelines (85%)
+
+### DevOps & Cloud
+- Docker (88%)
+- Kubernetes (85%)
+- Microsoft Azure (82%)
+- GitHub Actions (90%)
+- CI/CD (87%)
+- Linux (85%)
+
+### Analytics & Observability
+- Grafana (88%)
+- OpenSearch (85%)
+- PMM (80%)
+- Superset (82%)
+- GoAlert (78%)
+- Uptime Kuma (75%)
+
+### GenAI & ML
+- Langchain (85%)
+- Milvus (87%)
+- OpenAI (82%)
+- Azure AI (85%)
+- GitHub Copilot (90%)
+- Cursor (88%)
+
+### Tools & Methodologies
+- Git (92%)
+- Agile (90%)
+- System Design (88%)
+- Team Leadership (85%)
+- Mentoring (87%)
+- SRE (83%)
+
+## Additional Keywords
+Java, Python, Go, TypeScript, Dart, JavaScript, FastAPI, Spring Boot, gRPC, Protobuf, REST API, Microservices, Svelte, Flutter, Angular, MySQL, ClickHouse, Elasticsearch, Apache NiFi, Redis, Docker, Kubernetes, Microsoft Azure, GitHub Actions, Kafka, Grafana, OpenSearch, PMM, Superset, GoAlert, Uptime Kuma, Slack Alerts, Langchain, Milvus, OpenAI, Azure AI, GitHub Copilot, Cursor, ETL Pipelines, CI/CD, Linux, Vector Search, Semantic Search, Fuzzy Search, System Design, Atomic Design, White-label Solutions, Multi-tenant Architecture, Site Reliability Engineering, Team Leadership, Mentoring, Agile Methodologies, CIS Benchmark, VM Hardening, Alert Management, NPM Packages, Fintech Solutions, Digital Banking, GenAI Integration
+
+## Stats
+- Projects: 10+
+- Technologies: 30+
+- Dedication: 100%
+- Learning: ∞
