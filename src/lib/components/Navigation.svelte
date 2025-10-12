@@ -119,11 +119,10 @@
 
     <!-- Mobile Menu Dropdown -->
     <div class="dropdown dropdown-end lg:hidden">
-      <label tabindex="0" class="btn btn-ghost btn-sm">
+      <label tabindex="0" class="btn-sm">
         <svg
-          class="w-6 h-6"
           fill="none"
-          stroke="currentColor"
+          class="text-gray-900 dark:text-white w-6 h-6"
           viewBox="0 0 24 24"
         >
           <path
