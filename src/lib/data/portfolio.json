@@ -102,37 +102,6 @@
   ],
   "projects": [
     {
-      "title": "Dailify - Curbside Pickup Service",
-      "description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
-      "image": "/assets/projects/dailify.png",
-      "technologies": [
-        "SpringBoot",
-        "Flutter",
-        "MySQL",
-        "Elasticsearch",
-        "Azure",
-        "GitHub Actions"
-      ],
-      "github": "https://github.com/AjinkyaTaranekar",
-      "document": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
-      "featured": true
-    },
-    {
-      "title": "Department Information System",
-      "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and documents, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
-      "image": "/assets/projects/dis.png",
-      "technologies": [
-        "SpringBoot",
-        "Flutter",
-        "MySQL",
-        "Angular",
-        "GitHub Actions"
-      ],
-      "github": "https://github.com/Department-Information-System",
-      "document": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
-      "featured": true
-    },
-    {
       "title": "Convo AI - VoiceBot Agent Management System",
       "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
       "image": "/assets/projects/voicebot.png",
@@ -164,13 +133,44 @@
       "featured": false
     },
     {
+      "title": "Dailify - Curbside Pickup Service",
+      "description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
+      "image": "/assets/projects/dailify.png",
+      "technologies": [
+        "SpringBoot",
+        "Flutter",
+        "MySQL",
+        "Elasticsearch",
+        "Azure",
+        "GitHub Actions"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar",
+      "document": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
+      "featured": true
+    },
+    {
+      "title": "Department Information System",
+      "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and documents, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
+      "image": "/assets/projects/dis.png",
+      "technologies": [
+        "SpringBoot",
+        "Flutter",
+        "MySQL",
+        "Angular",
+        "GitHub Actions"
+      ],
+      "github": "https://github.com/Department-Information-System",
+      "document": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
+      "featured": true
+    },
+    {
       "title": "FinnEasy - Gamified Stock Market Solution",
       "description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
       "image": "/assets/projects/finneasy.png",
       "technologies": ["React", "Node.js", "Financial APIs", "Gamification"],
       "github": "https://github.com/Brainstormers-HackItOut",
       "link": "https://devpost.com/software/finneasy",
-      "featured": true,
+      "featured": false,
       "winner": "Best in Fintech at HackItOut"
     },
     {
@@ -180,7 +180,7 @@
       "technologies": ["Python", "Machine Learning", "Data Analytics", "Flask"],
       "github": "https://github.com/M-I-T-R-A",
       "link": "https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/",
-      "featured": true,
+      "featured": false,
       "winner": "2nd Runner-Up at TVS Credit EPIC Season 2"
     }
   ],
