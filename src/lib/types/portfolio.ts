@@ -4,9 +4,11 @@ export interface PersonalInfo {
   tagline: string;
   bio: string[];
   location: string;
+  phone: string;
   email: string;
   availability: string;
   profileImage?: string;
+  website?: string;
 }
 
 export interface SocialLinks {
@@ -21,9 +23,11 @@ export interface Experience {
   title: string;
   company: string;
   companyLogo?: string;
+  location: string;
   period: string;
   description: string;
   technologies: string[];
+  highlights?: string[];
   type: "work" | "internship";
 }
 
@@ -45,6 +49,7 @@ export interface Education {
   degree: string;
   institution: string;
   institutionLogo?: string;
+  location: string;
   period: string;
   grade: string;
   description: string;
@@ -65,6 +70,7 @@ export interface SkillCategory {
 }
 
 export interface Stats {
+  experience: string;
   projects: string;
   technologies: string;
   dedication: string;
@@ -79,6 +85,13 @@ export interface Photo {
   date?: string;
 }
 
+export interface Achievement {
+  title: string;
+  organization: string;
+  year: string;
+  description: string;
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   social: SocialLinks;
@@ -86,6 +99,7 @@ export interface PortfolioData {
   experiences: Experience[];
   projects: Project[];
   education: Education[];
+  achievements: Achievement[];
   skillCategories: SkillCategory[];
   additionalSkills: string[];
   photos: Photo[];

@@ -1,5 +1,6 @@
 <script lang="ts">
   import About from "$lib/components/About.svelte";
+  import Achievements from "$lib/components/Achievements.svelte";
   import Contact from "$lib/components/Contact.svelte";
   import Education from "$lib/components/Education.svelte";
   import Experience from "$lib/components/Experience.svelte";
@@ -58,6 +59,7 @@
       additionalSkills={data.portfolio.additionalSkills}
     />
     <Education education={data.portfolio.education} />
+    <Achievements achievements={data.portfolio.achievements} />
     <PhotoCarousel
       photos={data.photos && data.photos.length
         ? data.photos

@@ -123,16 +123,79 @@
                     {exp.period}
                   </span>
                 </div>
-                <p
-                  class="text-sm sm:text-base text-blue-500 dark:text-blue-400 font-semibold mb-3"
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3"
                 >
-                  {exp.company}
-                </p>
+                  <p
+                    class="text-sm sm:text-base text-blue-500 dark:text-blue-400 font-semibold"
+                  >
+                    {exp.company}
+                  </p>
+
+                  {#if exp.location}
+                    <div
+                      class="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      <span>{exp.location}</span>
+                    </div>
+                  {/if}
+                </div>
+
                 <p
                   class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4"
                 >
                   {exp.description}
                 </p>
+
+                {#if exp.highlights && exp.highlights.length > 0}
+                  <div class="mb-4">
+                    <h4
+                      class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-2"
+                    >
+                      Key Highlights:
+                    </h4>
+                    <ul class="space-y-1">
+                      {#each exp.highlights as highlight}
+                        <li
+                          class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
+                        >
+                          <svg
+                            class="w-4 h-4 text-green-500 shrink-0 mt-0.5"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                          <span>{highlight}</span>
+                        </li>
+                      {/each}
+                    </ul>
+                  </div>
+                {/if}
+
                 <div class="flex flex-wrap gap-2">
                   {#each exp.technologies as tech}
                     <span

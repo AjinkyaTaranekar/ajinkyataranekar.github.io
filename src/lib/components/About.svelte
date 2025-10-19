@@ -88,8 +88,20 @@
           </div>
 
           <div
-            class="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
+            class="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4"
           >
+            <div
+              class="text-center p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            >
+              <div class="text-2xl sm:text-3xl font-bold text-amber-500">
+                {stats.experience}
+              </div>
+              <div
+                class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1"
+              >
+                Experience
+              </div>
+            </div>
             <div
               class="text-center p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
