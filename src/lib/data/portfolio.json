@@ -1,7 +1,7 @@
 {
   "personal": {
     "name": "Ajinkya Taranekar",
-    "title": "Polyglot Software Engineer",
+    "title": "Software Development Engineer 2",
     "tagline": "Full Stack Engineer | GenAI Specialist | Tech Leader",
     "bio": [
       "I'm a Polyglot Software Engineer with 3+ years of hands-on experience architecting scalable, data-intensive applications in fast-paced startup environments, where I've worn multiple hats from full-stack development and SRE to GenAI R&D, gaining broad exposure across technologies like Java, Python, Go, and cloud-native tools.",
@@ -36,7 +36,7 @@
       "companyLogo": "/assets/companies/nuclei.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "July 2024 - July 2025",
-      "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s → 150ms. Architected migration of Svelte micro-frontends from mobile-first to desktop-optimised versions using atomic design templates, eliminating 50K lines of rework across Flights, Hotels, Bus, Events, and FAQ modules. Developed a robust analytics engine to monitor performance and RoPA events (for GDPR) for 100K+ daily active users, enabling real-time, data-driven decision-making. Pioneered an internal Figma plugin leveraging LLMs to generate heatmaps and optimise copy, accelerating design review cycles from weeks → days and boosting Product Design team efficiency. Mentored & led a team of 3 interns in Java backend development (Spring Boot, gRPC, REST), instilling industry best practices and modern Agile workflows.",
+      "description": "Spearheaded R&D for VoiceBot SDKs in digital banking, integrating cutting-edge GenAI frameworks and building scalable enterprise solutions. Mentored a team of 3 interns in Java backend development, instilling industry best practices and modern Agile workflows.",
       "technologies": [
         "Milvus",
         "Azure AI",
@@ -50,11 +50,11 @@
         "Kubernetes"
       ],
       "highlights": [
-        "Reduced agent onboarding time to 5 minutes with GenAI-powered system",
-        "Cut retrieval latency from 1s to 150ms with hybrid search engine",
-        "Eliminated 50K lines of rework through micro-frontend architecture",
-        "Built GDPR-compliant analytics for 100K+ daily active users",
-        "Accelerated design review cycles from weeks to days with Figma LLM plugin"
+        "Built Go + gRPC-based Agent Management System, reducing agent onboarding time to 5 minutes",
+        "Designed in-house search engine with semantic vector and fuzzy search, cutting retrieval latency from 1s → 150ms",
+        "Architected Svelte micro-frontend migration (mobile-first to desktop), eliminating 50K lines of rework across 5 modules",
+        "Developed GDPR-compliant analytics engine monitoring RoPA events for 100K+ daily active users",
+        "Pioneered Figma LLM plugin for heatmaps and copy optimization, accelerating design reviews from weeks → days"
       ],
       "type": "work"
     },
@@ -64,7 +64,7 @@
       "companyLogo": "/assets/companies/nuclei.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "July 2022 - July 2024",
-      "description": "Automated onboarding of 300+ products across 15 categories into a multi-tenant CMS for the UHNI Ecosystem (India & MEA), slashing new bank onboarding time from several weeks to 1 week (onboarded 2 banks in 2 months). Engineered an Atomic Design templating system, enabling fully white-label customisation for each bank's website across the UHNI platform. Researched & implemented ClickHouse for marketplace analytics, reducing report-generation time from hours → 30 seconds. Acting Reliability Engineer: managed 1,400+ P0 alerts with a 91.7% resolution rate (avg. ack 2.8 min; record 50 sec) and automated VM hardening (CIS Benchmark), achieving zero DR failures during DC-to-DR transition. Boosted performance in Flights & Hotels categories by 90% through the development of Svelte-based micro-frontends. Developed a core NPM package that reduced development time by 75% across 6 retail banking categories, and led a team of 6 to migrate the Merchant Marketplace Frontend to a Svelte micro-frontend architecture. Led a team of 3 engineers to architect and deliver a scalable Svelte Hotels micro-frontend, significantly improving maintainability and user experience. Designed & implemented Wallet and Coupon Payment solutions in Svelte, driving measurable increases in user engagement. Enhanced the Checkout System with advanced currency formatting, discount coupons, and cart expiry logic, supporting 100,000+ daily transactions across multiple categories. Mentored 3 interns in modern Agile, Svelte and JavaScript best practices, empowering them to deliver critical Flight and Hotel features on time and to specification.",
+      "description": "Built and scaled multi-tenant CMS for UHNI Ecosystem (India & MEA), leading cross-functional teams to deliver enterprise-grade retail banking solutions. Acted as Reliability Engineer, managing critical production incidents and ensuring zero DR failures.",
       "technologies": [
         "Svelte",
         "SpringBoot",
@@ -76,12 +76,14 @@
         "Kubernetes"
       ],
       "highlights": [
-        "Onboarded 300+ products across 15 categories with automated CMS",
-        "Reduced bank onboarding from weeks to 1 week",
-        "91.7% P0 alert resolution rate with 2.8 min average acknowledgment",
-        "90% performance boost in Flights & Hotels categories",
-        "75% reduction in development time with core NPM package",
-        "100,000+ daily transactions supported through checkout enhancements"
+        "Automated onboarding of 300+ products across 15 categories, reducing bank onboarding from weeks → 1 week",
+        "Engineered Atomic Design templating system for fully white-label customization across UHNI platform",
+        "Implemented ClickHouse for analytics, reducing report generation from hours → 30 seconds",
+        "Managed 1,400+ P0 alerts with 91.7% resolution rate (avg. ack 2.8 min; record 50 sec)",
+        "Boosted Flights & Hotels performance by 90% with Svelte micro-frontends",
+        "Developed core NPM package reducing development time by 75% across 6 retail banking categories",
+        "Led team of 6 to migrate Merchant Marketplace Frontend to Svelte micro-frontend architecture",
+        "Enhanced Checkout System supporting 100,000+ daily transactions with advanced payment features"
       ],
       "type": "work"
     },
@@ -91,7 +93,7 @@
       "companyLogo": "/assets/companies/nuclei.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "Jan 2022 - July 2022",
-      "description": "Optimised reconciliation services for two major banks, processing 45,000+ daily transactions and reducing manual efforts by 95%. Engineered robust ETL pipelines using Apache NiFi that cut new bank onboarding times for reconciliation from multiple weeks to 1 week. As a reliability engineer, I created dynamic visualisations for on-call rotations on Superset. I enhanced alerting systems in OpenSearch and Grafana with real-time CPU and memory insights, bolstering system reliability.",
+      "description": "Optimized reconciliation services for major banks and built robust ETL pipelines. Enhanced system reliability through dynamic visualizations and real-time monitoring solutions.",
       "technologies": [
         "Apache NiFi",
         "SpringBoot",
@@ -102,9 +104,10 @@
         "Grafana"
       ],
       "highlights": [
-        "Processed 45,000+ daily transactions with 95% reduction in manual effort",
-        "Cut reconciliation onboarding from weeks to 1 week",
-        "Enhanced system reliability with real-time monitoring dashboards"
+        "Processed 45,000+ daily transactions, reducing manual reconciliation efforts by 95%",
+        "Engineered Apache NiFi ETL pipelines, cutting bank onboarding for reconciliation from weeks → 1 week",
+        "Created dynamic on-call rotation visualizations on Superset",
+        "Enhanced OpenSearch and Grafana alerting with real-time CPU and memory insights"
       ],
       "type": "internship"
     },
@@ -114,11 +117,11 @@
       "companyLogo": "/assets/companies/multipl.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "May 2021 - Dec 2021",
-      "description": "Developed secure mobile app lock and deferred deep linking features in Flutter to enhance app security. Designed interactive UI components for both Android and iOS platforms using Flutter, improving app responsiveness and user engagement.",
+      "description": "Developed secure mobile features and interactive UI components for wealth management app, enhancing security and user engagement across Android and iOS platforms.",
       "technologies": ["Flutter", "Dart", "Android", "iOS"],
       "highlights": [
-        "Enhanced app security with mobile app lock feature",
-        "Improved cross-platform user engagement with interactive UI components"
+        "Developed secure mobile app lock and deferred deep linking features",
+        "Designed interactive cross-platform UI components improving app responsiveness"
       ],
       "type": "internship"
     },
@@ -128,11 +131,11 @@
       "companyLogo": "/assets/companies/niograph.png",
       "location": "Indore, Madhya Pradesh, India",
       "period": "Sep 2020 - Feb 2021",
-      "description": "Processed and enriched data for over 1.2 million doctor profiles using advanced pipelines, ensuring high-quality, accurate data for analytics. Integrated Elasticsearch to enhance search capabilities, reducing API response times by 50% and accelerating data access for decision-making.",
+      "description": "Processed large-scale healthcare data and enhanced search capabilities for improved decision-making and analytics performance.",
       "technologies": ["Elasticsearch", "Python", "Data Pipelines"],
       "highlights": [
-        "Processed 1.2M+ doctor profiles with data enrichment pipelines",
-        "50% reduction in API response times with Elasticsearch integration"
+        "Processed and enriched 1.2M+ doctor profiles using advanced data pipelines",
+        "Integrated Elasticsearch, reducing API response times by 50%"
       ],
       "type": "internship"
     }
