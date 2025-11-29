@@ -6,7 +6,7 @@
     "bio": [
       "I'm a Polyglot Software Engineer with 3+ years of hands-on experience architecting scalable, data-intensive applications in fast-paced startup environments, where I've worn multiple hats from full-stack development and SRE to GenAI R&D, gaining broad exposure across technologies like Java, Python, Go, and cloud-native tools.",
       "Proven in driving innovation, such as integrating GenAI to slash latencies by 90% and onboarding times from weeks to minutes, while mentoring teams to accelerate development cycles by 75%. Recognized for strong ownership and accountability in high-impact and leveraged projects, including resolving 1,400+ P0 alerts at 91.7% efficiency.",
-      "I bring a collaborative culture that emphasizes agile practices, cross-functional leadership, and reliable delivery of enterprise-grade solutions. A gold medalist in Computer Science, I relocated to Dublin in September 2025 to pursue an MSc in Computer Science at Trinity College Dublin, blending technical depth with strategic vision to transform fintech and emerging tech landscapes.",
+      "I bring a collaborative culture that emphasises agile practices, cross-functional leadership, and reliable delivery of enterprise-grade solutions. A gold medalist in Computer Science, I relocated to Dublin in September 2025 to pursue an MSc in Computer Science at Trinity College Dublin, blending technical depth with strategic vision to transform fintech and emerging tech landscapes.",
       "I believe in being a Karma Yogi, valuing culture, knowledge, and impact more than rewards."
     ],
     "location": "Dublin, Ireland",
@@ -54,7 +54,7 @@
         "Designed in-house search engine with semantic vector and fuzzy search, cutting retrieval latency from 1s → 150ms",
         "Architected Svelte micro-frontend migration (mobile-first to desktop), eliminating 50K lines of rework across 5 modules",
         "Developed GDPR-compliant analytics engine monitoring RoPA events for 100K+ daily active users",
-        "Pioneered Figma LLM plugin for heatmaps and copy optimization, accelerating design reviews from weeks → days"
+        "Pioneered Figma LLM plugin for heatmaps and copy optimisation, accelerating design reviews from weeks → days"
       ],
       "type": "work"
     },
@@ -77,7 +77,7 @@
       ],
       "highlights": [
         "Automated onboarding of 300+ products across 15 categories, reducing bank onboarding from weeks → 1 week",
-        "Engineered Atomic Design templating system for fully white-label customization across UHNI platform",
+        "Engineered Atomic Design templating system for fully white-label customisation across UHNI platform",
         "Implemented ClickHouse for analytics, reducing report generation from hours → 30 seconds",
         "Managed 1,400+ P0 alerts with 91.7% resolution rate (avg. ack 2.8 min; record 50 sec)",
         "Boosted Flights & Hotels performance by 90% with Svelte micro-frontends",
@@ -93,7 +93,7 @@
       "companyLogo": "/assets/companies/nuclei.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "Jan 2022 - July 2022",
-      "description": "Optimized reconciliation services for major banks and built robust ETL pipelines. Enhanced system reliability through dynamic visualizations and real-time monitoring solutions.",
+      "description": "Optimised reconciliation services for major banks and built robust ETL pipelines. Enhanced system reliability through dynamic visualizations and real-time monitoring solutions.",
       "technologies": [
         "Apache NiFi",
         "SpringBoot",
@@ -106,7 +106,7 @@
       "highlights": [
         "Processed 45,000+ daily transactions, reducing manual reconciliation efforts by 95%",
         "Engineered Apache NiFi ETL pipelines, cutting bank onboarding for reconciliation from weeks → 1 week",
-        "Created dynamic on-call rotation visualizations on Superset",
+        "Created dynamic on-call rotation visualisations on Superset",
         "Enhanced OpenSearch and Grafana alerting with real-time CPU and memory insights"
       ],
       "type": "internship"
@@ -117,7 +117,7 @@
       "companyLogo": "/assets/companies/multipl.png",
       "location": "Bengaluru, Karnataka, India",
       "period": "May 2021 - Dec 2021",
-      "description": "Developed secure mobile features and interactive UI components for wealth management app, enhancing security and user engagement across Android and iOS platforms.",
+      "description": "Developed secure mobile features and interactive UI components for a wealth management app, enhancing security and user engagement across Android and iOS platforms.",
       "technologies": ["Flutter", "Dart", "Android", "iOS"],
       "highlights": [
         "Developed secure mobile app lock and deferred deep linking features",
@@ -141,6 +141,42 @@
     }
   ],
   "projects": [
+    {
+  "title": "Anti-AI CAPTCHA System",
+  "description": "Engineered a next-gen CAPTCHA system resilient against modern AI solvers by combining adversarial image generation, behavioural biometrics, browser fingerprinting, and proof-of-work throttling. Built full-stack attacker simulation pipelines to benchmark models like OCR, CNN/CTC, and LLM-guided attacks—demonstrating strong resistance under real adversarial stress.",
+  "image": "/assets/projects/anti-ai-captcha.png",
+  "technologies": [
+    "FastAPI",
+    "Python",
+    "OpenCV",
+    "Machine Learning",
+    "Behavioral Biometrics",
+    "Computer Vision",
+    "Security Engineering"
+  ],
+  "github": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA",
+  "link": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA/blob/main/Anti-AI-CAPTCHA-System-Architecture.pdf",
+  "featured": false
+},
+    {
+  "title": "AI Toolkit – PostgreSQL Extension for Natural-Language Querying",
+  "description": "Developed a PostgreSQL extension enabling natural-language querying, SQL error explanation, and schema-aware reasoning directly inside the database. Added multi-provider LLM support and a pluggable 'database memory' layer for context-rich responses—making analytics dramatically more accessible for analysts and product teams.",
+  "image": "/assets/projects/ai_toolkit.png",
+  "technologies": [
+    "PostgreSQL",
+    "C++",
+    "AI/LLMs",
+    "OpenAI",
+    "Anthropic",
+    "OpenRouter",
+    "Database Systems",
+    "Clickhouse AI SDK"
+  ],
+  "github": "https://github.com/AjinkyaTaranekar/ai_toolkit",
+  "link": "https://www.linkedin.com/posts/ajinkya-taranekar_postgresql-databaseinternals-cplusplus-activity-7396439083889233920-woyf",
+  "featured": false
+},
+
     {
       "title": "Convo AI - VoiceBot Agent Management System",
       "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
