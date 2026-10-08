@@ -118,9 +118,23 @@ export interface Signals {
   latency?: { label: string; from: string; to: string };
 }
 
+/** Search and social-preview metadata. */
+export interface SeoInfo {
+  /** Page title (keep under ~60 characters). */
+  title: string;
+  /** Meta description (keep under ~160 characters). */
+  description: string;
+  jobTitle: string;
+  /** 1200×630 social preview image, path under static/. */
+  image: string;
+  imageAlt: string;
+  keywords?: string[];
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   social: SocialLinks;
+  seo: SeoInfo;
   stats: Stats;
   signals?: Signals;
   experiences: Experience[];

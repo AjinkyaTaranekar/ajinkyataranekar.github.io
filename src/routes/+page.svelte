@@ -13,6 +13,7 @@
   import Projects from "$lib/components/Projects.svelte";
   import QRCode from "$lib/components/QRCode.svelte";
   import Skills from "$lib/components/Skills.svelte";
+  import { SITE_URL, absolute, jsonForScript, profileJsonLd } from "$lib/utils/seo";
   import { onMount } from "svelte";
   import type { PageData } from "./$types";
 
@@ -23,6 +24,10 @@
 
   const portfolio = $derived(data.portfolio);
   const photos = $derived(data.photos?.length ? data.photos : portfolio.photos);
+  const seo = $derived(portfolio.seo);
+  const ogImage = $derived(absolute(seo.image));
+  const twitterHandle = $derived(portfolio.social.twitter?.split("/").pop());
+  const jsonLd = $derived(jsonForScript(profileJsonLd(portfolio)));
 
   // Credential badges on the hero portrait
   const award = $derived(
@@ -100,6 +105,36 @@
     ].filter(Boolean) as Command[],
   );
 </script>
+
+<svelte:head>
+  <title>{seo.title}</title>
+  <meta name="description" content={seo.description} />
+  {#if seo.keywords?.length}<meta name="keywords" content={seo.keywords.join(", ")} />{/if}
+  <link rel="canonical" href="{SITE_URL}/" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="{SITE_URL}/" />
+  <meta property="og:site_name" content={portfolio.personal.name} />
+  <meta property="og:locale" content="en_IE" />
+  <meta property="og:title" content={seo.title} />
+  <meta property="og:description" content={seo.description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={seo.imageAlt} />
+  <meta property="profile:first_name" content={portfolio.personal.name.split(" ")[0]} />
+  <meta property="profile:last_name" content={portfolio.personal.name.split(" ").slice(1).join(" ")} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={seo.title} />
+  <meta name="twitter:description" content={seo.description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={seo.imageAlt} />
+  {#if twitterHandle}<meta name="twitter:creator" content="@{twitterHandle}" />{/if}
+
+  {@html `<script type="application/ld+json">${jsonLd}</script>`}
+</svelte:head>
 
 <div class="relative min-h-screen overflow-x-clip">
   <Navigation

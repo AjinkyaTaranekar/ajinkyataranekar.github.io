@@ -108,8 +108,7 @@
       <span
         class="relative grid h-8 w-8 place-items-center rounded-lg border bg-surface font-mono text-xs font-semibold tracking-tight hairline transition-transform duration-300 group-hover:-rotate-6"
       >
-        AT
-        <span class="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent"></span>
+        <span>AT<span class="ml-[1.5px] inline-block h-[5px] w-[5px] rounded-full bg-accent"></span></span>
       </span>
       <span class="hidden font-medium tracking-tight sm:inline">Ajinkya</span>
     </a>

@@ -24,6 +24,27 @@
     "twitter": "https://twitter.com/ajinkyataranekr",
     "resume": "https://drive.google.com/file/d/1J7--UOUDZx3nWBeGPJwDFLz0gFkdeCGd/view"
   },
+  "seo": {
+    "title": "Ajinkya Taranekar – Software & Site Reliability Engineer",
+    "description": "Software & site reliability engineer in Dublin: SRE Intern at Apple, MSc CS (1:1 Distinction) from Trinity College Dublin, 3+ years across backend, SRE & GenAI.",
+    "jobTitle": "Software & Site Reliability Engineer",
+    "image": "/og-image.jpg",
+    "imageAlt": "Ajinkya Taranekar – Software & Site Reliability Engineer, Dublin",
+    "keywords": [
+      "Ajinkya Taranekar",
+      "Site Reliability Engineer",
+      "SRE",
+      "Software Engineer",
+      "Backend Engineer",
+      "Apple",
+      "Trinity College Dublin",
+      "Dublin",
+      "Go",
+      "Kubernetes",
+      "GenAI",
+      "Svelte"
+    ]
+  },
   "stats": {
     "experience": "3+ Years",
     "projects": "10+",
