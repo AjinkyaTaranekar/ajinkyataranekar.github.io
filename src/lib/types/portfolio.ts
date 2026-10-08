@@ -9,6 +9,12 @@ export interface PersonalInfo {
   availability: string;
   profileImage?: string;
   website?: string;
+  /** A short personal philosophy, shown as a pull quote. */
+  motto?: string;
+  /** One or two sentences shown under the name in the hero. */
+  intro?: string;
+  /** Words cycled in the hero headline ("Engineering software that's ___"). */
+  focus?: string[];
 }
 
 export interface SocialLinks {
@@ -34,8 +40,15 @@ export interface Experience {
 export interface Project {
   title: string;
   description: string;
-  image: string;
+  /** Cover image; a typographic cover is drawn if missing or it fails to load. */
+  image?: string;
   technologies: string[];
+  /** Key outcomes; numbers in them are emphasised automatically. */
+  highlights?: string[];
+  /** YouTube demo; embedded in the project dialog. */
+  video?: string;
+  /** Older work shown in the compact "More projects" list instead of a card. */
+  archived?: boolean;
   github?: string;
   demo?: string;
   document?: string;
@@ -80,6 +93,8 @@ export interface Stats {
 export interface Photo {
   id: string;
   url: string;
+  width?: number;
+  height?: number;
   caption?: string;
   location?: string;
   date?: string;
@@ -92,10 +107,22 @@ export interface Achievement {
   description: string;
 }
 
+export interface Signal {
+  label: string;
+  value: string;
+}
+
+/** Real impact metrics rendered as a status-page card in the hero. */
+export interface Signals {
+  metrics: Signal[];
+  latency?: { label: string; from: string; to: string };
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   social: SocialLinks;
   stats: Stats;
+  signals?: Signals;
   experiences: Experience[];
   projects: Project[];
   education: Education[];

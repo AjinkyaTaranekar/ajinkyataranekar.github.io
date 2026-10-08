@@ -1,18 +1,20 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import type { SocialLinks } from "$lib/types/portfolio";
+  import { onMount, tick } from "svelte";
+  import Icon from "./Icon.svelte";
 
   interface Props {
     darkMode: boolean;
-    toggleTheme: () => void;
+    toggleTheme: (event?: MouseEvent) => void;
     showQR: boolean;
+    openPalette: () => void;
+    social: SocialLinks;
+    email: string;
   }
 
-  let { darkMode, toggleTheme, showQR = $bindable() }: Props = $props();
-  let scrolled = $state(false);
-  let mobileMenuOpen = $state(false);
+  let { darkMode, toggleTheme, showQR = $bindable(), openPalette, social, email }: Props = $props();
 
   const navItems = [
-    { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
@@ -21,133 +23,198 @@
     { name: "Contact", href: "#contact" },
   ];
 
+  let mobileMenuOpen = $state(false);
+  let scrolled = $state(false);
+  let progress = $state(0);
+  let active = $state("");
+  let isMac = $state(true);
+
+  let linkEls: HTMLAnchorElement[] = $state([]);
+  let indicator = $state({ left: 0, width: 0, visible: false });
+
+  function updateIndicator() {
+    const index = navItems.findIndex((item) => item.href === `#${active}`);
+    const el = linkEls[index];
+    indicator = el
+      ? { left: el.offsetLeft, width: el.offsetWidth, visible: true }
+      : { ...indicator, visible: false };
+  }
+
   onMount(() => {
-    const handleScroll = () => {
-      scrolled = window.scrollY > 20;
+    isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+    const sections = navItems
+      .map((item) => document.querySelector<HTMLElement>(item.href))
+      .filter((el): el is HTMLElement => el !== null);
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        scrolled = y > 8;
+        progress = max > 0 ? Math.min(1, y / max) : 0;
+
+        let current = "";
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top < window.innerHeight * 0.4) {
+            current = section.id;
+          }
+        }
+        if (current !== active) {
+          active = current;
+          tick().then(updateIndicator);
+        }
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateIndicator);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateIndicator);
+      cancelAnimationFrame(frame);
+    };
   });
+
+  // Lock page scroll while the full-screen mobile menu is open
+  $effect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+  });
+
+  function onKeydown(event: KeyboardEvent) {
+    if (event.key === "Escape") mobileMenuOpen = false;
+  }
 </script>
 
-<nav
-  class="navbar fixed top-0 w-full z-50 transition-all duration-300 {scrolled
-    ? 'bg-gray-50 dark:bg-gray-800 transition-colors duration-300 backdrop-blur-md shadow-lg'
-    : 'bg-gray-50/50 dark:bg-gray-800/50 transition-colors duration-300 backdrop-blur-sm'}"
->
-  <div class="navbar-start">
-    <!-- Logo -->
-    <a href="#home">
-      <img src="/assets/favicon.png" alt="Logo" class="w-8 h-8 mx-4" />
-    </a>
-  </div>
+<svelte:window onkeydown={onKeydown} />
 
-  <!-- Desktop Navigation -->
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      {#each navItems as item}
-        <li>
+<!-- Scroll progress -->
+<div
+  class="fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-accent"
+  style="transform: scaleX({progress})"
+  aria-hidden="true"
+></div>
+
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out {scrolled
+    ? 'glass border-b hairline'
+    : 'border-b border-transparent'}"
+>
+  <nav class="container-page flex h-16 items-center justify-between gap-4" aria-label="Primary">
+    <!-- Monogram -->
+    <a href="#home" class="group flex items-center gap-2.5" aria-label="Back to top">
+      <span
+        class="relative grid h-8 w-8 place-items-center rounded-lg border bg-surface font-mono text-xs font-semibold tracking-tight hairline transition-transform duration-300 group-hover:-rotate-6"
+      >
+        AT
+        <span class="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent"></span>
+      </span>
+      <span class="hidden font-medium tracking-tight sm:inline">Ajinkya</span>
+    </a>
+
+    <!-- Desktop links with a sliding active pill -->
+    <div
+      class="relative hidden items-center rounded-full border bg-surface/60 p-1 hairline lg:flex"
+    >
+      <span
+        class="absolute top-1 h-[calc(100%-0.5rem)] rounded-full bg-fg/[0.08] transition-all duration-500 ease-out"
+        style="left: {indicator.left}px; width: {indicator.width}px; opacity: {indicator.visible
+          ? 1
+          : 0}"
+        aria-hidden="true"
+      ></span>
+      {#each navItems as item, i}
+        <a
+          bind:this={linkEls[i]}
+          href={item.href}
+          class="relative rounded-full px-3.5 py-1.5 text-sm transition-colors duration-200 {active ===
+          item.href.slice(1)
+            ? 'text-fg'
+            : 'text-muted hover:text-fg'}"
+          aria-current={active === item.href.slice(1) ? "true" : undefined}
+        >
+          {item.name}
+        </a>
+      {/each}
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center gap-1">
+      <button
+        onclick={openPalette}
+        class="hidden items-center gap-2 rounded-full border bg-surface/60 py-1.5 pl-3 pr-1.5 text-sm text-muted transition-colors hairline hover:text-fg md:inline-flex"
+        aria-label="Open command menu"
+      >
+        <Icon name="search" class="h-3.5 w-3.5" />
+        <span>Search</span>
+        <span class="flex gap-0.5">
+          <kbd class="kbd">{isMac ? "⌘" : "Ctrl"}</kbd><kbd class="kbd">K</kbd>
+        </span>
+      </button>
+      <button onclick={openPalette} class="icon-btn md:hidden" aria-label="Open command menu">
+        <Icon name="search" />
+      </button>
+      <button onclick={() => (showQR = true)} class="icon-btn" aria-label="Share this site">
+        <Icon name="qr" />
+      </button>
+      <button
+        onclick={toggleTheme}
+        class="icon-btn"
+        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {#key darkMode}
+          <span class="animate-scale-in">
+            <Icon name={darkMode ? "sun" : "moon"} />
+          </span>
+        {/key}
+      </button>
+      <a href="mailto:{email}" class="btn-primary ml-1 hidden !px-4 !py-2 text-xs sm:inline-flex">
+        <Icon name="mail" class="h-3.5 w-3.5" /> Email me
+      </a>
+      <a href="mailto:{email}" class="icon-btn sm:hidden" aria-label="Email me">
+        <Icon name="mail" />
+      </a>
+      <button
+        onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+        class="icon-btn lg:hidden"
+        aria-label="Toggle menu"
+        aria-expanded={mobileMenuOpen}
+      >
+        <Icon name={mobileMenuOpen ? "close" : "menu"} />
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Full-screen mobile menu -->
+{#if mobileMenuOpen}
+  <div class="glass fixed inset-0 z-40 flex flex-col px-5 pb-10 pt-24 sm:px-8 lg:hidden">
+    <ul class="flex flex-col">
+      {#each navItems as item, i}
+        <li class="animate-fade-up border-b hairline" style="animation-delay: {i * 50}ms">
           <a
             href={item.href}
-            class="hover:text-primary text-gray-900 dark:text-white"
+            onclick={() => (mobileMenuOpen = false)}
+            class="flex items-baseline gap-4 py-4 text-3xl font-medium tracking-tight"
           >
+            <span class="font-mono text-xs text-faint">0{i + 1}</span>
             {item.name}
           </a>
         </li>
       {/each}
     </ul>
-  </div>
-
-  <!-- Right side buttons -->
-  <div class="navbar-end gap-2">
-    <!-- QR Code Button -->
-    <button
-      onclick={() => (showQR = true)}
-      class="btn btn-primary btn-sm"
-      aria-label="Show QR Code"
-    >
-      <svg
-        class="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
-        />
-      </svg>
-    </button>
-
-    <!-- Theme Toggle with DaisyUI swap -->
-    <label
-      class="swap swap-rotate text-gray-900 dark:text-white"
-      title={darkMode ? "Switch to light" : "Switch to dark"}
-    >
-      <input
-        type="checkbox"
-        checked={darkMode}
-        onchange={toggleTheme}
-        aria-label="Toggle theme"
-        class="hidden"
-      />
-
-      <!-- moon icon (shown when dark mode is ON) -->
-      <svg
-        class="swap-on fill-current w-5 h-5"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
-        />
-      </svg>
-
-      <!-- sun icon (shown when dark mode is OFF) -->
-      <svg
-        class="swap-off fill-current w-5 h-5"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
-        />
-      </svg>
-    </label>
-
-    <!-- Mobile Menu Dropdown -->
-    <div class="dropdown dropdown-end lg:hidden">
-      <label tabindex="0" class="btn-sm">
-        <svg
-          fill="none"
-          class="stroke-gray-900 dark:stroke-white w-6 h-6"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </label>
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300 rounded-box w-64 right-0"
-      >
-        {#each navItems as item}
-          <li class="mb-1">
-            <a
-              href={item.href}
-              class="block py-2 px-4 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-primary text-gray-900 dark:text-white rounded-md transition-colors duration-200"
-            >
-              {item.name}
-            </a>
-          </li>
-        {/each}
-      </ul>
+    <div class="mt-auto flex flex-wrap gap-2 animate-fade-up" style="animation-delay: 350ms">
+      <a href="mailto:{email}" class="btn-primary">
+        <Icon name="mail" /> Email me
+      </a>
+      <a href={social.github} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+        <Icon name="github" /> GitHub
+      </a>
+      <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+        <Icon name="linkedin" /> LinkedIn
+      </a>
     </div>
   </div>
-</nav>
+{/if}

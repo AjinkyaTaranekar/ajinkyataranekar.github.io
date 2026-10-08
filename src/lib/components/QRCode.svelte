@@ -1,6 +1,8 @@
 <script lang="ts">
   import QRCodeLib from "qrcode";
   import { onMount } from "svelte";
+  import { fade, scale } from "svelte/transition";
+  import Icon from "./Icon.svelte";
 
   interface Props {
     show: boolean;
@@ -8,17 +10,21 @@
 
   let { show = $bindable() }: Props = $props();
   let qrCodeDataURL = $state("");
+  let url = $state("");
+  let copied = $state(false);
+  let closeBtn = $state<HTMLButtonElement>();
 
   onMount(async () => {
+    closeBtn?.focus();
     try {
       // Generate QR code for the website URL
-      const url = window.location.origin;
+      url = window.location.origin;
       qrCodeDataURL = await QRCodeLib.toDataURL(url, {
-        width: 300,
-        margin: 2,
+        width: 320,
+        margin: 1,
         color: {
-          dark: "#000000",
-          light: "#FFFFFF",
+          dark: "#08090a",
+          light: "#ffffff",
         },
       });
     } catch (error) {
@@ -30,73 +36,50 @@
     show = false;
   }
 
-  function downloadQR() {
-    const link = document.createElement("a");
-    link.download = "portfolio-qr-code.png";
-    link.href = qrCodeDataURL;
-    link.click();
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+      copied = true;
+      setTimeout(() => (copied = false), 1600);
+    } catch {
+      // clipboard blocked; the URL is visible to copy manually
+    }
   }
 </script>
 
-{#if show}
+<svelte:window onkeydown={(e) => e.key === "Escape" && closeModal()} />
+
+<div class="fixed inset-0 z-[85] flex items-center justify-center p-4" transition:fade|global={{ duration: 150 }}>
+  <button class="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm" aria-label="Close" onclick={closeModal}></button>
+
   <div
-    class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6"
-    onclick={closeModal}
+    class="card relative w-full max-w-sm p-6 text-center shadow-2xl sm:p-8"
     role="dialog"
     aria-modal="true"
+    aria-labelledby="qr-title"
+    transition:scale|global={{ start: 0.95, duration: 250 }}
   >
-    <div
-      class="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full sm:w-4/5 md:w-3/4 lg:w-1/2 p-4 sm:p-6 md:p-8 transform transition-all"
-      onclick={(e) => e.stopPropagation()}
-    >
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-          Share
-        </h3>
-        <button
-          onclick={closeModal}
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-          aria-label="Close"
-        >
-          <svg
-            class="w-6 h-6 text-gray-600 dark:text-gray-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
+    <button bind:this={closeBtn} onclick={closeModal} class="icon-btn absolute right-3 top-3" aria-label="Close">
+      <Icon name="close" />
+    </button>
 
-      <!-- QR Code -->
-      <div class="flex flex-col items-center">
-        {#if qrCodeDataURL}
-          <div class="bg-white p-4 rounded-xl shadow-inner mb-6">
-            <img
-              src={qrCodeDataURL}
-              alt="Portfolio QR Code"
-              class="w-64 h-64"
-            />
-          </div>
+    <p class="eyebrow justify-center">Share</p>
+    <h3 id="qr-title" class="mt-3 text-2xl font-medium tracking-tight">Scan to visit</h3>
 
-          <p class="text-center text-gray-600 dark:text-gray-300 mb-6">
-            Scan this QR code to visit my portfolio.
-          </p>
-        {:else}
-          <div class="flex items-center justify-center h-64">
-            <div
-              class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"
-            ></div>
-          </div>
-        {/if}
-      </div>
+    <div class="mx-auto mt-6 grid aspect-square w-full max-w-[16rem] place-items-center rounded-2xl bg-white p-4 shadow-[0_0_0_6px_rgb(var(--accent)/0.25)]">
+      {#if qrCodeDataURL}
+        <img src={qrCodeDataURL} alt="QR code linking to {url}" class="h-full w-full" />
+      {:else}
+        <div class="h-8 w-8 animate-spin rounded-full border-2 border-black/20 border-t-black"></div>
+      {/if}
     </div>
+
+    <button onclick={copyLink} class="btn-ghost mt-6 w-full justify-between font-mono text-xs">
+      <span class="truncate">{url.replace(/^https?:\/\//, "")}</span>
+      <span class="flex items-center gap-1.5 {copied ? 'text-accent-ink' : 'text-muted'}">
+        <Icon name={copied ? "check" : "copy"} class="h-3.5 w-3.5" />
+        {copied ? "Copied" : "Copy"}
+      </span>
+    </button>
   </div>
-{/if}
+</div>

@@ -2,24 +2,319 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
+/* ==========================================================================
+   "Signal" design system
+   An observability-inspired palette: near-black canvas, quiet greys and a
+   single "all systems operational" green. Every token is an "R G B" triplet so
+   Tailwind opacity modifiers work (see tailwind.config.js).
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: 8 9 10;
+  --surface: 15 16 18;
+  --surface-2: 23 24 27;
+  --line: 255 255 255;
+  --fg: 237 237 239;
+  --muted: 160 161 168;
+  --faint: 107 108 116;
+
+  /* Signal green. Alternatives (swap all three lines, both themes):
+       electric blue  --accent: 77 141 255;  --accent-fg: 255 255 255; --accent-ink: 110 163 255 (light: 29 78 216)
+       coral orange   --accent: 255 122 69;  --accent-fg: 20 8 4;      --accent-ink: 255 138 92  (light: 194 65 12)
+       lime           --accent: 198 241 53;  --accent-fg: 11 12 10;    --accent-ink: 198 241 53  (light: 77 124 15) */
+  --accent: 52 211 153;
+  --accent-fg: 3 20 13;
+  --accent-ink: 52 211 153;
+
+  /* opacity used for hairlines; light theme needs a stronger value */
+  --line-a: 0.08;
+  --glow-a: 0.16;
 }
 
-body {
-  @apply antialiased overflow-x-hidden;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: 246 246 242;
+  --surface: 255 255 255;
+  --surface-2: 238 238 232;
+  --line: 17 17 16;
+  --fg: 17 17 16;
+  --muted: 82 82 76;
+  --faint: 128 128 120;
+
+  --accent: 52 211 153;
+  --accent-fg: 3 20 13;
+  --accent-ink: 4 120 87;
+
+  --line-a: 0.1;
+  --glow-a: 0.35;
 }
 
-/* Custom animations */
-@layer utilities {
-  .animation-delay-2000 {
-    animation-delay: 2s;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
   }
-  .animation-delay-4000 {
-    animation-delay: 4s;
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.85);
+    color: rgb(var(--accent-fg));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-ink));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Thin, theme-aware scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line) / 0.18) transparent;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8;
+  }
+
+  .section {
+    @apply relative py-24 sm:py-32;
+  }
+
+  .hairline {
+    border-color: rgb(var(--line) / var(--line-a));
+  }
+
+  /* "01 — About" style section label */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-muted;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-accent-ink;
+  }
+
+  .h-section {
+    @apply text-4xl font-medium leading-[1.02] tracking-[-0.045em] text-fg sm:text-5xl lg:text-6xl;
+  }
+
+  /* Italic serif accent words inside headings */
+  .serif-accent {
+    @apply font-serif font-normal italic;
+    letter-spacing: -0.01em;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--fg)) 30%,
+      rgb(var(--fg) / 0.55) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ease-out;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-accent-fg;
+    box-shadow:
+      0 0 0 1px rgb(var(--accent) / 0.4),
+      0 8px 30px -8px rgb(var(--accent) / 0.55);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgb(var(--accent) / 0.6),
+      0 12px 40px -8px rgb(var(--accent) / 0.75);
+  }
+  .btn-ghost {
+    @apply btn border text-fg hairline;
+    background: rgb(var(--surface) / 0.6);
+  }
+  .btn-ghost:hover {
+    background: rgb(var(--surface-2));
+    border-color: rgb(var(--line) / 0.22);
+  }
+
+  .icon-btn {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:bg-fg/[0.06] hover:text-fg;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-2xs text-muted hairline;
+    background: rgb(var(--surface-2) / 0.6);
+  }
+
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 font-mono text-[10px] leading-none text-muted hairline;
+    background: rgb(var(--surface-2));
+  }
+
+  /* Card surface with a cursor-following spotlight border (see spotlight action) */
+  .card {
+    @apply relative rounded-2xl border hairline;
+    background: rgb(var(--surface));
+    isolation: isolate;
+  }
+  .card-spotlight::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, -100%),
+      rgb(var(--accent) / 0.55),
+      transparent 45%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .card-spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      600px circle at var(--mx, 50%) var(--my, -100%),
+      rgb(var(--accent) / 0.06),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .card-spotlight:hover::before,
+  .card-spotlight:hover::after {
+    opacity: 1;
+  }
+
+  /* Animated underline for inline links */
+  .link {
+    @apply relative text-fg;
+    background-image: linear-gradient(rgb(var(--accent-ink)), rgb(var(--accent-ink)));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Faint engineering grid, faded out toward the edges */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(var(--line) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+  }
+
+  .fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .glass {
+    background: rgb(var(--bg) / 0.72);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal. Content is only hidden when JS is running (html.js is set
+   by an inline script in app.html), so no-JS visitors and crawlers see it.
+   -------------------------------------------------------------------------- */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Theme switch: replace the default cross-fade with the circular reveal
+   driven from +page.svelte */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Film grain over the whole page, very subtle */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+[data-theme="light"] .grain {
+  opacity: 0.05;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }

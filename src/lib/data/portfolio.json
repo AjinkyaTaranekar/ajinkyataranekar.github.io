@@ -1,14 +1,16 @@
 {
   "personal": {
     "name": "Ajinkya Taranekar",
-    "title": "Software Development Engineer 2",
-    "tagline": "Full Stack Engineer | GenAI Specialist | Tech Leader",
+    "title": "Site Reliability Engineer Intern @ Apple",
+    "tagline": "SRE Intern @ Apple | Full Stack Engineer | GenAI Specialist",
     "bio": [
       "I'm a Polyglot Software Engineer with 3+ years of hands-on experience architecting scalable, data-intensive applications in fast-paced startup environments, where I've worn multiple hats from full-stack development and SRE to GenAI R&D, gaining broad exposure across technologies like Java, Python, Go, and cloud-native tools.",
       "Proven in driving innovation, such as integrating GenAI to slash latencies by 90% and onboarding times from weeks to minutes, while mentoring teams to accelerate development cycles by 75%. Recognized for strong ownership and accountability in high-impact and leveraged projects, including resolving 1,400+ P0 alerts at 91.7% efficiency.",
-      "I bring a collaborative culture that emphasises agile practices, cross-functional leadership, and reliable delivery of enterprise-grade solutions. A gold medalist in Computer Science, I relocated to Dublin in September 2025 to pursue an MSc in Computer Science at Trinity College Dublin, blending technical depth with strategic vision to transform fintech and emerging tech landscapes.",
-      "I believe in being a Karma Yogi, valuing culture, knowledge, and impact more than rewards."
+      "A gold medalist in Computer Science, I relocated to Dublin in September 2025 to pursue an MSc in Computer Science at Trinity College Dublin, which I completed in September 2026 with a 1:1 Distinction. In June 2026, I joined Apple as a Site Reliability Engineer Intern in Dublin, working alongside the final months of my degree."
     ],
+    "motto": "I believe in being a Karma Yogi, valuing culture, knowledge, and impact more than rewards.",
+    "intro": "Polyglot engineer with 3+ years building data-intensive systems across full-stack, SRE and GenAI, most recently as a Site Reliability Engineer Intern at Apple. MSc in Computer Science from Trinity College Dublin, graduated with a 1:1 Distinction.",
+    "focus": ["reliable", "scalable", "intelligent", "observable"],
     "location": "Dublin, Ireland",
     "phone": "+353 89 201 9015",
     "email": "ajinkyataranekar26@gmail.com",
@@ -29,7 +31,36 @@
     "dedication": "100%",
     "learning": "∞"
   },
+  "signals": {
+    "metrics": [
+      { "label": "P0 alerts handled", "value": "1,400+" },
+      { "label": "Resolution rate", "value": "91.7%" },
+      { "label": "Avg. time to ack", "value": "2.8 min" },
+      { "label": "Daily transactions", "value": "100,000+" }
+    ],
+    "latency": {
+      "label": "Search retrieval latency",
+      "from": "1s",
+      "to": "150ms"
+    }
+  },
   "experiences": [
+    {
+      "title": "Site Reliability Engineer Intern",
+      "company": "Apple",
+      "companyLogo": "/assets/companies/apple.svg",
+      "location": "Dublin, Ireland",
+      "period": "June 2026 - Sept 2026",
+      "description": "Joined Apple's Site Reliability Engineering organisation in Dublin, focusing on the reliability, observability, and operational excellence of large-scale production systems, alongside completing my MSc in Computer Science at Trinity College Dublin.",
+      "technologies": [
+        "Site Reliability Engineering",
+        "Observability",
+        "Incident Management",
+        "Automation",
+        "Cloud Infrastructure"
+      ],
+      "type": "internship"
+    },
     {
       "title": "Software Development Engineer 2",
       "company": "Nuclei, CDNA Technologies Pvt. Ltd.",
@@ -142,45 +173,148 @@
   ],
   "projects": [
     {
-  "title": "Anti-AI CAPTCHA System",
-  "description": "Engineered a next-gen CAPTCHA system resilient against modern AI solvers by combining adversarial image generation, behavioural biometrics, browser fingerprinting, and proof-of-work throttling. Built full-stack attacker simulation pipelines to benchmark models like OCR, CNN/CTC, and LLM-guided attacks—demonstrating strong resistance under real adversarial stress.",
-  "image": "/assets/projects/anti-ai-captcha.png",
-  "technologies": [
-    "FastAPI",
-    "Python",
-    "OpenCV",
-    "Machine Learning",
-    "Behavioral Biometrics",
-    "Computer Vision",
-    "Security Engineering"
-  ],
-  "github": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA",
-  "link": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA/blob/main/Anti-AI-CAPTCHA-System-Architecture.pdf",
-  "featured": false
-},
+      "title": "Constitutional Distillation for Trustworthy, Personalised AI",
+      "description": "My MSc dissertation at Trinity College Dublin, supervised by Prof. Owen Conlan. An AI assistant that runs on your own phone keeps private conversations off the internet, but phone-sized models are tiny. Can a small 0.6-billion-parameter model (Qwen3) be taught a written 25-principle constitution (be honest, admit what it doesn't know, ask before assuming, use tools properly, personalise without inventing facts), and what does that cost? I built a test bench and trained the same model three different ways to find out.",
+      "image": "/assets/projects/trustworthy-ai.webp",
+      "technologies": [
+        "Python",
+        "Qwen3-0.6B",
+        "LoRA / SFT",
+        "Unsloth",
+        "Constitutional AI",
+        "LLM-as-Judge",
+        "On-device AI"
+      ],
+      "highlights": [
+        "Teaching the format: training on the shape of a good answer backfired. The model copied the checklist instead of thinking, and its rule-following score halved (0.356 → 0.175).",
+        "Teaching the behaviour: learning from how a large teacher model answers with the rules in view gave the biggest jump in the study, and taught it when to use tools (failed tool calls fell from 22% → 1.2%).",
+        "The hidden cost: the most rule-abiding model stopped showing its working, leaving its reasoning empty on 91% of answers. A measurable 'alignment tax' at phone scale.",
+        "Splitting the brain: a Thinker model that plans and an Executor that acts, both on-device, brought visible reasoning back (empty on just 36%), personalised best, and was the only one to ask clarifying questions. Honesty dropped, because the Executor never saw the rules.",
+        "The test bench: 151 questions across five suites (rule-following, task coverage, a 25-turn conversation, jailbreak attacks and role-played users), with a large AI judge ranking all five models' answers head-to-head.",
+        "The takeaway: small models learn trustworthiness in layers, not all at once, and where they fail is predictable in advance. It's the first measurement of this trade-off at a size a budget phone can run."
+      ],
+      "github": "https://github.com/AjinkyaTaranekar/trustworthy-personalized-ai",
+      "document": "https://github.com/AjinkyaTaranekar/trustworthy-personalized-ai/blob/main/Constitutional_AI_in_SLM.pdf",
+      "featured": true
+    },
     {
-  "title": "AI Toolkit – PostgreSQL Extension for Natural-Language Querying",
-  "description": "Developed a PostgreSQL extension enabling natural-language querying, SQL error explanation, and schema-aware reasoning directly inside the database. Added multi-provider LLM support and a pluggable 'database memory' layer for context-rich responses—making analytics dramatically more accessible for analysts and product teams.",
-  "image": "/assets/projects/ai_toolkit.png",
-  "technologies": [
-    "PostgreSQL",
-    "C++",
-    "AI/LLMs",
-    "OpenAI",
-    "Anthropic",
-    "OpenRouter",
-    "Database Systems",
-    "Clickhouse AI SDK"
-  ],
-  "github": "https://github.com/AjinkyaTaranekar/ai_toolkit",
-  "link": "https://www.linkedin.com/posts/ajinkya-taranekar_postgresql-databaseinternals-cplusplus-activity-7396439083889233920-woyf",
-  "featured": false
-},
-
+      "title": "Atlas – ML Training Observatory",
+      "description": "A real-time observatory for PyTorch training runs, built at HackEurope 2026. A Python observer hooks into any training loop to stream loss, gradient, memory, profiler and carbon telemetry; a FastAPI diagnostics engine scores run health; and an adaptive AI agent on Crusoe Cloud explains what's going wrong and how to fix it, through a live Next.js dashboard with 3D network visualisation.",
+      "image": "/assets/projects/atlas.webp",
+      "video": "https://www.youtube.com/watch?v=lytHFWg5m-w",
+      "technologies": [
+        "PyTorch",
+        "FastAPI",
+        "Next.js",
+        "TypeScript",
+        "Crusoe Cloud",
+        "MCP",
+        "Server-Sent Events",
+        "CodeCarbon"
+      ],
+      "highlights": [
+        "Won Best Use of Crusoe API at HackEurope 2026",
+        "30+ diagnostic heuristics (divergence, vanishing gradients, dead ReLUs, idle GPUs) roll up into a 0–100 health score",
+        "Agent on Crusoe Cloud (Qwen3-235B) with 10 tools and belief-state tracking, with Claude as fallback",
+        "Live updates over SSE, plus an MCP server so Claude Desktop can run the same diagnostics"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar/hackeurope-2026",
+      "link": "https://devpost.com/software/atlas-3z6s2y",
+      "winner": "Winner · Best Use of Crusoe API, HackEurope 2026",
+      "featured": true
+    },
+    {
+      "title": "Beacon – City-Scale Emergency Response Platform",
+      "description": "A team-built emergency response platform for Irish local authorities that coordinates an incident end to end, from a citizen tapping \"Report Incident\" to the commander closing it: dispatching ground staff, broadcasting evacuation routes, streaming live city data and keeping an immutable audit trail, across twelve repositories.",
+      "image": "/assets/projects/beacon.webp",
+      "technologies": [
+        "Go",
+        "GKE / Kubernetes",
+        "GCP Pub/Sub",
+        "ClickHouse",
+        "Apache Airflow",
+        "Vertex AI",
+        "Keycloak",
+        "React",
+        "Flutter"
+      ],
+      "highlights": [
+        "6 Go microservices and 3 shared libraries on GKE Autopilot, talking over a Pub/Sub event bus with circuit breakers",
+        "13 Airflow ETL pipelines ingest Irish public data into ClickHouse; 5 alert DAGs raise incidents automatically",
+        "Vertex AI support bot detects distress and escalates to a human",
+        "Distroless Go images under 25 MB, with every action written to a ClickHouse audit trail"
+      ],
+      "github": "https://github.com/Response-To-City-Disaster/beacon-docs",
+      "featured": false
+    },
+    {
+      "title": "Lumino – Explainable Graph-Based Job Matching",
+      "description": "An adaptive job recommendation platform built for CS7IS5 at Trinity College Dublin, where every match decision is explainable. An LLM turns resumes and job posts into knowledge graphs in Neo4j; embeddings are only used to link equivalent concepts, and all scoring is deterministic graph traversal.",
+      "image": "/assets/projects/lumino.webp",
+      "technologies": [
+        "Neo4j",
+        "Cypher",
+        "FastAPI",
+        "Python",
+        "LiteLLM",
+        "React",
+        "TypeScript"
+      ],
+      "highlights": [
+        "Every score traces back to an explicit graph path, e.g. User → HAS_SKILL → Python → MATCHES → requirement",
+        "Weighted matching: skills 65%, domain 35%, plus culture and human-depth bonuses",
+        "Provider-agnostic LLM extraction (Gemini, Groq, OpenAI, Anthropic, Ollama) with an interactive graph editor and versioned checkpoints"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar/Lumino",
+      "featured": false
+    },
+    {
+      "title": "Anti-AI CAPTCHA System",
+      "description": "Engineered a next-gen CAPTCHA system resilient against modern AI solvers by combining adversarial image generation, behavioural biometrics, browser fingerprinting, and proof-of-work throttling. Built full-stack attacker simulation pipelines to benchmark models like OCR, CNN/CTC, and LLM-guided attacks—demonstrating strong resistance under real adversarial stress.",
+      "image": "/assets/projects/anti-ai-captcha.webp",
+      "technologies": [
+        "FastAPI",
+        "Python",
+        "OpenCV",
+        "Machine Learning",
+        "Behavioral Biometrics",
+        "Computer Vision",
+        "Security Engineering"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA",
+      "link": "https://github.com/AjinkyaTaranekar/CS7NS1-Anti-AI-CAPTCHA/blob/main/Anti-AI-CAPTCHA-System-Architecture.pdf",
+      "featured": false,
+      "highlights": [
+        "Layers adversarial images, behavioural biometrics, browser fingerprinting and proof-of-work throttling",
+        "Benchmarked against OCR, CNN/CTC and LLM-guided solver attacks in a full attacker simulation pipeline"
+      ]
+    },
+    {
+      "title": "AI Toolkit – PostgreSQL Extension for Natural-Language Querying",
+      "description": "Developed a PostgreSQL extension enabling natural-language querying, SQL error explanation, and schema-aware reasoning directly inside the database. Added multi-provider LLM support and a pluggable 'database memory' layer for context-rich responses—making analytics dramatically more accessible for analysts and product teams.",
+      "image": "/assets/projects/ai_toolkit.webp",
+      "technologies": [
+        "PostgreSQL",
+        "C++",
+        "AI/LLMs",
+        "OpenAI",
+        "Anthropic",
+        "OpenRouter",
+        "Database Systems",
+        "Clickhouse AI SDK"
+      ],
+      "github": "https://github.com/AjinkyaTaranekar/ai_toolkit",
+      "link": "https://www.linkedin.com/posts/ajinkya-taranekar_postgresql-databaseinternals-cplusplus-activity-7396439083889233920-woyf",
+      "featured": false,
+      "highlights": [
+        "Natural-language querying, SQL error explanation and schema-aware reasoning inside PostgreSQL, written in C++",
+        "Multi-provider LLM support (OpenAI, Anthropic, OpenRouter) with a pluggable database-memory layer"
+      ]
+    },
     {
       "title": "Convo AI - VoiceBot Agent Management System",
       "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
-      "image": "/assets/projects/voicebot.png",
+      "image": "/assets/projects/voicebot.webp",
       "technologies": [
         "GoLang",
         "gRPC",
@@ -192,12 +326,16 @@
         "Kubernetes"
       ],
       "link": "https://www.gonuclei.com/convo-ai",
-      "featured": false
+      "featured": false,
+      "highlights": [
+        "Go + gRPC agent management system that cut agent onboarding to 5 minutes",
+        "Production VoiceBot SDKs for digital banking"
+      ]
     },
     {
       "title": "In-House Search Engine (Part of Convo AI)",
       "description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 150ms. Implemented for high-performance data retrieval in production systems.",
-      "image": "/assets/projects/searchengine.png",
+      "image": "/assets/projects/searchengine.webp",
       "technologies": [
         "Python",
         "Milvus",
@@ -206,7 +344,10 @@
         "Fuzzy Search"
       ],
       "link": "https://www.gonuclei.com/convo-ai",
-      "featured": false
+      "featured": false,
+      "highlights": [
+        "Hybrid semantic vector + fuzzy search cut retrieval latency from 1s → 150ms"
+      ]
     },
     {
       "title": "Dailify - Curbside Pickup Service",
@@ -222,12 +363,13 @@
       ],
       "github": "https://github.com/AjinkyaTaranekar",
       "document": "https://drive.google.com/file/d/1cnCDYT8Pd0qG0KxQn8Qnd84jrKOmDNrw/view",
-      "featured": true
+      "featured": false,
+      "archived": true
     },
     {
       "title": "Department Information System",
       "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
-      "image": "/assets/projects/dis.png",
+      "image": "/assets/projects/dis.webp",
       "technologies": [
         "SpringBoot",
         "Flutter",
@@ -237,7 +379,8 @@
       ],
       "github": "https://github.com/Department-Information-System",
       "document": "https://drive.google.com/file/d/11D9nvsV8SvRstwdzjxWHaxsh0iwjlI86/view",
-      "featured": true
+      "featured": false,
+      "archived": true
     },
     {
       "title": "FinnEasy - Gamified Stock Market Solution",
@@ -247,7 +390,8 @@
       "github": "https://github.com/Brainstormers-HackItOut",
       "link": "https://devpost.com/software/finneasy",
       "featured": false,
-      "winner": "Best in Fintech at HackItOut"
+      "winner": "Best in Fintech at HackItOut",
+      "archived": true
     },
     {
       "title": "M.I.T.R.A - Credit Worthiness Tool",
@@ -257,7 +401,8 @@
       "github": "https://github.com/M-I-T-R-A",
       "link": "https://www.linkedin.com/feed/update/urn:li:activity:6776805874938732544/",
       "featured": false,
-      "winner": "2nd Runner-Up at TVS Credit EPIC Season 2"
+      "winner": "2nd Runner-Up at TVS Credit EPIC Season 2",
+      "archived": true
     }
   ],
   "education": [
@@ -267,9 +412,10 @@
       "institutionLogo": "/assets/institutes/tcd.png",
       "location": "Dublin 2, Dublin, Ireland",
       "period": "Sept 2025 - Sept 2026",
-      "grade": "In Progress",
-      "description": "Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.",
+      "grade": "1:1 Distinction",
+      "description": "Completed advanced studies in distributed systems, scalable computing, information retrieval, and machine learning, with a focus on emerging technologies and future networked systems.",
       "achievements": [
+        "Graduated with a 1:1 Distinction",
         "Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning"
       ]
     },
@@ -289,6 +435,18 @@
     }
   ],
   "achievements": [
+    {
+      "title": "1:1 Distinction",
+      "organization": "Trinity College Dublin",
+      "year": "2026",
+      "description": "Graduated with a 1:1 Distinction in the MSc in Computer Science (Future Networked Systems) at Trinity College Dublin."
+    },
+    {
+      "title": "Best Use of Crusoe API",
+      "organization": "HackEurope",
+      "year": "2026",
+      "description": "Won Best Use of Crusoe API at HackEurope 2026 for 'Atlas', an ML training observatory whose AI agent on Crusoe Cloud diagnoses PyTorch training runs in real time."
+    },
     {
       "title": "Seksaria Gold Medal",
       "organization": "Shri G.S. Institute of Technology and Science",

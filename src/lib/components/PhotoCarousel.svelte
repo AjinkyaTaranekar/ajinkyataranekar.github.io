@@ -1,237 +1,141 @@
 <script lang="ts">
   import type { Photo } from "$lib/types/portfolio";
-  import { onDestroy, onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import Icon from "./Icon.svelte";
+  import SectionHeader from "./SectionHeader.svelte";
 
   interface Props {
     photos: Photo[];
   }
 
   let { photos }: Props = $props();
-  let currentIndex = $state(0);
-  let visible = $state(false);
-  let autoplayInterval: NodeJS.Timeout | null = null;
 
-  onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visible = true;
-          startAutoplay();
-        } else {
-          stopAutoplay();
-        }
-      });
-    });
+  // Alternate photos between two filmstrips that drift in opposite directions
+  const rows = $derived([
+    photos.map((p, i) => ({ ...p, index: i })).filter((_, i) => i % 2 === 0),
+    photos.map((p, i) => ({ ...p, index: i })).filter((_, i) => i % 2 === 1),
+  ]);
 
-    const section = document.getElementById("photos");
-    if (section) observer.observe(section);
+  let current = $state<number | null>(null);
+  let closeBtn = $state<HTMLButtonElement>();
+  let lastFocus: HTMLElement | null = null;
 
-    return () => {
-      observer.disconnect();
-      stopAutoplay();
-    };
+  function openAt(index: number, event: MouseEvent) {
+    lastFocus = event.currentTarget as HTMLElement;
+    current = index;
+  }
+  function close() {
+    current = null;
+    lastFocus?.focus();
+  }
+  function go(delta: number) {
+    if (current === null) return;
+    current = (current + delta + photos.length) % photos.length;
+  }
+
+  $effect(() => {
+    document.body.style.overflow = current !== null ? "hidden" : "";
+    if (current !== null) closeBtn?.focus();
   });
 
-  onDestroy(() => {
-    stopAutoplay();
-  });
-
-  function startAutoplay() {
-    stopAutoplay(); // Clear any existing interval
-    autoplayInterval = setInterval(() => {
-      nextSlide();
-    }, 4000); // Change slide every 4 seconds
+  function onKeydown(event: KeyboardEvent) {
+    if (current === null) return;
+    if (event.key === "Escape") close();
+    else if (event.key === "ArrowRight") go(1);
+    else if (event.key === "ArrowLeft") go(-1);
   }
 
-  function stopAutoplay() {
-    if (autoplayInterval) {
-      clearInterval(autoplayInterval);
-      autoplayInterval = null;
-    }
-  }
-
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % photos.length;
-  }
-
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-  }
-
-  function goToSlide(index: number) {
-    currentIndex = index;
-    stopAutoplay();
-    setTimeout(startAutoplay, 5000); // Resume autoplay after 5 seconds
-  }
-
-  function handleMouseEnter() {
-    stopAutoplay();
-  }
-
-  function handleMouseLeave() {
-    startAutoplay();
-  }
+  const ratio = (p: Photo) => (p.width && p.height ? `${p.width} / ${p.height}` : "4 / 3");
 </script>
 
-<section
-  id="photos"
-  class="py-12 sm:py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
->
-  <div class="container mx-auto px-4">
-    <div
-      class="transform transition-all duration-1000 {visible
-        ? 'translate-y-0 opacity-100'
-        : 'translate-y-10 opacity-0'}"
-    >
-      <h2
-        class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4"
-      >
-        My <span class="text-primary">Photography</span>
-      </h2>
-      <p
-        class="text-center text-sm sm:text-base text-gray-900 dark:text-white/70 mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
-      >
-        Capturing moments and places that inspire me. A glimpse into my
-        adventures and explorations.
-      </p>
+<svelte:window onkeydown={onKeydown} />
 
-      <div class="max-w-5xl mx-auto px-2 sm:px-4">
-        <!-- Carousel Container -->
-        <div
-          class="carousel w-full rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl sm:shadow-2xl bg-white dark:bg-gray-800 dark:bg-base-300 overflow-hidden"
-          onmouseenter={handleMouseEnter}
-          onmouseleave={handleMouseLeave}
-          ontouchstart={handleMouseEnter}
-          ontouchend={handleMouseLeave}
-        >
-          <div
-            class="relative w-full h-[300px] xs:h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px]"
-          >
-            {#each photos as photo, index}
-              <div
-                class="carousel-item absolute w-full h-full transition-opacity duration-700 {index ===
-                currentIndex
-                  ? 'opacity-100 z-10'
-                  : 'opacity-0 z-0'}"
-              >
-                <img
-                  src={photo.url}
-                  alt={photo.caption ?? "Photo"}
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <!-- Photo Info Overlay -->
-                {#if photo.caption || photo.location || photo.date}
-                  <div
-                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-300/95 dark:from-base-200/95 to-transparent p-4 sm:p-6"
-                  >
-                    {#if photo.caption}
-                      <h3
-                        class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white"
-                      >
-                        {photo.caption}
-                      </h3>
-                    {/if}
-                    {#if photo.location}
-                      <p
-                        class="text-sm sm:text-base text-gray-900 dark:text-white/70 flex items-center gap-2 mt-1"
-                      >
-                        <svg
-                          class="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                        {photo.location}
-                        {#if photo.date}
-                          <span class="ml-2">• {photo.date}</span>
-                        {/if}
-                      </p>
-                    {/if}
-                  </div>
-                {/if}
-              </div>
+<section id="photos" class="section overflow-hidden">
+  <div class="container-page">
+    <SectionHeader
+      index="06"
+      label="Off the clock"
+      title="Through"
+      accent="my lens."
+      description="Capturing moments and places that inspire me. A glimpse into my adventures and explorations."
+    />
+  </div>
+
+  <div class="fade-x flex flex-col gap-4">
+    {#each rows as row, r}
+      <div
+        class="strip flex w-max {r === 0 ? 'animate-marquee' : 'animate-marquee-reverse'}"
+        style="--marquee-duration: {row.length * 7}s"
+      >
+        {#each [0, 1] as copy}
+          <ul class="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1 ? "true" : undefined}>
+            {#each row as photo}
+              <li class="h-48 shrink-0 sm:h-64" style="aspect-ratio: {ratio(photo)}">
+                <button
+                  class="group block h-full w-full overflow-hidden rounded-xl border hairline"
+                  onclick={(e) => openAt(photo.index, e)}
+                  tabindex={copy === 1 ? -1 : undefined}
+                  aria-label="Open photo {photo.index + 1}{photo.caption ? `: ${photo.caption}` : ''}"
+                >
+                  <img
+                    src={photo.url}
+                    alt={photo.caption ?? ""}
+                    width={photo.width}
+                    height={photo.height}
+                    class="h-full w-full object-cover saturate-[0.85] transition-all duration-700 ease-out group-hover:scale-105 group-hover:saturate-100"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              </li>
             {/each}
-
-            <!-- Navigation Arrows -->
-            <button
-              onclick={prevSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute left-1 xs:left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border-none z-20 shadow-md"
-              aria-label="Previous photo"
-            >
-              <svg
-                class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              onclick={nextSlide}
-              class="btn btn-circle btn-sm sm:btn-md absolute right-1 xs:right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border-none z-20 shadow-md"
-              aria-label="Next photo"
-            >
-              <svg
-                class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Indicators -->
-        <div
-          class="flex justify-center flex-wrap gap-1 xs:gap-2 mt-4 sm:mt-6 px-2"
-        >
-          {#each photos as photo, index}
-            <button
-              onclick={() => goToSlide(index)}
-              class="w-2 h-2 xs:w-3 xs:h-3 sm:btn btn-xs rounded-full {index ===
-              currentIndex
-                ? 'bg-primary'
-                : 'bg-gray-300 dark:bg-gray-600'} sm:hover:opacity-80 transition-all"
-              aria-label="Go to photo {index + 1}"
-            >
-            </button>
-          {/each}
-        </div>
-
-        <!-- Photo Count -->
-        <div
-          class="text-center mt-3 sm:mt-4 text-xs sm:text-sm text-gray-900 dark:text-white/60"
-        >
-          {currentIndex + 1} / {photos.length}
-        </div>
+          </ul>
+        {/each}
       </div>
-    </div>
+    {/each}
   </div>
 </section>
+
+<!-- Lightbox -->
+{#if current !== null}
+  {@const photo = photos[current]}
+  <div class="fixed inset-0 z-[80] flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Photo viewer" transition:fade={{ duration: 200 }}>
+    <button class="absolute inset-0 cursor-default bg-black/90 backdrop-blur-sm" aria-label="Close viewer" onclick={close}></button>
+
+    {#key current}
+      <img
+        src={photo.url}
+        alt={photo.caption ?? `Photo ${current + 1}`}
+        class="relative max-h-[82svh] max-w-[92vw] rounded-lg object-contain shadow-2xl"
+        in:fade={{ duration: 250 }}
+      />
+    {/key}
+
+    <div class="absolute inset-x-0 top-0 flex items-center justify-between p-4 text-white sm:p-6">
+      <span class="font-mono text-xs tracking-wider text-white/70">
+        {String(current + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
+      </span>
+      <button bind:this={closeBtn} onclick={close} class="icon-btn text-white/80 hover:bg-white/10 hover:text-white" aria-label="Close">
+        <Icon name="close" />
+      </button>
+    </div>
+    <button onclick={() => go(-1)} class="absolute left-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/20 sm:left-6" aria-label="Previous photo">
+      <Icon name="chevron-left" class="h-5 w-5" />
+    </button>
+    <button onclick={() => go(1)} class="absolute right-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/20 sm:right-6" aria-label="Next photo">
+      <Icon name="chevron-right" class="h-5 w-5" />
+    </button>
+    {#if photo.caption || photo.location}
+      <p class="absolute inset-x-0 bottom-6 text-center text-sm text-white/80">
+        {photo.caption ?? ""}{photo.caption && photo.location ? " · " : ""}{photo.location ?? ""}
+      </p>
+    {/if}
+  </div>
+{/if}
+
+<style>
+  .strip:hover,
+  .strip:focus-within {
+    animation-play-state: paused;
+  }
+</style>

@@ -13,7 +13,7 @@ Results-driven Software Engineer with 3+ years of experience architecting scalab
 
 I specialize in full-stack development with expertise in microservices architecture, GenAI frameworks, and cloud platforms. Recognised for taking ownership of high-impact projects, from spearheading R&D initiatives to managing 1,400+ P0 alerts with a 91.7% resolution rate in SRE.
 
-Currently pursuing MSc Computer Science at Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies.
+MSc Computer Science graduate (1:1 Distinction, Sept 2026) from Trinity College Dublin, combining technical expertise with strategic leadership to deliver transformative solutions in fintech and emerging technologies.
 
 ## Social Links
 - GitHub: https://github.com/AjinkyaTaranekar
@@ -57,10 +57,10 @@ Currently pursuing MSc Computer Science at Trinity College Dublin, combining tec
 
 ### Master of Science in Computer Science - Future Networked Systems
 - Institution: Trinity College Dublin
-- Period: Sept 2025 - Present
-- Grade: In Progress
-- Description: Pursuing advanced studies in distributed systems, scalable computing, information retrieval, and machine learning. Focusing on emerging technologies and future networked systems.
-- Achievements: Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning
+- Period: Sept 2025 - Sept 2026
+- Grade: 1:1 Distinction
+- Description: Completed advanced studies in distributed systems, scalable computing, information retrieval, and machine learning, with a focus on emerging technologies and future networked systems.
+- Achievements: Graduated with a 1:1 Distinction, Relevant Coursework: Distributed Systems, Scalable Computing, Information Retrieval, Machine Learning
 
 ### Bachelor of Technology in Computer Science
 - Institution: Shri G.S. Institute of Technology and Science

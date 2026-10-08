@@ -1,224 +1,313 @@
 <script lang="ts">
+  import { reveal } from "$lib/actions/reveal";
+  import { spotlight } from "$lib/actions/spotlight";
   import type { Project } from "$lib/types/portfolio";
-  import { onMount } from "svelte";
+  import { emphasize } from "$lib/utils/emphasize";
+  import { fade, scale } from "svelte/transition";
+  import Icon from "./Icon.svelte";
+  import ProjectCover from "./ProjectCover.svelte";
+  import SectionHeader from "./SectionHeader.svelte";
 
   interface Props {
     projects: Project[];
   }
 
   let { projects }: Props = $props();
-  let visible = $state(false);
 
-  onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visible = true;
-        }
-      });
-    });
+  const featured = $derived(projects.filter((p) => p.featured && !p.archived));
+  const selected = $derived(projects.filter((p) => !p.featured && !p.archived));
+  const archived = $derived(projects.filter((p) => p.archived));
 
-    const section = document.getElementById("projects");
-    if (section) observer.observe(section);
+  // Asymmetric 12-column rhythm for the selected grid: wide/narrow, then narrow/wide
+  const SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
+  const MAX_TAGS = 4;
 
-    return () => observer.disconnect();
+  let open = $state<Project | null>(null);
+  let closeBtn = $state<HTMLButtonElement>();
+  let lastFocus: HTMLElement | null = null;
+
+  function show(project: Project, event: MouseEvent) {
+    lastFocus = event.currentTarget as HTMLElement;
+    open = project;
+  }
+
+  function close() {
+    open = null;
+    lastFocus?.focus();
+  }
+
+  $effect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) closeBtn?.focus();
   });
+
+  // "https://www.youtube.com/watch?v=ID" / "youtu.be/ID" -> "ID"
+  const youtubeId = (url?: string) => url?.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1];
+
+  function links(project: Project) {
+    return [
+      project.github && { href: project.github, label: "Source", icon: "github" },
+      project.video && { href: project.video, label: "Watch demo", icon: "play" },
+      project.demo && { href: project.demo, label: "Live demo", icon: "arrow-up-right" },
+      project.link && { href: project.link, label: "Read more", icon: "arrow-up-right" },
+      project.document && { href: project.document, label: "Report", icon: "file" },
+    ].filter(Boolean) as { href: string; label: string; icon: string }[];
+  }
+
+  // "Teaching the format: training on…" -> a short bold label plus the body
+  function splitLabel(text: string) {
+    const match = text.match(/^([^:]{3,32}):\s+(.*)$/s);
+    return match ? { label: match[1], body: match[2] } : { label: "", body: text };
+  }
 </script>
 
-<section
-  id="projects"
-  class="py-12 sm:py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300"
->
-  <div class="container mx-auto px-4">
-    <div
-      class="transform transition-all duration-1000 {visible
-        ? 'translate-y-0 opacity-100'
-        : 'translate-y-10 opacity-0'}"
-    >
-      <h2
-        class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4"
-      >
-        My <span class="text-blue-500">Projects</span>
-      </h2>
-      <p
-        class="text-center text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
-      >
-        Here are some of my recent projects that showcase my skills and passion
-        for development.
-      </p>
+<svelte:window onkeydown={(e) => e.key === "Escape" && open && close()} />
 
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-6"
-      >
-        {#each projects as project, i}
-          <div
-            class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl transform-gpu hover:-translate-y-1 {project.featured
-              ? 'md:col-span-2'
-              : ''}"
-            style="animation-delay: {i * 100}ms"
-          >
-            <div
-              class={project.featured
-                ? "md:flex flex-col md:flex-row"
-                : "flex flex-col"}
-            >
-              <div
-                class="relative {project.featured
-                  ? 'md:w-1/2'
-                  : 'w-full'} h-48 sm:h-56 md:h-64 overflow-hidden"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  loading="lazy"
-                />
-                {#if project.featured}
-                  <div
-                    class="absolute top-4 left-4 px-3 py-1 bg-yellow-500 text-white text-xs sm:text-sm font-semibold rounded-full"
-                  >
-                    Featured
-                  </div>
-                {/if}
-              </div>
+{#snippet highlightList(items: string[], size: string)}
+  <ul class="space-y-2">
+    {#each items as highlight}
+      {@const { label, body } = splitLabel(highlight)}
+      <li class="flex gap-2.5 leading-relaxed text-muted {size}">
+        <Icon name="arrow-right" class="mt-[0.35em] h-3.5 w-3.5 shrink-0 text-accent-ink" />
+        <span>
+          {#if label}<strong class="font-semibold text-fg">{label}:</strong>{" "}{/if}
+          {#each emphasize(body) as seg}
+            {#if seg.em}<strong class="font-medium text-fg">{seg.text}</strong>{:else}{seg.text}{/if}
+          {/each}
+        </span>
+      </li>
+    {/each}
+  </ul>
+{/snippet}
 
-              <div class="p-4 sm:p-6 {project.featured ? 'md:w-1/2' : ''}">
-                <h3
-                  class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3"
-                >
-                  {project.title}
-                </h3>
-                <p
-                  class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4"
-                >
-                  {project.description}
-                </p>
+{#snippet badges(project: Project)}
+  {#if project.video}
+    <span class="pointer-events-none absolute inset-0 z-[1] grid place-items-center" aria-hidden="true">
+      <span class="grid h-16 w-16 place-items-center rounded-full bg-accent text-accent-fg shadow-[0_0_0_10px_rgb(var(--accent)/0.18)] transition-transform duration-500 group-hover:scale-110">
+        <Icon name="play" class="ml-1 h-6 w-6" />
+      </span>
+    </span>
+    <span class="absolute bottom-3 right-3 z-[1] rounded-full bg-black/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-white backdrop-blur-md">Watch demo</span>
+  {/if}
+  {#if project.featured || project.winner}
+    <div class="absolute left-3 top-3 z-[1] flex flex-wrap gap-2">
+      {#if project.featured}
+        <span class="rounded-full bg-accent px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-accent-fg">Featured</span>
+      {/if}
+      {#if project.winner}
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 text-[11px] text-white backdrop-blur-md">
+          <Icon name="trophy" class="h-3.5 w-3.5 text-amber-300" />
+          {project.winner}
+        </span>
+      {/if}
+    </div>
+  {/if}
+{/snippet}
 
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {#each project.technologies as tech}
-                    <span
-                      class="px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-xs sm:text-sm"
-                    >
-                      {tech}
-                    </span>
-                  {/each}
-                </div>
+{#snippet footer(project: Project, maxTags: number)}
+  <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-6">
+    <ul class="flex flex-wrap gap-1.5">
+      {#each project.technologies.slice(0, maxTags) as tech}
+        <li class="chip">{tech}</li>
+      {/each}
+      {#if project.technologies.length > maxTags}
+        <li class="chip">+{project.technologies.length - maxTags}</li>
+      {/if}
+    </ul>
+    <div class="relative z-[3] flex gap-1">
+      {#each links(project) as link}
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label}>
+          <Icon name={link.icon} class="h-4 w-4" />
+        </a>
+      {/each}
+    </div>
+  </div>
+{/snippet}
 
-                <div class="flex flex-wrap gap-2 sm:gap-4">
-                  {#if project.github}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors text-xs sm:text-sm flex-1 sm:flex-none"
-                    >
-                      <svg
-                        class="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        ><path
-                          d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                        /></svg
-                      >
-                      <span class="inline">GitHub</span>
-                    </a>
-                  {/if}
-                  {#if project.demo}
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs sm:text-sm flex-1 sm:flex-none"
-                    >
-                      <svg
-                        class="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        ><path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        /></svg
-                      >
-                      <span class="inline">Demo</span>
-                    </a>
-                  {/if}
-                  {#if project.document}
-                    <a
-                      href={project.document}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-xs sm:text-sm flex-1 sm:flex-none"
-                    >
-                      <svg
-                        class="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        ><path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        /></svg
-                      >
-                      <span class="inline">Document</span>
-                    </a>
-                  {/if}
-                  {#if project.link}
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm"
-                    >
-                      <svg
-                        class="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        ><path
-                          d="M3.27 12C2.48 11.05 2 9.83 2 8.5C2 5.48 4.47 3 7.5 3H12.5C15.52 3 18 5.48 18 8.5C18 11.52 15.53 14 12.5 14H10"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M20.73 12C21.52 12.95 22 14.17 22 15.5C22 18.52 19.53 21 16.5 21H11.5C8.48 21 6 18.52 6 15.5C6 12.48 8.47 10 11.5 10H14"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <span class="inline">Link</span>
-                    </a>
-                  {/if}
-                </div>
-                {#if project.winner}
-                  <div
-                    class="mt-2 text-xs sm:text-sm font-semibold text-yellow-600 dark:text-yellow-400"
-                  >
-                    🏆 {project.winner}
-                  </div>
-                {/if}
-                <!-- Render any extra keys dynamically -->
-                <div class="mt-2 text-xs text-gray-500">
-                  {#each Object.entries(project) as [key, value]}
-                    {#if !["title", "description", "image", "technologies", "github", "demo", "document", "link", "winner", "featured"].includes(key)}
-                      <div>
-                        <span class="font-semibold">{key}:</span>
-                        {value}
-                      </div>
-                    {/if}
-                  {/each}
-                </div>
-              </div>
+<section id="projects" class="section">
+  <div class="container-page">
+    <SectionHeader
+      index="03"
+      label="Projects"
+      title="Selected"
+      accent="work."
+      description="Research, production systems and hackathon wins. Open any card for the full story."
+    />
+
+    <!-- Featured: full-width cards, image alternating sides -->
+    {#if featured.length}
+      <div class="mb-5 space-y-5">
+        {#each featured as project, i}
+          <article class="card group grid p-2 lg:grid-cols-12" use:spotlight use:reveal>
+            <div class="relative lg:col-span-7 {i % 2 ? 'lg:order-2' : ''}">
+              <ProjectCover
+                {project}
+                class="h-64 rounded-xl sm:h-80 lg:h-full lg:min-h-[28rem]"
+                imgClass="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+              {@render badges(project)}
             </div>
-          </div>
+            <div class="flex flex-col p-4 sm:p-6 lg:col-span-5 lg:p-8">
+              <div class="flex items-start justify-between gap-4">
+                <h3 class="text-2xl font-medium leading-tight tracking-tight sm:text-[1.7rem]">
+                  <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                    {project.title}
+                  </button>
+                </h3>
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border text-muted transition-all duration-500 hairline group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
+                  <Icon name="arrow-up-right" class="h-4 w-4" />
+                </span>
+              </div>
+              <p class="mt-3 line-clamp-4 leading-relaxed text-muted">{project.description}</p>
+              {#if project.highlights?.length}
+                <div class="mt-5">{@render highlightList(project.highlights.slice(0, 4), "text-sm")}</div>
+              {/if}
+              {@render footer(project, 5)}
+            </div>
+          </article>
         {/each}
+      </div>
+    {/if}
+
+    <!-- Selected work: asymmetric grid -->
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-12">
+      {#each selected as project, i}
+        <article
+          class="card group flex flex-col p-2 transition-transform duration-500 ease-out hover:-translate-y-1 {SPANS[i % SPANS.length]}"
+          use:spotlight
+          use:reveal={{ delay: (i % 2) * 90 }}
+        >
+          <div class="relative">
+            <ProjectCover
+              {project}
+              class="h-56 rounded-xl sm:h-64"
+              imgClass="transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            />
+            {@render badges(project)}
+          </div>
+
+          <div class="flex flex-1 flex-col p-4 sm:p-5">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="text-lg font-medium leading-snug tracking-tight sm:text-xl">
+                <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                  {project.title}
+                </button>
+              </h3>
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border text-muted transition-all duration-500 hairline group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
+                <Icon name="arrow-up-right" class="h-4 w-4" />
+              </span>
+            </div>
+            <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{project.description}</p>
+            {#if project.highlights?.length}
+              <div class="mt-4">{@render highlightList(project.highlights.slice(0, 2), "text-[0.85rem]")}</div>
+            {/if}
+            {@render footer(project, MAX_TAGS)}
+          </div>
+        </article>
+      {/each}
+    </div>
+
+    <!-- Archive: compact list of earlier work -->
+    {#if archived.length}
+      <div class="mt-20" use:reveal>
+        <div class="mb-4 flex items-center gap-4">
+          <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-muted">More projects</h3>
+          <span class="h-px flex-1 bg-fg/10"></span>
+        </div>
+        <ul>
+          {#each archived as project}
+            <li class="group relative border-b hairline">
+              <div class="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg px-3 py-5 transition-colors duration-300 group-hover:bg-fg/[0.03]">
+                <h4 class="min-w-0 flex-1 text-base font-medium tracking-tight sm:text-lg">
+                  <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                    {project.title}
+                  </button>
+                </h4>
+                {#if project.winner}
+                  <span class="inline-flex items-center gap-1.5 font-mono text-2xs text-accent-ink">
+                    <Icon name="trophy" class="h-3.5 w-3.5" /> {project.winner}
+                  </span>
+                {/if}
+                <span class="hidden gap-1.5 lg:flex">
+                  {#each project.technologies.slice(0, 3) as tech}
+                    <span class="chip">{tech}</span>
+                  {/each}
+                </span>
+                <span class="relative z-[3] flex gap-1">
+                  {#each links(project) as link}
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label}>
+                      <Icon name={link.icon} class="h-4 w-4" />
+                    </a>
+                  {/each}
+                </span>
+              </div>
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
+  </div>
+</section>
+
+<!-- Case-study dialog -->
+{#if open}
+  <div class="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6" role="presentation">
+    <button class="absolute inset-0 cursor-default bg-black/70 backdrop-blur-sm" aria-label="Close project" onclick={close} transition:fade={{ duration: 200 }}></button>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-title"
+      class="card relative max-h-[92svh] w-full max-w-3xl overflow-y-auto rounded-b-none shadow-2xl sm:rounded-2xl"
+      transition:scale={{ start: 0.96, duration: 300 }}
+    >
+      <div class="relative">
+        {#if youtubeId(open.video)}
+          <div class="aspect-video w-full bg-black">
+            <iframe
+              class="h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/{youtubeId(open.video)}?rel=0"
+              title="{open.title} demo video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        {:else}
+          <ProjectCover project={open} fit="contain" class="h-[40svh] max-h-[26rem] min-h-[14rem]" />
+        {/if}
+        <button bind:this={closeBtn} onclick={close} class="icon-btn absolute right-3 top-3 bg-black/50 text-white backdrop-blur-md hover:bg-black/70 hover:text-white" aria-label="Close">
+          <Icon name="close" />
+        </button>
+      </div>
+      <div class="p-6 sm:p-8">
+        {#if open.winner}
+          <p class="mb-3 inline-flex items-center gap-1.5 font-mono text-2xs uppercase tracking-wider text-accent-ink">
+            <Icon name="trophy" class="h-3.5 w-3.5" /> {open.winner}
+          </p>
+        {/if}
+        <h3 id="project-title" class="text-2xl font-medium tracking-tight sm:text-3xl">{open.title}</h3>
+        <p class="mt-4 leading-relaxed text-muted">{open.description}</p>
+        {#if open.highlights?.length}
+          <div class="mt-6 rounded-xl border p-5 hairline">
+            <p class="mb-3 font-mono text-2xs uppercase tracking-[0.18em] text-faint">Highlights</p>
+            {@render highlightList(open.highlights, "text-[0.95rem]")}
+          </div>
+        {/if}
+        <ul class="mt-6 flex flex-wrap gap-1.5">
+          {#each open.technologies as tech}
+            <li class="chip">{tech}</li>
+          {/each}
+        </ul>
+        {#if links(open).length}
+          <div class="mt-8 flex flex-wrap gap-2">
+            {#each links(open) as link, i}
+              <a href={link.href} target="_blank" rel="noopener noreferrer" class={i === 0 ? "btn-primary" : "btn-ghost"}>
+                <Icon name={link.icon} /> {link.label}
+              </a>
+            {/each}
+          </div>
+        {/if}
       </div>
     </div>
   </div>
-</section>
+{/if}

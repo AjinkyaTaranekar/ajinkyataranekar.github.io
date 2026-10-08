@@ -1,260 +1,142 @@
 <script lang="ts">
+  import { reveal } from "$lib/actions/reveal";
   import type { PersonalInfo, SocialLinks } from "$lib/types/portfolio";
   import { onMount } from "svelte";
+  import Icon from "./Icon.svelte";
 
   interface Props {
     personal: PersonalInfo;
     social: SocialLinks;
+    timeZone?: string;
   }
 
-  let { personal, social }: Props = $props();
-  let visible = $state(false);
+  let { personal, social, timeZone = "Europe/Dublin" }: Props = $props();
 
-  const socialLinksData = [
-    {
-      name: "GitHub",
-      url: social.github,
-      icon: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z",
-      color: "hover:bg-gray-900 dark:hover:bg-gray-600",
-    },
-    {
-      name: "LinkedIn",
-      url: social.linkedin,
-      icon: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
-      color: "hover:bg-blue-600",
-    },
-  ];
-
-  if (social.twitter) {
-    socialLinksData.push({
-      name: "Twitter",
-      url: social.twitter,
-      icon: "M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z",
-      color: "hover:bg-sky-500",
-    });
-  }
-
-  socialLinksData.push({
-    name: "Email",
-    url: `mailto:${personal.email}`,
-    icon: "M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z",
-    color: "hover:bg-red-500",
-  });
+  let copied = $state(false);
+  let localTime = $state("");
 
   onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visible = true;
-        }
-      });
+    const fmt = new Intl.DateTimeFormat("en-GB", {
+      timeZone,
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
     });
-
-    const section = document.getElementById("contact");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
+    const update = () => (localTime = fmt.format(new Date()));
+    update();
+    const id = setInterval(update, 30_000);
+    return () => clearInterval(id);
   });
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(personal.email);
+      copied = true;
+      setTimeout(() => (copied = false), 1800);
+    } catch {
+      window.location.href = `mailto:${personal.email}`;
+    }
+  }
+
+  const links = $derived(
+    [
+      { label: "GitHub", value: social.github.replace(/^https?:\/\/(www\.)?/, ""), href: social.github, icon: "github" },
+      { label: "LinkedIn", value: social.linkedin.replace(/^https?:\/\/(www\.)?/, ""), href: social.linkedin, icon: "linkedin" },
+      social.twitter && { label: "X / Twitter", value: "@" + social.twitter.split("/").pop(), href: social.twitter, icon: "x" },
+      social.resume && { label: "Résumé", value: "View PDF", href: social.resume, icon: "file" },
+    ].filter(Boolean) as { label: string; value: string; href: string; icon: string }[],
+  );
 </script>
 
-<section
-  id="contact"
-  class="py-12 sm:py-20 bg-white dark:bg-gray-800 transition-colors duration-300"
->
-  <div class="container mx-auto px-4">
-    <div
-      class="transform transition-all duration-1000 {visible
-        ? 'translate-y-0 opacity-100'
-        : 'translate-y-10 opacity-0'}"
-    >
-      <h2
-        class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4"
-      >
-        Get In <span class="text-blue-500">Touch</span>
-      </h2>
-      <p
-        class="text-center text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto px-4"
-      >
-        I'm always open to discussing new projects, creative ideas, or
-        opportunities to be part of your visions.
-      </p>
+<section id="contact" class="section">
+  <div class="container-page">
+    <div class="card relative overflow-hidden" use:reveal>
+      <!-- Backdrop -->
+      <div class="bg-grid pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+      <div
+        class="pointer-events-none absolute -bottom-48 -left-24 h-[30rem] w-[30rem] rounded-full blur-[110px]"
+        style="background: rgb(var(--accent) / calc(var(--glow-a) * 0.6))"
+        aria-hidden="true"
+      ></div>
 
-      <div class="max-w-4xl mx-auto">
-        <!-- Contact Info -->
-        <div
-          class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-900 rounded-xl p-6 sm:p-8"
-        >
-          <h3
-            class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6"
+      <div class="relative grid gap-14 p-6 py-14 sm:p-12 lg:grid-cols-12 lg:gap-10 lg:p-16">
+        <div class="lg:col-span-7">
+          <p class="eyebrow"><span class="text-accent-ink">07</span> Contact</p>
+          <h2 class="mt-6 text-5xl font-medium leading-[0.98] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+            Let's build something
+            <span class="serif-accent text-accent-ink">that lasts.</span>
+          </h2>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+            {personal.availability}: SRE, backend, platform or GenAI roles and collaborations.
+            My inbox is always open.
+          </p>
+
+          <!-- Click-to-copy email -->
+          <button
+            onclick={copyEmail}
+            class="group mt-10 flex max-w-full items-center gap-3 rounded-2xl border bg-bg/60 py-3 pl-5 pr-3 text-left transition-colors hairline hover:border-accent/60"
+            aria-label="Copy email address {personal.email}"
           >
-            Contact Information
-          </h3>
+            <span class="truncate font-mono text-sm sm:text-lg">{personal.email}</span>
+            <span
+              class="grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors {copied
+                ? 'bg-accent text-accent-fg'
+                : 'bg-surface-2 text-muted group-hover:text-fg'}"
+            >
+              <Icon name={copied ? "check" : "copy"} class="h-4 w-4" strokeWidth={copied ? 2.4 : 1.6} />
+            </span>
+          </button>
+          <p class="mt-2 h-4 font-mono text-2xs text-accent-ink" aria-live="polite">
+            {copied ? "Copied to clipboard" : ""}
+          </p>
 
-          <div class="space-y-4">
-            <div class="flex items-start gap-4">
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-lg flex items-center justify-center shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h4
-                  class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white"
-                >
-                  Email
-                </h4>
-                <a
-                  href="mailto:{personal.email}"
-                  class="text-sm sm:text-base text-blue-500 dark:text-blue-400 hover:underline break-all"
-                  >{personal.email}</a
-                >
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500 rounded-lg flex items-center justify-center shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h4
-                  class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white"
-                >
-                  Location
-                </h4>
-                <p
-                  class="text-sm sm:text-base text-gray-600 dark:text-gray-300"
-                >
-                  {personal.location}
-                </p>
-              </div>
-            </div>
-
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="mailto:{personal.email}" class="btn-primary group">
+              <Icon name="mail" /> Say hello
+              <Icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </a>
             {#if personal.phone}
-              <div class="flex items-start gap-4">
-                <div
-                  class="w-10 h-10 sm:w-12 sm:h-12 bg-teal-500 rounded-lg flex items-center justify-center shrink-0"
-                >
-                  <svg
-                    class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h4
-                    class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white"
-                  >
-                    Phone
-                  </h4>
-                  <a
-                    href="tel:{personal.phone}"
-                    class="text-sm sm:text-base text-blue-500 dark:text-blue-400 hover:underline"
-                    >{personal.phone}</a
-                  >
-                </div>
-              </div>
+              <a href="tel:{personal.phone.replace(/\s/g, '')}" class="btn-ghost font-mono text-xs">{personal.phone}</a>
             {/if}
+          </div>
+        </div>
 
-            <div class="flex items-start gap-4">
-              <div
-                class="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-lg flex items-center justify-center shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h4
-                  class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white"
-                >
-                  Availability
-                </h4>
-                <p
-                  class="text-sm sm:text-base text-gray-600 dark:text-gray-300"
-                >
-                  {personal.availability}
-                </p>
-              </div>
+        <!-- Details & links -->
+        <div class="flex flex-col justify-end lg:col-span-5">
+          <div class="mb-8 grid grid-cols-2 gap-4">
+            <div class="rounded-xl border bg-bg/50 p-4 hairline">
+              <p class="font-mono text-2xs uppercase tracking-wider text-faint">Based in</p>
+              <p class="mt-1.5 text-sm">{personal.location}</p>
+            </div>
+            <div class="rounded-xl border bg-bg/50 p-4 hairline">
+              <p class="font-mono text-2xs uppercase tracking-wider text-faint">Local time</p>
+              <p class="mt-1.5 flex items-center gap-2 text-sm tabular-nums">
+                <Icon name="clock" class="h-3.5 w-3.5 text-muted" />
+                {localTime || "—"}
+              </p>
             </div>
           </div>
 
-          <!-- Social Links -->
-          <div class="mt-6 sm:mt-8">
-            <h4
-              class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-4"
-            >
-              Connect with me
-            </h4>
-            <div class="flex flex-wrap gap-3">
-              {#each socialLinksData as socialLink}
+          <ul class="border-t hairline">
+            {#each links as link}
+              <li class="border-b hairline">
                 <a
-                  href={socialLink.url}
+                  href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center transition-all duration-300 {socialLink.color} hover:scale-110"
-                  aria-label={socialLink.name}
+                  class="group flex items-center gap-4 py-4 transition-colors"
                 >
-                  <svg
-                    class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 dark:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d={socialLink.icon} />
-                  </svg>
+                  <Icon name={link.icon} class="h-[18px] w-[18px] text-muted transition-colors group-hover:text-fg" />
+                  <span class="font-medium">{link.label}</span>
+                  <span class="ml-auto truncate font-mono text-2xs text-faint transition-colors group-hover:text-muted">{link.value}</span>
+                  <span class="relative h-4 w-4 shrink-0 overflow-hidden text-muted group-hover:text-accent-ink">
+                    <Icon name="arrow-up-right" class="absolute inset-0 h-4 w-4 transition-transform duration-500 ease-out group-hover:-translate-y-4 group-hover:translate-x-4" />
+                    <Icon name="arrow-up-right" class="absolute inset-0 h-4 w-4 -translate-x-4 translate-y-4 transition-transform duration-500 ease-out group-hover:translate-x-0 group-hover:translate-y-0" />
+                  </span>
                 </a>
-              {/each}
-            </div>
-          </div>
+              </li>
+            {/each}
+          </ul>
         </div>
       </div>
     </div>

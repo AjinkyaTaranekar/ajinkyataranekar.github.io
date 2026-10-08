@@ -4,7 +4,7 @@ A fully responsive modern portfolio website showcasing my experience as a Softwa
 
 ## 👨‍💻 About Me
 
-Results-driven Software Engineer with 3+ years of experience in full-stack development, specializing in microservices architecture, GenAI integration, and cloud platforms. Currently pursuing MSc Computer Science at Trinity College Dublin.
+Results-driven Software Engineer with 3+ years of experience in full-stack development, specializing in microservices architecture, GenAI integration, and cloud platforms. MSc Computer Science graduate (1:1 Distinction) from Trinity College Dublin.
 
 ## 🛠️ Core Technologies
 

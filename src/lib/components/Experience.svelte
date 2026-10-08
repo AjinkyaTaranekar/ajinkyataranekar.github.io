@@ -1,215 +1,174 @@
 <script lang="ts">
+  import { reveal } from "$lib/actions/reveal";
+  import { spotlight } from "$lib/actions/spotlight";
   import type { Experience } from "$lib/types/portfolio";
-  import { onMount } from "svelte";
+  import { emphasize } from "$lib/utils/emphasize";
+  import { formatDuration, isOngoing, parsePeriod } from "$lib/utils/period";
+  import { slide } from "svelte/transition";
+  import Icon from "./Icon.svelte";
+  import SectionHeader from "./SectionHeader.svelte";
 
   interface Props {
     experiences: Experience[];
   }
 
   let { experiences }: Props = $props();
-  let visible = $state(false);
 
-  onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visible = true;
-        }
-      });
+  const VISIBLE_HIGHLIGHTS = 3;
+
+  // Consecutive roles at the same company become one card with a role timeline
+  const groups = $derived.by(() => {
+    const out: { company: string; logo?: string; location: string; roles: Experience[] }[] = [];
+    for (const exp of experiences) {
+      const last = out[out.length - 1];
+      if (last && last.company === exp.company) last.roles.push(exp);
+      else out.push({ company: exp.company, logo: exp.companyLogo, location: exp.location, roles: [exp] });
+    }
+    return out.map((group) => {
+      const newest = parsePeriod(group.roles[0].period);
+      const oldest = parsePeriod(group.roles[group.roles.length - 1].period);
+      return {
+        ...group,
+        range: `${oldest.startLabel} — ${newest.endLabel}`,
+        duration: formatDuration(oldest.start, newest.end),
+        ongoing: isOngoing(group.roles[0].period),
+      };
     });
-
-    const section = document.getElementById("experience");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
   });
+
+  let expanded = $state<Record<string, boolean>>({});
+
+  const shortName = (company: string) => company.split(",")[0];
+  const initials = (company: string) =>
+    shortName(company)
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase();
 </script>
 
-<section
-  id="experience"
-  class="py-12 sm:py-20 bg-white dark:bg-gray-900 transition-colors duration-300"
->
-  <div class="container mx-auto px-4">
-    <div
-      class="transform transition-all duration-1000 {visible
-        ? 'translate-y-0 opacity-100'
-        : 'translate-y-10 opacity-0'}"
-    >
-      <h2
-        class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12"
-      >
-        My <span class="text-blue-500">Experience</span>
-      </h2>
+<section id="experience" class="section">
+  <div class="container-page">
+    <SectionHeader
+      index="02"
+      label="Experience"
+      title="Where I've"
+      accent="shipped."
+      description="From bank reconciliation pipelines to GenAI voice agents, owning systems end to end: design, build, on-call."
+    />
 
-      <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        <div class="relative">
-          <!-- Timeline line -->
-          <div
-            class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-500"
-          ></div>
-
-          <!-- Mobile timeline line (visible only on small screens) -->
-          <div
-            class="md:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-blue-500"
-          ></div>
-
-          {#each experiences as exp, i}
-            <div
-              class="relative mb-8 md:mb-12 {i % 2 === 0
-                ? 'md:pr-1/2 pl-12 md:pl-0'
-                : 'md:pl-1/2 md:ml-auto pl-12 md:pl-0'}"
-              style="animation-delay: {i * 200}ms"
-            >
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center z-10 shrink-0 overflow-hidden absolute md:static {i %
-                    2 ===
-                  0
-                    ? 'md:ml-auto md:mr-8 left-0 md:left-auto'
-                    : 'md:ml-8 left-0 md:left-auto'}"
-                >
-                  {#if exp.companyLogo}
-                    <img
-                      src={exp.companyLogo}
-                      alt="{exp.company} logo"
-                      class="w-full h-full object-contain p-1"
-                    />
-                  {:else if exp.type === "work"}
-                    <svg
-                      class="w-6 h-6 sm:w-8 sm:h-8 text-blue-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  {:else}
-                    <svg
-                      class="w-6 h-6 sm:w-8 sm:h-8 text-blue-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                      />
-                    </svg>
-                  {/if}
-                </div>
-              </div>
-
-              <div
-                class="md:ml-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 transition-all duration-300 hover:shadow-xl"
-              >
-                <div
-                  class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2"
-                >
-                  <h3
-                    class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white"
-                  >
-                    {exp.title}
-                  </h3>
-                  <span
-                    class="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full w-fit"
-                  >
-                    {exp.period}
-                  </span>
-                </div>
-                <div
-                  class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3"
-                >
-                  <p
-                    class="text-sm sm:text-base text-blue-500 dark:text-blue-400 font-semibold"
-                  >
-                    {exp.company}
-                  </p>
-
-                  {#if exp.location}
-                    <div
-                      class="flex items-center text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <svg
-                        class="w-4 h-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      <span>{exp.location}</span>
-                    </div>
-                  {/if}
-                </div>
-
-                <p
-                  class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4"
-                >
-                  {exp.description}
-                </p>
-
-                {#if exp.highlights && exp.highlights.length > 0}
-                  <div class="mb-4">
-                    <h4
-                      class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-2"
-                    >
-                      Key Highlights:
-                    </h4>
-                    <ul class="space-y-1">
-                      {#each exp.highlights as highlight}
-                        <li
-                          class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
-                        >
-                          <svg
-                            class="w-4 h-4 text-green-500 shrink-0 mt-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clip-rule="evenodd"
-                            />
-                          </svg>
-                          <span>{highlight}</span>
-                        </li>
-                      {/each}
-                    </ul>
+    <ol class="exp-list space-y-5">
+      {#each groups as group}
+        <li class="exp-item card grid gap-8 p-6 transition-opacity duration-500 sm:p-8 lg:grid-cols-12 lg:p-10" use:spotlight use:reveal>
+          <!-- Company -->
+          <div class="lg:col-span-4">
+            <div class="lg:sticky lg:top-28">
+              <div class="flex items-center gap-4 lg:block">
+                {#if group.logo}
+                  <div class="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white p-2 ring-1 ring-black/5">
+                    <img src={group.logo} alt="{shortName(group.company)} logo" class="h-full w-full object-contain" loading="lazy" />
+                  </div>
+                {:else}
+                  <div class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-fg font-mono text-lg font-semibold text-bg">
+                    {initials(group.company)}
                   </div>
                 {/if}
-
-                <div class="flex flex-wrap gap-2">
-                  {#each exp.technologies as tech}
-                    <span
-                      class="px-2 sm:px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-xs sm:text-sm"
-                    >
-                      {tech}
-                    </span>
-                  {/each}
+                <div class="lg:mt-5">
+                  <h3 class="text-xl font-medium tracking-tight sm:text-2xl">{shortName(group.company)}</h3>
+                  <p class="mt-1 text-sm text-muted">{group.location}</p>
                 </div>
               </div>
+              <div class="mt-5 flex flex-wrap items-center gap-2 font-mono text-2xs text-faint">
+                <span>{group.range}</span>
+                {#if group.duration}<span aria-hidden="true">·</span><span>{group.duration}</span>{/if}
+              </div>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {#if group.ongoing}
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2.5 py-1 font-mono text-2xs text-accent-ink">
+                    <span class="h-1.5 w-1.5 rounded-full bg-accent"></span> Current
+                  </span>
+                {/if}
+                {#if group.roles.length > 1}
+                  <span class="chip">{group.roles.length} roles</span>
+                {/if}
+              </div>
             </div>
-          {/each}
-        </div>
-      </div>
-    </div>
+          </div>
+
+          <!-- Roles -->
+          <ol class="relative lg:col-span-8">
+            {#each group.roles as role, r}
+              {@const key = `${group.company}-${r}`}
+              {@const hidden = (role.highlights?.length ?? 0) - VISIBLE_HIGHLIGHTS}
+              <li class="relative pb-10 pl-7 last:pb-0">
+                <!-- timeline rail -->
+                {#if group.roles.length > 1}
+                  <span class="absolute left-[5px] top-3 h-full w-px bg-fg/10 {r === group.roles.length - 1 ? 'hidden' : ''}" aria-hidden="true"></span>
+                {/if}
+                <span
+                  class="absolute left-0 top-[7px] h-[11px] w-[11px] rounded-full border-2 {r === 0
+                    ? 'border-accent bg-accent/30'
+                    : 'border-fg/25 bg-bg'}"
+                  aria-hidden="true"
+                ></span>
+
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h4 class="text-lg font-medium tracking-tight">{role.title}</h4>
+                  <span class="font-mono text-2xs text-faint">{role.period}</span>
+                </div>
+                {#if role.type === "internship"}
+                  <span class="chip mt-2">Internship</span>
+                {/if}
+
+                <p class="mt-3 leading-relaxed text-muted">{role.description}</p>
+
+                {#if role.highlights?.length}
+                  <ul class="mt-5 space-y-2.5">
+                    {#each role.highlights as highlight, h}
+                      {#if h < VISIBLE_HIGHLIGHTS || expanded[key]}
+                        <li class="flex gap-3 text-[0.95rem] leading-relaxed text-muted" transition:slide={{ duration: 350 }}>
+                          <Icon name="arrow-right" class="mt-[0.4rem] h-3.5 w-3.5 shrink-0 text-accent-ink" />
+                          <span>
+                            {#each emphasize(highlight) as seg}
+                              {#if seg.em}<strong class="font-medium text-fg underline decoration-accent/60 decoration-1 underline-offset-4">{seg.text}</strong>{:else}{seg.text}{/if}
+                            {/each}
+                          </span>
+                        </li>
+                      {/if}
+                    {/each}
+                  </ul>
+                  {#if hidden > 0}
+                    <button
+                      class="mt-4 inline-flex items-center gap-1.5 font-mono text-2xs uppercase tracking-wider text-muted transition-colors hover:text-fg"
+                      onclick={() => (expanded[key] = !expanded[key])}
+                      aria-expanded={!!expanded[key]}
+                    >
+                      {expanded[key] ? "Show less" : `+ ${hidden} more highlights`}
+                      <Icon name="chevron-down" class="h-3.5 w-3.5 transition-transform duration-300 {expanded[key] ? 'rotate-180' : ''}" />
+                    </button>
+                  {/if}
+                {/if}
+
+                <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Technologies">
+                  {#each role.technologies as tech}
+                    <li class="chip">{tech}</li>
+                  {/each}
+                </ul>
+              </li>
+            {/each}
+          </ol>
+        </li>
+      {/each}
+    </ol>
   </div>
 </section>
+
+<style>
+  /* Dim the other cards while one is hovered (pointer devices only) */
+  @media (hover: hover) and (min-width: 1024px) {
+    .exp-list:hover > :global(.exp-item:not(:hover)) {
+      opacity: 0.55;
+    }
+  }
+</style>
