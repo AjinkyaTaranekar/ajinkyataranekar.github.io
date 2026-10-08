@@ -104,8 +104,9 @@
 >
   <nav class="container-page flex h-16 items-center justify-between gap-4" aria-label="Primary">
     <!-- Monogram -->
-    <a href="#home" class="group flex items-center gap-2.5" aria-label="Back to top">
+    <a href="#home" class="group flex items-center gap-2.5" aria-label="AT Ajinkya Taranekar, back to top">
       <span
+        aria-hidden="true"
         class="relative grid h-8 w-8 place-items-center rounded-lg border bg-surface font-mono text-xs font-semibold tracking-tight hairline transition-transform duration-300 group-hover:-rotate-6"
       >
         <span>AT<span class="ml-[1.5px] inline-block h-[5px] w-[5px] rounded-full bg-accent"></span></span>

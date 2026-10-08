@@ -8,6 +8,9 @@ const config = {
   preprocess: vitePreprocess(),
 
   kit: {
+    // Inline CSS into the prerendered HTML (the whole bundle is ~40 KB raw,
+    // ~9 KB gzipped), so first paint doesn't wait on a separate request.
+    inlineStyleThreshold: 60000,
     // Using adapter-static for GitHub Pages deployment
     adapter: adapter({
       // default options are shown. On some platforms

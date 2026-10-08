@@ -171,5 +171,4 @@
     <QRCode bind:show={showQR} />
   {/if}
   <CommandPalette bind:open={paletteOpen} {commands} />
-  <div class="grain" aria-hidden="true"></div>
 </div>

@@ -18,6 +18,8 @@
   const words = $derived(personal.focus?.length ? personal.focus : ["reliable"]);
   const nameParts = $derived(personal.name.split(" "));
   const roles = $derived(personal.tagline.split("|").map((part) => part.trim()));
+  // "/assets/profile.jpg" -> "/assets/profile" (responsive WebP variants share this stem)
+  const portraitBase = $derived(personal.profileImage?.replace(/\.\w+$/, "") ?? "");
   const shortDegree = $derived(
     degree?.degree.startsWith("Master") ? "MSc" : degree?.degree.startsWith("Bachelor") ? "BTech" : "",
   );
@@ -77,7 +79,7 @@
   <div class="container-page relative grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
     <div class="lg:col-span-7">
       <!-- Availability -->
-      <div class="animate-fade-up" style="animation-delay: 80ms">
+      <div class="animate-fade-up">
         <span class="inline-flex items-center gap-2.5 rounded-full border bg-surface/70 px-3 py-1.5 text-xs text-muted hairline">
           <span class="relative flex h-2 w-2">
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent"></span>
@@ -95,14 +97,14 @@
         aria-label={personal.name}
       >
         {#each nameParts as part, i}
-          <span class="mask" aria-hidden="true"><span class="rise text-gradient" style="--d: {150 + i * 110}ms">{part}</span></span>{#if i < nameParts.length - 1}{" "}{/if}
+          <span class="mask" aria-hidden="true"><span class="rise text-gradient" style="--d: {i * 90}ms">{part}</span></span>{#if i < nameParts.length - 1}{" "}{/if}
         {/each}
       </h1>
 
       <!-- Statement with a rotating serif word -->
       <p
         class="animate-fade-up mt-6 text-2xl tracking-tight text-muted sm:text-3xl"
-        style="animation-delay: 420ms"
+        style="animation-delay: 180ms"
       >
         Engineering software that's
         <span class="relative inline-grid align-bottom">
@@ -121,14 +123,14 @@
       {#if personal.intro}
         <p
           class="animate-fade-up mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
-          style="animation-delay: 520ms"
+          style="animation-delay: 240ms"
         >
           {personal.intro}
         </p>
       {/if}
 
       <!-- Actions: email first, so visitors can reach out straight away -->
-      <div class="animate-fade-up mt-9 flex flex-wrap items-center gap-3" style="animation-delay: 620ms">
+      <div class="animate-fade-up mt-9 flex flex-wrap items-center gap-3" style="animation-delay: 300ms">
         <div class="flex items-center">
           <a href="mailto:{personal.email}" class="btn-primary rounded-r-md pr-4">
             <Icon name="mail" /> Email me
@@ -154,7 +156,7 @@
       </div>
 
       <!-- Email address + socials -->
-      <div class="animate-fade-up mt-5 flex flex-wrap items-center gap-x-4 gap-y-2" style="animation-delay: 680ms">
+      <div class="animate-fade-up mt-5 flex flex-wrap items-center gap-x-4 gap-y-2" style="animation-delay: 340ms">
         <a href="mailto:{personal.email}" class="link font-mono text-xs text-muted">{personal.email}</a>
         {#if copied}
           <span class="font-mono text-2xs text-accent-ink">Copied to clipboard</span>
@@ -177,7 +179,7 @@
       </div>
 
       <!-- Role tags -->
-      <ul class="animate-fade-up mt-10 flex flex-wrap gap-x-5 gap-y-2 font-mono text-2xs uppercase tracking-[0.16em] text-faint" style="animation-delay: 760ms">
+      <ul class="animate-fade-up mt-10 flex flex-wrap gap-x-5 gap-y-2 font-mono text-2xs uppercase tracking-[0.16em] text-faint" style="animation-delay: 380ms">
         {#each roles as tag, i}
           <li class="flex items-center gap-5">
             {#if i > 0}<span class="h-1 w-1 rounded-full bg-fg/25" aria-hidden="true"></span>{/if}
@@ -189,7 +191,7 @@
 
     <!-- Portrait with floating credential badges -->
     {#if personal.profileImage}
-      <div class="animate-fade-up lg:col-span-5" style="animation-delay: 350ms">
+      <div class="animate-fade-up lg:col-span-5" style="animation-delay: 120ms">
         <div class="relative mx-auto w-full max-w-[20rem] sm:max-w-sm lg:max-w-none lg:pl-8">
           <div
             class="absolute inset-8 -z-10 rounded-[2.5rem] blur-3xl"
@@ -199,8 +201,13 @@
 
           <div class="portrait card overflow-hidden rounded-[2rem] p-2">
             <div class="relative aspect-[4/5] overflow-hidden rounded-[1.6rem]">
+              <!-- WebP variants generated next to the original: profile-480/640/780.webp -->
               <img
                 src={personal.profileImage}
+                srcset="{portraitBase}-480.webp 480w, {portraitBase}-640.webp 640w, {portraitBase}-780.webp 780w"
+                sizes="(min-width: 1024px) 26rem, 20rem"
+                width="780"
+                height="1040"
                 alt="Portrait of {personal.name}"
                 class="h-full w-full object-cover object-[62%_center]"
                 fetchpriority="high"
@@ -210,7 +217,7 @@
           </div>
 
           {#if role}
-            <div class="badge -left-3 top-8 sm:-left-8" style="--delay: 900ms; --drift: 6s">
+            <div class="badge -left-3 top-8 sm:-left-8" style="--delay: 600ms; --drift: 6s">
               {#if role.companyLogo}
                 <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white p-1.5">
                   <img src={role.companyLogo} alt="" class="h-full w-full object-contain" />
@@ -224,7 +231,7 @@
           {/if}
 
           {#if degree}
-            <div class="badge -right-3 top-[63%] sm:-right-8" style="--delay: 1050ms; --drift: 7s">
+            <div class="badge -right-3 top-[63%] sm:-right-8" style="--delay: 720ms; --drift: 7s">
               <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent text-accent-fg">
                 <Icon name="graduation-cap" class="h-5 w-5" />
               </span>
@@ -236,7 +243,7 @@
           {/if}
 
           {#if award}
-            <div class="badge -left-2 bottom-6 sm:-left-6" style="--delay: 1200ms; --drift: 5.5s">
+            <div class="badge -left-2 bottom-6 sm:-left-6" style="--delay: 840ms; --drift: 5.5s">
               <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-400/15 text-amber-500 dark:text-amber-300">
                 <Icon name="trophy" class="h-5 w-5" />
               </span>
@@ -308,27 +315,27 @@
     padding: 0.6rem 0.9rem 0.6rem 0.6rem;
     border-radius: 1rem;
     border: 1px solid rgb(var(--line) / var(--line-a));
-    background: rgb(var(--surface) / 0.82);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    backdrop-filter: blur(14px) saturate(160%);
+    background: rgb(var(--surface) / 0.94);
     box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.45);
+    /* pop animates opacity + scale and drift animates translate, so the two
+       never compete for the same property and both stay on the compositor */
     animation:
-      pop 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both,
-      drift var(--drift) ease-in-out calc(var(--delay) + 0.8s) infinite;
+      pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both,
+      drift var(--drift) ease-in-out calc(var(--delay) + 0.7s) infinite;
   }
   @keyframes pop {
     from {
       opacity: 0;
-      transform: translateY(14px) scale(0.92);
+      scale: 0.92;
     }
   }
   @keyframes drift {
     0%,
     100% {
-      transform: translateY(0);
+      translate: 0 0;
     }
     50% {
-      transform: translateY(-8px);
+      translate: 0 -8px;
     }
   }
 

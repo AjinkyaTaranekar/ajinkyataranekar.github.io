@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Photo } from "$lib/types/portfolio";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Icon from "./Icon.svelte";
   import SectionHeader from "./SectionHeader.svelte";
@@ -15,6 +16,25 @@
     photos.map((p, i) => ({ ...p, index: i })).filter((_, i) => i % 2 === 0),
     photos.map((p, i) => ({ ...p, index: i })).filter((_, i) => i % 2 === 1),
   ]);
+
+  // The filmstrips hold ~100 nodes per row, so they are only built once the
+  // section is about to scroll into view (keeps them out of first render).
+  let section: HTMLElement;
+  let near = $state(false);
+
+  onMount(() => {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          near = true;
+          io.disconnect();
+        }
+      },
+      { rootMargin: "800px 0px" },
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  });
 
   let current = $state<number | null>(null);
   let closeBtn = $state<HTMLButtonElement>();
@@ -50,7 +70,7 @@
 
 <svelte:window onkeydown={onKeydown} />
 
-<section id="photos" class="section overflow-hidden">
+<section id="photos" class="section overflow-hidden" bind:this={section}>
   <div class="container-page">
     <SectionHeader
       index="06"
@@ -62,7 +82,11 @@
   </div>
 
   <div class="fade-x flex flex-col gap-4">
-    {#each rows as row, r}
+    {#if !near}
+      <!-- Same height as the two strips, so nothing shifts when they mount -->
+      <div class="h-[25rem] sm:h-[33rem]" aria-hidden="true"></div>
+    {/if}
+    {#each near ? rows : [] as row, r}
       <div
         class="strip flex w-max {r === 0 ? 'animate-marquee' : 'animate-marquee-reverse'}"
         style="--marquee-duration: {row.length * 7}s"
@@ -82,7 +106,7 @@
                     alt={photo.caption ?? ""}
                     width={photo.width}
                     height={photo.height}
-                    class="h-full w-full object-cover saturate-[0.85] transition-all duration-700 ease-out group-hover:scale-105 group-hover:saturate-100"
+                    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
                   />

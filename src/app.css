@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Self-hosted fonts (latin subsets, SIL Open Font License). Serving them from
+   this origin avoids two extra connections to Google Fonts before first paint. */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ==========================================================================
    "Signal" design system
    An observability-inspired palette: near-black canvas, quiet greys and a
@@ -19,7 +46,7 @@
   --line: 255 255 255;
   --fg: 237 237 239;
   --muted: 160 161 168;
-  --faint: 107 108 116;
+  --faint: 130 131 140;
 
   /* Signal green. Alternatives (swap all three lines, both themes):
        electric blue  --accent: 77 141 255;  --accent-fg: 255 255 255; --accent-ink: 110 163 255 (light: 29 78 216)
@@ -43,7 +70,7 @@
   --line: 17 17 16;
   --fg: 17 17 16;
   --muted: 82 82 76;
-  --faint: 128 128 120;
+  --faint: 108 108 101;
 
   --accent: 52 211 153;
   --accent-fg: 3 20 13;
@@ -89,8 +116,8 @@
     border-radius: 6px;
   }
 
-  /* Thin, theme-aware scrollbar */
-  * {
+  /* Thin, theme-aware scrollbar (inherited, so set once on the root) */
+  html {
     scrollbar-width: thin;
     scrollbar-color: rgb(var(--line) / 0.18) transparent;
   }
@@ -267,17 +294,14 @@
 html.js .reveal {
   opacity: 0;
   transform: translateY(28px);
-  filter: blur(6px);
   transition:
     opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--d, 0ms);
 }
 html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 /* Theme switch: replace the default cross-fade with the circular reveal
@@ -286,19 +310,6 @@ html.js .reveal.is-visible {
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
-}
-
-/* Film grain over the whole page, very subtle */
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-[data-theme="light"] .grain {
-  opacity: 0.05;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -315,6 +326,5 @@ html.js .reveal.is-visible {
   html.js .reveal {
     opacity: 1;
     transform: none;
-    filter: none;
   }
 }
