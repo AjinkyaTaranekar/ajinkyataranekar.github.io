@@ -147,15 +147,15 @@
             <Icon name={copied ? "check" : "copy"} class="h-4 w-4" strokeWidth={copied ? 2.4 : 1.8} />
           </button>
         </div>
+        {#if social?.resume}
+          <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="resume_open" data-track-placement="hero">
+            <Icon name="file" class="h-4 w-4 text-accent-ink" /> Résumé
+          </a>
+        {/if}
         <a href="#projects" class="btn-ghost group">
           View my work
           <Icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </a>
-        {#if social?.resume}
-          <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="resume_open" data-track-placement="hero">
-            <Icon name="file" /> Résumé
-          </a>
-        {/if}
       </div>
 
       <!-- Email address + socials -->

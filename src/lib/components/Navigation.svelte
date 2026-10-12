@@ -142,9 +142,11 @@
 
     <!-- Controls -->
     <div class="flex items-center gap-1">
+      <!-- The labelled search pill gives way to an icon from lg to xl, where the
+           section links appear and the bar would otherwise overflow -->
       <button
         onclick={openPalette}
-        class="hidden items-center gap-2 rounded-full border bg-surface/60 py-1.5 pl-3 pr-1.5 text-sm text-muted transition-colors hairline hover:text-fg md:inline-flex"
+        class="hidden items-center gap-2 rounded-full border bg-surface/60 py-1.5 pl-3 pr-1.5 text-sm text-muted transition-colors hairline hover:text-fg md:inline-flex lg:hidden xl:inline-flex"
         aria-label="Open command menu"
       >
         <Icon name="search" class="h-3.5 w-3.5" />
@@ -153,7 +155,7 @@
           <kbd class="kbd">{isMac ? "⌘" : "Ctrl"}</kbd><kbd class="kbd">K</kbd>
         </span>
       </button>
-      <button onclick={openPalette} class="icon-btn md:hidden" aria-label="Open command menu">
+      <button onclick={openPalette} class="icon-btn md:hidden lg:inline-flex xl:hidden" aria-label="Open command menu">
         <Icon name="search" />
       </button>
       <button onclick={() => (showQR = true)} class="icon-btn" aria-label="Share this site" data-track="share" data-track-method="qr" data-track-placement="nav">
@@ -170,6 +172,11 @@
           </span>
         {/key}
       </button>
+      {#if social.resume}
+        <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost ml-1 hidden !px-4 !py-2 text-xs sm:inline-flex" data-track="resume_open" data-track-placement="nav">
+          <Icon name="file" class="h-3.5 w-3.5" /> Résumé
+        </a>
+      {/if}
       <a href="mailto:{email}" class="btn-primary ml-1 hidden !px-4 !py-2 text-xs sm:inline-flex" data-track="contact_click" data-track-method="email" data-track-placement="nav">
         <Icon name="mail" class="h-3.5 w-3.5" /> Email me
       </a>
@@ -209,6 +216,11 @@
       <a href="mailto:{email}" class="btn-primary" data-track="contact_click" data-track-method="email" data-track-placement="menu">
         <Icon name="mail" /> Email me
       </a>
+      {#if social.resume}
+        <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="resume_open" data-track-placement="menu">
+          <Icon name="file" /> Résumé
+        </a>
+      {/if}
       <a href={social.github} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="social_click" data-track-network="github" data-track-placement="menu">
         <Icon name="github" /> GitHub
       </a>
