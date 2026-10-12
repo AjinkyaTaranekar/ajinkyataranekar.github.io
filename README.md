@@ -26,7 +26,12 @@ npm install
 
 # Start development server
 npm run dev
+
+# Rebuild static/resume.pdf after editing resume/resume.tex (needs MiKTeX or TeX Live)
+npm run resume
 ```
+
+The résumé is compiled with LuaLaTeX, which embeds its fonts as compact OpenType. pdfLaTeX produces the same page but embeds Type 1 fonts, about 250 KB instead of about 45 KB. On Overleaf, set the compiler to LuaLaTeX.
 
 ## 📈 Analytics
 

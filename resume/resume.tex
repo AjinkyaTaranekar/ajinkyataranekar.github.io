@@ -1,0 +1,149 @@
+% Build with `npm run resume` (LuaLaTeX), which also copies the PDF to
+% static/resume.pdf. On Overleaf, set Menu > Compiler to LuaLaTeX.
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage{iftex}
+\ifPDFTeX
+    % pdfLaTeX still works, but embeds Type 1 fonts, which barely compress (~250 KB PDF)
+    \usepackage{cmap}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+\else
+    % LuaLaTeX/XeLaTeX: Computer Modern Unicode (same look) embedded as
+    % compact OpenType, ~45 KB PDF
+    \usepackage{fontspec}
+    \setmainfont{cmunrm.otf}[
+        BoldFont = cmunbx.otf,
+        ItalicFont = cmunti.otf,
+        BoldItalicFont = cmunbi.otf]
+    \setmonofont{cmuntt.otf}
+\fi
+\usepackage[margin=0.4in, top=0.08in, bottom=0.05in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue!70!black,
+    pdfauthor={Ajinkya Taranekar},
+    pdftitle={Ajinkya Taranekar - Site Reliability Engineer Resume}
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% No automatic hyphenation: a keyword split across lines ("Orches-tration")
+% may not match in applicant tracking systems
+\hyphenpenalty=10000
+
+\titleformat{\section}{\normalsize\bfseries\scshape}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{2pt}{1.5pt}
+\linespread{0.87}
+\selectfont
+
+\setlist[itemize]{leftmargin=11pt, itemsep=0.2pt, parsep=0pt, topsep=1pt}
+
+\newcommand{\resumeHeading}[4]{
+    {\textbf{#1} \hfill \textbf{#2}} \\[0.5pt]
+    {\textit{#3} \hfill \textit{#4}}
+}
+
+\begin{document}
+
+% ==== HEADER ====
+\begin{center}
+    {\fontsize{14}{18}\selectfont\textbf{Ajinkya Taranekar}} \\[2pt]
+    {\small Dublin, Ireland ~|~ +353 89 201 9015 ~|~
+    \href{mailto:ajinkyataranekar26@gmail.com}{ajinkyataranekar26@gmail.com} ~|~
+    \href{https://linkedin.com/in/ajinkya-taranekar}{linkedin.com/in/ajinkya-taranekar} ~|~
+    \href{https://github.com/AjinkyaTaranekar}{github.com/AjinkyaTaranekar} ~|~
+    \href{https://ajinkyataranekar.github.io}{ajinkyataranekar.github.io}}
+\end{center}
+
+% ==== EXPERIENCE ====
+\section{Experience}
+
+\resumeHeading
+{Apple}{Dublin, Ireland}
+{Site Reliability Engineering Intern, ASE Security SRE Team}{Jun 2026 -- Sept 2026}
+\begin{itemize}
+    \item Support site reliability for security-critical distributed systems, handling monitoring, alerting, root-cause incident response, and automation to keep systems highly available.
+\end{itemize}
+
+\resumeHeading
+{Nuclei, CDNA Technologies Pvt. Ltd.}{Bengaluru, India}
+{Software Development Engineer 2}{Jul 2024 -- Jul 2025}
+\begin{itemize}
+    \item Slashed partner bank onboarding time from weeks to under 5 minutes by designing a Go + gRPC Agent Management System with OIDC multi-tenant auth and Protobuf contracts for an AI-driven VoiceBot SDK, rolled out across multiple bank integrations.
+    \item Reduced product catalogue search latency from 1s to 150ms by combining Milvus vector search with Elasticsearch fuzzy matching in a custom hybrid search pipeline.
+    \item Powered proactive, data-driven decisions for 100K+ daily active users with a real-time analytics engine on Kafka and ClickHouse, processing metrics and GDPR RoPA events.
+    \item Shipped an internal Figma plugin that uses LLMs to generate UX heatmaps and optimise copy, cutting design review cycles from weeks to days.
+    \item Mentored a team of engineers in Java backend and Svelte frontend development.
+\end{itemize}
+
+\resumeHeading
+{Nuclei, CDNA Technologies Pvt. Ltd.}{Bengaluru, India}
+{Full-Stack Developer}{Jul 2022 -- Jul 2024}
+\begin{itemize}
+    \item Resolved 1,400+ P0 production outages independently at a 91.7\% resolution rate (avg. ack 2.8 min) as the company's founding SRE, automating CIS Benchmark hardening, orchestrating Airflow DAGs for stuck-event recovery, and driving RCA on partner-facing payments and business services.
+    \item Compressed new partner onboarding time from weeks to 1 week for India's largest banks (India \& MEA) by automating the rollout of 300+ products across 15 categories into a multi-tenant CMS built on Spring Boot and gRPC.
+    \item Migrated marketplace analytics from MySQL to ClickHouse with Airflow-orchestrated ETL, cutting report generation from hours to 30 seconds and letting teams build their own self-serve Superset dashboards.
+    \item Trimmed frontend dev time by 75\% across 6 banking categories by building a core NPM package and leading 6 engineers through the Merchant Marketplace's migration to a Svelte micro-frontend architecture with atomic design patterns.
+    \item Built the Checkout System handling 100,000+ daily transactions, with multi-currency formatting, discount coupons, cart expiry logic, and Wallet/Coupon payments on Svelte and Spring Boot.
+\end{itemize}
+
+% ==== PROJECTS ====
+\section{Projects}
+
+\resumeHeading
+{Constitutional AI Framework on Small Language Model}
+{\href{https://github.com/AjinkyaTaranekar/trustworthy-personalized-ai}{GitHub}}
+{FastAPI, Python, PyTorch, Unsloth, Qwen3, HuggingFace}{Sept 2025 -- Aug 2026}
+\begin{itemize}
+    \item Fine-tuned a Qwen3-0.6B PyTorch LLM using Unsloth's 16-bit LoRA on synthetic constitutional data to test how alignment reliability holds up at on-device scale.
+    \item Developed a modular Python reliability harness, combining a constitutional scratchpad, a 5W+H user memory model, and a dependency monitor, to enable multi-turn personalization without retraining the model.
+    \item Designed a dual-SFT Thinker-Executor architecture that splits reasoning and tool-calling across two sub-1B models, keeping everything on-device to preserve data privacy.
+\end{itemize}
+
+\resumeHeading
+{Atlas: ML Training Reliability \& Observability ~|~ HackEurope 2026, Best Use of Crusoe API}{\href{https://devpost.com/software/atlas-3z6s2y}{Devpost}}
+{FastAPI, Python, PyTorch, Next.js, SQLite, Crusoe Cloud, Anthropic Claude, WebGL, CodeCarbon, MCP}{Feb 2026}
+\begin{itemize}
+    \item Engineered a real-time observability platform for PyTorch training runs; a custom Python Observer library streams per-epoch telemetry to a FastAPI backend that runs 30+ diagnostic heuristics, covering layer health, gradient flow, architectural waste, early stopping, device utilisation, and carbon emissions.
+    \item Extended the diagnostics engine with an agentic AI pipeline of LLM-powered agents, tracked CO\textsubscript{2} emissions via CodeCarbon using EU ETS pricing, and exposed the tools through an MCP server for Claude Desktop.
+\end{itemize}
+
+\resumeHeading
+{PG AI: PostgreSQL AI Toolkit Extension}{\href{https://github.com/AjinkyaTaranekar/ai_toolkit}{GitHub}}
+{PostgreSQL, C++, OpenAI API, Anthropic API, OpenRouter}{Nov 2025}
+\begin{itemize}
+    \item Created a PostgreSQL extension for CLI-level AI tooling: natural-language-to-SQL queries via \texttt{ai\_toolkit.query(...)}, query explanation via \texttt{explain\_query(...)}, and error diagnosis via \texttt{explain\_error(...)}.
+    \item Supported multi-provider LLM config (OpenAI, Anthropic, OpenRouter) with persistent, schema-aware ``database memory'' for context-aware query generation.
+\end{itemize}
+
+% ==== SKILLS ====
+\section{Technical Skills}
+
+{\footnotesize
+\textbf{Languages:} Python, Java, Go, TypeScript, JavaScript, C++, Dart, SQL \\[1.5pt]
+\textbf{Backend \& Distributed Systems:} FastAPI, Spring Boot, gRPC/Protobuf, REST APIs, Microservices, Kafka, Redis, Airflow, Apache NiFi \\[1.5pt]
+\textbf{DevOps \& Cloud:} Docker, Docker Swarm, Kubernetes, Helm, Terraform, Azure, GCP, GitHub Actions, Istio, Jenkins, CI/CD, DevSecOps \\[1.5pt]
+\textbf{Security \& Identity:} OIDC/OAuth2.0, IAM Architecture, HashiCorp Vault, Secret Management, Supply Chain Security, CIS Benchmark Hardening, Multi-Tenant Access Control \\[1.5pt]
+\textbf{Observability \& Reliability:} Grafana, Prometheus, OpenSearch, ELK Stack, Superset, GoAlert, PMM, Slack Alerts, SLA/SLO \\[1.5pt]
+\textbf{Data \& Storage:} PostgreSQL, MySQL, CockroachDB, ClickHouse, Elasticsearch, Milvus, FalkorDB, SQLite \\[1.5pt]
+\textbf{AI \& LLMs:} LangChain, RAG, Vector Search, Chunking, Prompt/Context Engineering, MCP, PyTorch Fine-Tuning (LoRA/Unsloth), Multi-Agent Orchestration, Harness Engineering, LLM APIs (Claude, GPT, Qwen) \\[1.5pt]
+\textbf{Frontend:} React, Svelte, Next.js, Flutter, Micro-Frontends, NPM Packaging, Atomic Design Systems, Figma Plugins
+}
+
+% ==== EDUCATION ====
+\section{Education}
+
+{\footnotesize
+\textbf{Trinity College Dublin}: MSc Computer Science, Future Networked Systems, 1:1, Distinction \hfill \textit{Dublin, Ireland ~|~ Sept 2025 -- Sept 2026}\\[1pt]
+\textbf{Shri G.S. Institute of Technology and Science}: B.Tech CS, CGPA 9.04/10.0, Rank 1st, Gold Medal \hfill \textit{Indore, India ~|~ Aug 2018 -- Jun 2022}
+}
+
+\end{document}

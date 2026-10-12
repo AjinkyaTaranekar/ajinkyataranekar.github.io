@@ -8,6 +8,10 @@ node_modules
 /.svelte-kit
 /build
 
+# LaTeX build files from compiling the résumé in place (npm run resume builds in a temp dir)
+/resume/*
+!/resume/*.tex
+
 # OS
 .DS_Store
 Thumbs.db
