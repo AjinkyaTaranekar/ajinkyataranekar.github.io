@@ -2,8 +2,10 @@
   import { reveal } from "$lib/actions/reveal";
   import { spotlight } from "$lib/actions/spotlight";
   import type { Project } from "$lib/types/portfolio";
-  import { emphasize } from "$lib/utils/emphasize";
+  import { track } from "$lib/utils/analytics";
+  import { projectLinks as links, projectPath, youtubeEmbed, youtubeId } from "$lib/utils/project";
   import { fade, scale } from "svelte/transition";
+  import HighlightList from "./HighlightList.svelte";
   import Icon from "./Icon.svelte";
   import ProjectCover from "./ProjectCover.svelte";
   import SectionHeader from "./SectionHeader.svelte";
@@ -26,9 +28,14 @@
   let closeBtn = $state<HTMLButtonElement>();
   let lastFocus: HTMLElement | null = null;
 
-  function show(project: Project, event: MouseEvent) {
+  // Titles are real links to the project page (crawlable, and they open in a
+  // new tab with a modifier key); a plain click opens the dialog instead.
+  function show(project: Project, placement: string, event: MouseEvent) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
     lastFocus = event.currentTarget as HTMLElement;
     open = project;
+    track("project_open", { project: project.slug, placement });
   }
 
   function close() {
@@ -37,48 +44,17 @@
   }
 
   $effect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    if (open) closeBtn?.focus();
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    closeBtn?.focus();
+    // Also runs on unmount, e.g. when "Project page" navigates away with the dialog open
+    return () => {
+      document.body.style.overflow = "";
+    };
   });
-
-  // "https://www.youtube.com/watch?v=ID" / "youtu.be/ID" -> "ID"
-  const youtubeId = (url?: string) => url?.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1];
-
-  function links(project: Project) {
-    return [
-      project.github && { href: project.github, label: "Source", icon: "github" },
-      project.video && { href: project.video, label: "Watch demo", icon: "play" },
-      project.demo && { href: project.demo, label: "Live demo", icon: "arrow-up-right" },
-      project.link && { href: project.link, label: "Read more", icon: "arrow-up-right" },
-      project.document && { href: project.document, label: "Report", icon: "file" },
-    ].filter(Boolean) as { href: string; label: string; icon: string }[];
-  }
-
-  // "Teaching the format: training on…" -> a short bold label plus the body
-  function splitLabel(text: string) {
-    const match = text.match(/^([^:]{3,32}):\s+(.*)$/s);
-    return match ? { label: match[1], body: match[2] } : { label: "", body: text };
-  }
 </script>
 
 <svelte:window onkeydown={(e) => e.key === "Escape" && open && close()} />
-
-{#snippet highlightList(items: string[], size: string)}
-  <ul class="space-y-2">
-    {#each items as highlight}
-      {@const { label, body } = splitLabel(highlight)}
-      <li class="flex gap-2.5 leading-relaxed text-muted {size}">
-        <Icon name="arrow-right" class="mt-[0.35em] h-3.5 w-3.5 shrink-0 text-accent-ink" />
-        <span>
-          {#if label}<strong class="font-semibold text-fg">{label}:</strong>{" "}{/if}
-          {#each emphasize(body) as seg}
-            {#if seg.em}<strong class="font-medium text-fg">{seg.text}</strong>{:else}{seg.text}{/if}
-          {/each}
-        </span>
-      </li>
-    {/each}
-  </ul>
-{/snippet}
 
 {#snippet badges(project: Project)}
   {#if project.video}
@@ -116,7 +92,7 @@
     </ul>
     <div class="relative z-[3] flex gap-1">
       {#each links(project) as link}
-        <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label}>
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label} data-track="project_link_click" data-track-project={project.slug} data-track-link-type={link.kind} data-track-placement="card">
           <Icon name={link.icon} class="h-4 w-4" />
         </a>
       {/each}
@@ -150,9 +126,9 @@
             <div class="flex flex-col p-4 sm:p-6 lg:col-span-5 lg:p-8">
               <div class="flex items-start justify-between gap-4">
                 <h3 class="text-2xl font-medium leading-tight tracking-tight sm:text-[1.7rem]">
-                  <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                  <a href={projectPath(project.slug)} class="after:absolute after:inset-0 after:z-[2] after:content-['']" data-sveltekit-preload-data="off" onclick={(e) => show(project, "featured", e)}>
                     {project.title}
-                  </button>
+                  </a>
                 </h3>
                 <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border text-muted transition-all duration-500 hairline group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
                   <Icon name="arrow-up-right" class="h-4 w-4" />
@@ -160,7 +136,7 @@
               </div>
               <p class="mt-3 line-clamp-4 leading-relaxed text-muted">{project.description}</p>
               {#if project.highlights?.length}
-                <div class="mt-5">{@render highlightList(project.highlights.slice(0, 4), "text-sm")}</div>
+                <div class="mt-5"><HighlightList items={project.highlights.slice(0, 4)} size="text-sm" /></div>
               {/if}
               {@render footer(project, 5)}
             </div>
@@ -189,9 +165,9 @@
           <div class="flex flex-1 flex-col p-4 sm:p-5">
             <div class="flex items-start justify-between gap-4">
               <h3 class="text-lg font-medium leading-snug tracking-tight sm:text-xl">
-                <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                <a href={projectPath(project.slug)} class="after:absolute after:inset-0 after:z-[2] after:content-['']" data-sveltekit-preload-data="off" onclick={(e) => show(project, "grid", e)}>
                   {project.title}
-                </button>
+                </a>
               </h3>
               <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border text-muted transition-all duration-500 hairline group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
                 <Icon name="arrow-up-right" class="h-4 w-4" />
@@ -199,7 +175,7 @@
             </div>
             <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{project.description}</p>
             {#if project.highlights?.length}
-              <div class="mt-4">{@render highlightList(project.highlights.slice(0, 2), "text-[0.85rem]")}</div>
+              <div class="mt-4"><HighlightList items={project.highlights.slice(0, 2)} size="text-[0.85rem]" /></div>
             {/if}
             {@render footer(project, MAX_TAGS)}
           </div>
@@ -219,9 +195,9 @@
             <li class="group relative border-b hairline">
               <div class="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg px-3 py-5 transition-colors duration-300 group-hover:bg-fg/[0.03]">
                 <h4 class="min-w-0 flex-1 text-base font-medium tracking-tight sm:text-lg">
-                  <button class="text-left after:absolute after:inset-0 after:z-[2] after:content-['']" onclick={(e) => show(project, e)}>
+                  <a href={projectPath(project.slug)} class="after:absolute after:inset-0 after:z-[2] after:content-['']" data-sveltekit-preload-data="off" onclick={(e) => show(project, "archive", e)}>
                     {project.title}
-                  </button>
+                  </a>
                 </h4>
                 {#if project.winner}
                   <span class="inline-flex items-center gap-1.5 font-mono text-2xs text-accent-ink">
@@ -235,7 +211,7 @@
                 </span>
                 <span class="relative z-[3] flex gap-1">
                   {#each links(project) as link}
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label}>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="{link.label}: {project.title}" title={link.label} data-track="project_link_click" data-track-project={project.slug} data-track-link-type={link.kind} data-track-placement="archive">
                       <Icon name={link.icon} class="h-4 w-4" />
                     </a>
                   {/each}
@@ -265,7 +241,7 @@
           <div class="aspect-video w-full bg-black">
             <iframe
               class="h-full w-full"
-              src="https://www.youtube-nocookie.com/embed/{youtubeId(open.video)}?rel=0"
+              src={youtubeEmbed(youtubeId(open.video)!)}
               title="{open.title} demo video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
@@ -290,7 +266,7 @@
         {#if open.highlights?.length}
           <div class="mt-6 rounded-xl border p-5 hairline">
             <p class="mb-3 font-mono text-2xs uppercase tracking-[0.18em] text-faint">Highlights</p>
-            {@render highlightList(open.highlights, "text-[0.95rem]")}
+            <HighlightList items={open.highlights} size="text-[0.95rem]" />
           </div>
         {/if}
         <ul class="mt-6 flex flex-wrap gap-1.5">
@@ -298,15 +274,16 @@
             <li class="chip">{tech}</li>
           {/each}
         </ul>
-        {#if links(open).length}
-          <div class="mt-8 flex flex-wrap gap-2">
-            {#each links(open) as link, i}
-              <a href={link.href} target="_blank" rel="noopener noreferrer" class={i === 0 ? "btn-primary" : "btn-ghost"}>
-                <Icon name={link.icon} /> {link.label}
-              </a>
-            {/each}
-          </div>
-        {/if}
+        <div class="mt-8 flex flex-wrap gap-2">
+          {#each links(open) as link, i}
+            <a href={link.href} target="_blank" rel="noopener noreferrer" class={i === 0 ? "btn-primary" : "btn-ghost"} data-track="project_link_click" data-track-project={open.slug} data-track-link-type={link.kind} data-track-placement="dialog">
+              <Icon name={link.icon} /> {link.label}
+            </a>
+          {/each}
+          <a href={projectPath(open.slug)} class="btn-ghost sm:ml-auto">
+            Project page <Icon name="arrow-right" class="h-4 w-4" />
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -13,6 +13,8 @@
   import Projects from "$lib/components/Projects.svelte";
   import QRCode from "$lib/components/QRCode.svelte";
   import Skills from "$lib/components/Skills.svelte";
+  import { track, trackSections } from "$lib/utils/analytics";
+  import { projectCommands } from "$lib/utils/commands";
   import { SITE_URL, absolute, jsonForScript, profileJsonLd } from "$lib/utils/seo";
   import { onMount } from "svelte";
   import type { PageData } from "./$types";
@@ -40,6 +42,7 @@
 
   onMount(() => {
     darkMode = document.documentElement.getAttribute("data-theme") !== "light";
+    return trackSections(["about", "experience", "projects", "skills", "education", "achievements", "photos", "contact"]);
   });
 
   // Theme switch with a circular reveal from the click point (View Transitions API)
@@ -76,6 +79,11 @@
   const scrollTo = (id: string) => () =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const openUrl = (url: string) => () => window.open(url, "_blank", "noopener,noreferrer");
+  // Palette actions aren't clicks on tracked elements, so they report themselves
+  const tracked = (event: string, params: Record<string, string>, run: () => void) => () => {
+    track(event, { ...params, placement: "palette" });
+    run();
+  };
 
   const commands = $derived<Command[]>(
     [
@@ -87,21 +95,22 @@
       { id: "education", label: "Education", group: "Navigate", icon: "graduation-cap", run: scrollTo("education") },
       { id: "photos", label: "Photography", group: "Navigate", icon: "camera", run: scrollTo("photos") },
       { id: "contact", label: "Contact", group: "Navigate", icon: "mail", run: scrollTo("contact") },
-      { id: "github", label: "GitHub", group: "Links", icon: "github", hint: "↗", run: openUrl(portfolio.social.github) },
-      { id: "linkedin", label: "LinkedIn", group: "Links", icon: "linkedin", hint: "↗", run: openUrl(portfolio.social.linkedin) },
-      portfolio.social.twitter && { id: "x", label: "X / Twitter", group: "Links", icon: "x", hint: "↗", run: openUrl(portfolio.social.twitter) },
-      portfolio.social.resume && { id: "resume", label: "Résumé", group: "Links", icon: "file", hint: "PDF ↗", run: openUrl(portfolio.social.resume) },
+      ...projectCommands(portfolio.projects),
+      { id: "github", label: "GitHub", group: "Links", icon: "github", hint: "↗", run: tracked("social_click", { network: "github" }, openUrl(portfolio.social.github)) },
+      { id: "linkedin", label: "LinkedIn", group: "Links", icon: "linkedin", hint: "↗", run: tracked("social_click", { network: "linkedin" }, openUrl(portfolio.social.linkedin)) },
+      portfolio.social.twitter && { id: "x", label: "X / Twitter", group: "Links", icon: "x", hint: "↗", run: tracked("social_click", { network: "x" }, openUrl(portfolio.social.twitter)) },
+      portfolio.social.resume && { id: "resume", label: "Résumé", group: "Links", icon: "file", hint: "PDF ↗", run: tracked("resume_open", {}, openUrl(portfolio.social.resume)) },
       {
         id: "copy-email",
         label: "Copy email address",
         group: "Actions",
         icon: "copy",
         hint: portfolio.personal.email,
-        run: () => navigator.clipboard?.writeText(portfolio.personal.email),
+        run: tracked("contact_click", { method: "copy_email" }, () => navigator.clipboard?.writeText(portfolio.personal.email)),
       },
-      { id: "email", label: "Send an email", group: "Actions", icon: "mail", run: () => (location.href = `mailto:${portfolio.personal.email}`) },
+      { id: "email", label: "Send an email", group: "Actions", icon: "mail", run: tracked("contact_click", { method: "email" }, () => (location.href = `mailto:${portfolio.personal.email}`)) },
       { id: "theme", label: darkMode ? "Switch to light theme" : "Switch to dark theme", group: "Actions", icon: darkMode ? "sun" : "moon", run: () => toggleTheme() },
-      { id: "share", label: "Share via QR code", group: "Actions", icon: "qr", run: () => (showQR = true) },
+      { id: "share", label: "Share via QR code", group: "Actions", icon: "qr", run: tracked("share", { method: "qr" }, () => (showQR = true)) },
     ].filter(Boolean) as Command[],
   );
 </script>

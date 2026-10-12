@@ -132,11 +132,14 @@
       <!-- Actions: email first, so visitors can reach out straight away -->
       <div class="animate-fade-up mt-9 flex flex-wrap items-center gap-3" style="animation-delay: 300ms">
         <div class="flex items-center">
-          <a href="mailto:{personal.email}" class="btn-primary rounded-r-md pr-4">
+          <a href="mailto:{personal.email}" class="btn-primary rounded-r-md pr-4" data-track="contact_click" data-track-method="email" data-track-placement="hero">
             <Icon name="mail" /> Email me
           </a>
           <button
             onclick={copyEmail}
+            data-track="contact_click"
+            data-track-method="copy_email"
+            data-track-placement="hero"
             class="btn-primary ml-px rounded-l-md px-3 py-3"
             aria-label={copied ? "Email address copied" : `Copy email address ${personal.email}`}
             title={copied ? "Copied!" : "Copy email address"}
@@ -149,7 +152,7 @@
           <Icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </a>
         {#if social?.resume}
-          <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          <a href={social.resume} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="resume_open" data-track-placement="hero">
             <Icon name="file" /> Résumé
           </a>
         {/if}
@@ -157,20 +160,20 @@
 
       <!-- Email address + socials -->
       <div class="animate-fade-up mt-5 flex flex-wrap items-center gap-x-4 gap-y-2" style="animation-delay: 340ms">
-        <a href="mailto:{personal.email}" class="link font-mono text-xs text-muted">{personal.email}</a>
+        <a href="mailto:{personal.email}" class="link font-mono text-xs text-muted" data-track="contact_click" data-track-method="email" data-track-placement="hero">{personal.email}</a>
         {#if copied}
           <span class="font-mono text-2xs text-accent-ink">Copied to clipboard</span>
         {/if}
         {#if social}
           <div class="-ml-2 flex items-center gap-1">
-            <a href={social.github} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+            <a href={social.github} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub" data-track="social_click" data-track-network="github" data-track-placement="hero">
               <Icon name="github" class="h-[18px] w-[18px]" />
             </a>
-            <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+            <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn" data-track="social_click" data-track-network="linkedin" data-track-placement="hero">
               <Icon name="linkedin" class="h-[17px] w-[17px]" />
             </a>
             {#if social.twitter}
-              <a href={social.twitter} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="X (Twitter)">
+              <a href={social.twitter} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="X (Twitter)" data-track="social_click" data-track-network="x" data-track-placement="hero">
                 <Icon name="x" class="h-4 w-4" />
               </a>
             {/if}

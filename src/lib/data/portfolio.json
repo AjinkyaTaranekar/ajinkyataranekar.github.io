@@ -16,13 +16,14 @@
     "email": "ajinkyataranekar26@gmail.com",
     "website": "https://ajinkyataranekar.github.io",
     "availability": "Open to opportunities",
+    "lookingFor": "SRE, backend, platform or GenAI roles and collaborations",
     "profileImage": "/assets/profile.jpg"
   },
   "social": {
     "github": "https://github.com/AjinkyaTaranekar",
     "linkedin": "https://www.linkedin.com/in/ajinkya-taranekar",
     "twitter": "https://twitter.com/ajinkyataranekr",
-    "resume": "https://drive.google.com/file/d/1J7--UOUDZx3nWBeGPJwDFLz0gFkdeCGd/view"
+    "resume": "/resume.pdf"
   },
   "seo": {
     "title": "Ajinkya Taranekar – Software & Site Reliability Engineer",
@@ -43,7 +44,8 @@
       "Kubernetes",
       "GenAI",
       "Svelte"
-    ]
+    ],
+    "sameAs": ["https://devpost.com/ajinkyataranekar26", "https://devpost.com/AjinkyaTaranekar"]
   },
   "stats": {
     "experience": "3+ Years",
@@ -53,6 +55,7 @@
     "learning": "∞"
   },
   "signals": {
+    "context": "Production work at Nuclei, CDNA Technologies (2022–2025)",
     "metrics": [
       { "label": "P0 alerts handled", "value": "1,400+" },
       { "label": "Resolution rate", "value": "91.7%" },
@@ -194,6 +197,7 @@
   ],
   "projects": [
     {
+      "slug": "constitutional-distillation",
       "title": "Constitutional Distillation for Trustworthy, Personalised AI",
       "description": "My MSc dissertation at Trinity College Dublin, supervised by Prof. Owen Conlan. An AI assistant that runs on your own phone keeps private conversations off the internet, but phone-sized models are tiny. Can a small 0.6-billion-parameter model (Qwen3) be taught a written 25-principle constitution (be honest, admit what it doesn't know, ask before assuming, use tools properly, personalise without inventing facts), and what does that cost? I built a test bench and trained the same model three different ways to find out.",
       "image": "/assets/projects/trustworthy-ai.webp",
@@ -219,6 +223,7 @@
       "featured": true
     },
     {
+      "slug": "atlas",
       "title": "Atlas – ML Training Observatory",
       "description": "A real-time observatory for PyTorch training runs, built at HackEurope 2026. A Python observer hooks into any training loop to stream loss, gradient, memory, profiler and carbon telemetry; a FastAPI diagnostics engine scores run health; and an adaptive AI agent on Crusoe Cloud explains what's going wrong and how to fix it, through a live Next.js dashboard with 3D network visualisation.",
       "image": "/assets/projects/atlas.webp",
@@ -245,6 +250,7 @@
       "featured": true
     },
     {
+      "slug": "beacon",
       "title": "Beacon – City-Scale Emergency Response Platform",
       "description": "A team-built emergency response platform for Irish local authorities that coordinates an incident end to end, from a citizen tapping \"Report Incident\" to the commander closing it: dispatching ground staff, broadcasting evacuation routes, streaming live city data and keeping an immutable audit trail, across twelve repositories.",
       "image": "/assets/projects/beacon.webp",
@@ -269,6 +275,7 @@
       "featured": false
     },
     {
+      "slug": "lumino",
       "title": "Lumino – Explainable Graph-Based Job Matching",
       "description": "An adaptive job recommendation platform built for CS7IS5 at Trinity College Dublin, where every match decision is explainable. An LLM turns resumes and job posts into knowledge graphs in Neo4j; embeddings are only used to link equivalent concepts, and all scoring is deterministic graph traversal.",
       "image": "/assets/projects/lumino.webp",
@@ -290,6 +297,7 @@
       "featured": false
     },
     {
+      "slug": "anti-ai-captcha",
       "title": "Anti-AI CAPTCHA System",
       "description": "Engineered a next-gen CAPTCHA system resilient against modern AI solvers by combining adversarial image generation, behavioural biometrics, browser fingerprinting, and proof-of-work throttling. Built full-stack attacker simulation pipelines to benchmark models like OCR, CNN/CTC, and LLM-guided attacks—demonstrating strong resistance under real adversarial stress.",
       "image": "/assets/projects/anti-ai-captcha.webp",
@@ -311,6 +319,7 @@
       ]
     },
     {
+      "slug": "pg-ai-toolkit",
       "title": "AI Toolkit – PostgreSQL Extension for Natural-Language Querying",
       "description": "Developed a PostgreSQL extension enabling natural-language querying, SQL error explanation, and schema-aware reasoning directly inside the database. Added multi-provider LLM support and a pluggable 'database memory' layer for context-rich responses—making analytics dramatically more accessible for analysts and product teams.",
       "image": "/assets/projects/ai_toolkit.webp",
@@ -333,6 +342,7 @@
       ]
     },
     {
+      "slug": "convo-ai",
       "title": "Convo AI - VoiceBot Agent Management System",
       "description": "Spearheaded R&D for VoiceBot SDKs in digital banking by integrating cutting-edge GenAI frameworks, delivering a Go + gRPC-based Agent Management System that slashed agent onboarding time to 5 minutes. Built for scalable, enterprise-grade digital banking solutions.",
       "image": "/assets/projects/voicebot.webp",
@@ -354,6 +364,7 @@
       ]
     },
     {
+      "slug": "hybrid-search-engine",
       "title": "In-House Search Engine (Part of Convo AI)",
       "description": "Designed & built an in-house search engine combining semantic vector and fuzzy search, streamlining data orchestration and cutting retrieval latency from 1s to 150ms. Implemented for high-performance data retrieval in production systems.",
       "image": "/assets/projects/searchengine.webp",
@@ -371,6 +382,7 @@
       ]
     },
     {
+      "slug": "dailify",
       "title": "Dailify - Curbside Pickup Service",
       "description": "Developed a curbside pickup service for Indian grocery stores to enable real-time inventory tracking and provide a convenient grocery pickup option for commuters. Implemented a microservices architecture using Spring Boot with a CI/CD pipeline using GitHub Actions on an Azure VM. Designed and executed end-to-end data ingestion and processing pipelines using ETL for inventory analysis, reducing query times by 85% by integrating Elasticsearch.",
       "image": "/assets/projects/dailify.png",
@@ -388,6 +400,7 @@
       "archived": true
     },
     {
+      "slug": "department-information-system",
       "title": "Department Information System",
       "description": "Built a mobile app with over 30+ interactive screens for the Computer Science department, enabling faculty and students to track and retrieve tasks and reports, improving efficiency by 60%. Utilised microservices in Spring Boot, automating CI/CD with GitHub Actions to streamline deployment and maintenance.",
       "image": "/assets/projects/dis.webp",
@@ -404,6 +417,7 @@
       "archived": true
     },
     {
+      "slug": "finneasy",
       "title": "FinnEasy - Gamified Stock Market Solution",
       "description": "Recognised as Best in Fintech at Hackitout for building 'FinnEasy,' a digital gamified stock market solution to streamline financial planning. Awarded among 50+ teams for innovation in fintech.",
       "image": "/assets/projects/finneasy.png",
@@ -415,6 +429,7 @@
       "archived": true
     },
     {
+      "slug": "mitra",
       "title": "M.I.T.R.A - Credit Worthiness Tool",
       "description": "2nd Runner-Up at TVS Credit EPIC Season 2. Developed 'M.I.T.R.A,' a credit-worthiness measuring tool for TVS Credit, focusing on innovation in data-driven inventory management for retail business persons.",
       "image": "/assets/projects/mitra.png",

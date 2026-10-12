@@ -156,7 +156,7 @@
       <button onclick={openPalette} class="icon-btn md:hidden" aria-label="Open command menu">
         <Icon name="search" />
       </button>
-      <button onclick={() => (showQR = true)} class="icon-btn" aria-label="Share this site">
+      <button onclick={() => (showQR = true)} class="icon-btn" aria-label="Share this site" data-track="share" data-track-method="qr" data-track-placement="nav">
         <Icon name="qr" />
       </button>
       <button
@@ -170,10 +170,10 @@
           </span>
         {/key}
       </button>
-      <a href="mailto:{email}" class="btn-primary ml-1 hidden !px-4 !py-2 text-xs sm:inline-flex">
+      <a href="mailto:{email}" class="btn-primary ml-1 hidden !px-4 !py-2 text-xs sm:inline-flex" data-track="contact_click" data-track-method="email" data-track-placement="nav">
         <Icon name="mail" class="h-3.5 w-3.5" /> Email me
       </a>
-      <a href="mailto:{email}" class="icon-btn sm:hidden" aria-label="Email me">
+      <a href="mailto:{email}" class="icon-btn sm:hidden" aria-label="Email me" data-track="contact_click" data-track-method="email" data-track-placement="nav">
         <Icon name="mail" />
       </a>
       <button
@@ -206,13 +206,13 @@
       {/each}
     </ul>
     <div class="mt-auto flex flex-wrap gap-2 animate-fade-up" style="animation-delay: 350ms">
-      <a href="mailto:{email}" class="btn-primary">
+      <a href="mailto:{email}" class="btn-primary" data-track="contact_click" data-track-method="email" data-track-placement="menu">
         <Icon name="mail" /> Email me
       </a>
-      <a href={social.github} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+      <a href={social.github} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="social_click" data-track-network="github" data-track-placement="menu">
         <Icon name="github" /> GitHub
       </a>
-      <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+      <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="btn-ghost" data-track="social_click" data-track-network="linkedin" data-track-placement="menu">
         <Icon name="linkedin" /> LinkedIn
       </a>
     </div>

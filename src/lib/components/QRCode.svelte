@@ -74,7 +74,7 @@
       {/if}
     </div>
 
-    <button onclick={copyLink} class="btn-ghost mt-6 w-full justify-between font-mono text-xs">
+    <button onclick={copyLink} class="btn-ghost mt-6 w-full justify-between font-mono text-xs" data-track="share" data-track-method="copy_link" data-track-placement="qr">
       <span class="truncate">{url.replace(/^https?:\/\//, "")}</span>
       <span class="flex items-center gap-1.5 {copied ? 'text-accent-ink' : 'text-muted'}">
         <Icon name={copied ? "check" : "copy"} class="h-3.5 w-3.5" />

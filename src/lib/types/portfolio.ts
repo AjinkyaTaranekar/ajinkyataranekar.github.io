@@ -7,6 +7,8 @@ export interface PersonalInfo {
   phone: string;
   email: string;
   availability: string;
+  /** The kinds of roles wanted, e.g. "SRE, backend or GenAI roles". */
+  lookingFor?: string;
   profileImage?: string;
   website?: string;
   /** A short personal philosophy, shown as a pull quote. */
@@ -38,6 +40,8 @@ export interface Experience {
 }
 
 export interface Project {
+  /** URL segment for the project page: /projects/<slug>. Keep it stable once published. */
+  slug: string;
   title: string;
   description: string;
   /** Cover image; a typographic cover is drawn if missing or it fails to load. */
@@ -114,6 +118,8 @@ export interface Signal {
 
 /** Real impact metrics rendered as a status-page card in the hero. */
 export interface Signals {
+  /** Where the numbers come from, so they are not misattributed (used in llms.txt). */
+  context?: string;
   metrics: Signal[];
   latency?: { label: string; from: string; to: string };
 }
@@ -129,6 +135,8 @@ export interface SeoInfo {
   image: string;
   imageAlt: string;
   keywords?: string[];
+  /** Extra profiles for structured data and llms.txt (e.g. Devpost), beyond the social links. */
+  sameAs?: string[];
 }
 
 export interface PortfolioData {

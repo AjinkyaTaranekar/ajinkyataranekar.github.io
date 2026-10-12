@@ -1,4 +1,5 @@
-import type { PortfolioData } from "$lib/types/portfolio";
+import type { PortfolioData, Project } from "$lib/types/portfolio";
+import { projectPath } from "./project";
 
 export const SITE_URL = "https://ajinkyataranekar.github.io";
 
@@ -32,8 +33,43 @@ export function profileJsonLd(data: PortfolioData, modified = new Date()) {
       alumniOf: data.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.institution })),
       award: data.achievements.map((a) => `${a.title} – ${a.organization} (${a.year})`),
       knowsAbout,
-      sameAs: [social.github, social.linkedin, social.twitter].filter(Boolean),
+      sameAs: [social.github, social.linkedin, social.twitter, ...(seo.sameAs ?? [])].filter(Boolean),
     },
+  };
+}
+
+/** Canonical URL of a project page. */
+export const projectUrl = (slug: string) => SITE_URL + projectPath(slug);
+
+/**
+ * schema.org description of a project page: the work itself (source code when
+ * there is a repository), credited to the Person on the home page, plus a breadcrumb.
+ */
+export function projectJsonLd(project: Project, person: { name: string }) {
+  const url = projectUrl(project.slug);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": project.github ? "SoftwareSourceCode" : "CreativeWork",
+        "@id": url + "#project",
+        name: project.title,
+        description: project.description,
+        url,
+        image: project.image ? absolute(project.image) : undefined,
+        author: { "@type": "Person", "@id": SITE_URL + "/#person", name: person.name, url: SITE_URL + "/" },
+        keywords: project.technologies.join(", "),
+        codeRepository: project.github,
+        award: project.winner,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: person.name, item: SITE_URL + "/" },
+          { "@type": "ListItem", position: 2, name: project.title, item: url },
+        ],
+      },
+    ],
   };
 }
 

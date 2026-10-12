@@ -3,7 +3,8 @@
 
   interface Props {
     name: string;
-    openPalette: () => void;
+    /** Shows the ⌘K hint; omitted on pages without the command palette. */
+    openPalette?: () => void;
   }
 
   let { name, openPalette }: Props = $props();
@@ -17,10 +18,13 @@
       <p class="text-faint">Built with ❤️ using Poha and Jalebi.</p>
     </div>
     <div class="flex items-center gap-3">
-      <button onclick={openPalette} class="hidden items-center gap-2 font-mono text-2xs text-faint transition-colors hover:text-fg sm:flex">
-        Press <kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd> to jump anywhere
-      </button>
-      <a href="#home" class="btn-ghost !px-3.5 !py-2 text-xs">
+      {#if openPalette}
+        <button onclick={openPalette} class="hidden items-center gap-2 font-mono text-2xs text-faint transition-colors hover:text-fg sm:flex">
+          Press <kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd> to jump anywhere
+        </button>
+      {/if}
+      <!-- "#top" scrolls to the top of any page, no matching id needed -->
+      <a href="#top" class="btn-ghost !px-3.5 !py-2 text-xs">
         <Icon name="arrow-up" class="h-3.5 w-3.5" /> Back to top
       </a>
     </div>

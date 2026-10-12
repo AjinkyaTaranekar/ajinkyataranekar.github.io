@@ -40,11 +40,11 @@
 
   const links = $derived(
     [
-      { label: "GitHub", value: social.github.replace(/^https?:\/\/(www\.)?/, ""), href: social.github, icon: "github" },
-      { label: "LinkedIn", value: social.linkedin.replace(/^https?:\/\/(www\.)?/, ""), href: social.linkedin, icon: "linkedin" },
-      social.twitter && { label: "X / Twitter", value: "@" + social.twitter.split("/").pop(), href: social.twitter, icon: "x" },
-      social.resume && { label: "Résumé", value: "View PDF", href: social.resume, icon: "file" },
-    ].filter(Boolean) as { label: string; value: string; href: string; icon: string }[],
+      { label: "GitHub", value: social.github.replace(/^https?:\/\/(www\.)?/, ""), href: social.github, icon: "github", event: "social_click" },
+      { label: "LinkedIn", value: social.linkedin.replace(/^https?:\/\/(www\.)?/, ""), href: social.linkedin, icon: "linkedin", event: "social_click" },
+      social.twitter && { label: "X / Twitter", value: "@" + social.twitter.split("/").pop(), href: social.twitter, icon: "x", event: "social_click" },
+      social.resume && { label: "Résumé", value: "View PDF", href: social.resume, icon: "file", event: "resume_open" },
+    ].filter(Boolean) as { label: string; value: string; href: string; icon: string; event: string }[],
   );
 </script>
 
@@ -67,13 +67,16 @@
             <span class="serif-accent text-accent-ink">that lasts.</span>
           </h2>
           <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">
-            {personal.availability}: SRE, backend, platform or GenAI roles and collaborations.
+            {personal.availability}{personal.lookingFor ? `: ${personal.lookingFor}` : ""}.
             My inbox is always open.
           </p>
 
           <!-- Click-to-copy email -->
           <button
             onclick={copyEmail}
+            data-track="contact_click"
+            data-track-method="copy_email"
+            data-track-placement="contact"
             class="group mt-10 flex max-w-full items-center gap-3 rounded-2xl border bg-bg/60 py-3 pl-5 pr-3 text-left transition-colors hairline hover:border-accent/60"
             aria-label="Copy email address {personal.email}"
           >
@@ -91,12 +94,12 @@
           </p>
 
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="mailto:{personal.email}" class="btn-primary group">
+            <a href="mailto:{personal.email}" class="btn-primary group" data-track="contact_click" data-track-method="email" data-track-placement="contact">
               <Icon name="mail" /> Say hello
               <Icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </a>
             {#if personal.phone}
-              <a href="tel:{personal.phone.replace(/\s/g, '')}" class="btn-ghost font-mono text-xs">{personal.phone}</a>
+              <a href="tel:{personal.phone.replace(/\s/g, '')}" class="btn-ghost font-mono text-xs" data-track="contact_click" data-track-method="phone" data-track-placement="contact">{personal.phone}</a>
             {/if}
           </div>
         </div>
@@ -124,6 +127,9 @@
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-track={link.event}
+                  data-track-network={link.event === "social_click" ? link.icon : undefined}
+                  data-track-placement="contact"
                   class="group flex items-center gap-4 py-4 transition-colors"
                 >
                   <Icon name={link.icon} class="h-[18px] w-[18px] text-muted transition-colors group-hover:text-fg" />
