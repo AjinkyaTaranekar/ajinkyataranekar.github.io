@@ -75,7 +75,8 @@ export interface Education {
 
 export interface Skill {
   name: string;
-  level: number;
+  /** Self-rated 0–100. Not shown on the site; optional. */
+  level?: number;
   experience?: "Expert" | "Advanced" | "Intermediate" | "Proficient";
   years?: string;
 }

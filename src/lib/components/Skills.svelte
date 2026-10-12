@@ -18,6 +18,7 @@
     [/frontend/i, "layout"],
     [/database|data/i, "database"],
     [/devops|cloud/i, "cloud"],
+    [/secur|identity/i, "shield"],
     [/observab|analytic/i, "activity"],
     [/genai|ml|ai\b/i, "brain"],
     [/tool|method/i, "wrench"],
@@ -35,10 +36,10 @@
       description="Breadth across the stack, depth where it matters: distributed backends, data infrastructure and keeping production healthy."
     />
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {#each skillCategories as category, i}
         {@const icon = iconFor(category.name)}
-        <div class="card group p-6" use:spotlight use:reveal={{ delay: (i % 4) * 70 }}>
+        <div class="card group p-6" use:spotlight use:reveal={{ delay: (i % 3) * 70 }}>
           <div class="flex items-center justify-between">
             <span class="grid h-10 w-10 place-items-center rounded-xl border bg-surface-2 text-fg transition-colors duration-300 hairline group-hover:border-accent group-hover:bg-accent group-hover:text-accent-fg">
               {#if icon}

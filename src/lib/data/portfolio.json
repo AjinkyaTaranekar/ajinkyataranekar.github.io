@@ -512,7 +512,9 @@
         { "name": "Go", "level": 85 },
         { "name": "TypeScript", "level": 87 },
         { "name": "JavaScript", "level": 90 },
-        { "name": "Dart", "level": 80 }
+        { "name": "Dart", "level": 80 },
+        { "name": "C++" },
+        { "name": "SQL" }
       ]
     },
     {
@@ -536,7 +538,11 @@
         { "name": "NPM Packaging", "level": 88 },
         { "name": "BFF Pattern", "level": 85 },
         { "name": "Figma", "level": 82 },
-        { "name": "Atomic Design", "level": 88 }
+        { "name": "Atomic Design", "level": 88 },
+        { "name": "React" },
+        { "name": "Next.js" },
+        { "name": "Micro-Frontends" },
+        { "name": "Figma Plugins" }
       ]
     },
     {
@@ -548,7 +554,12 @@
         { "name": "Elasticsearch", "level": 90 },
         { "name": "Apache NiFi", "level": 82 },
         { "name": "Redis", "level": 80 },
-        { "name": "Kafka", "level": 85 }
+        { "name": "Kafka", "level": 85 },
+        { "name": "PostgreSQL" },
+        { "name": "CockroachDB" },
+        { "name": "SQLite" },
+        { "name": "FalkorDB" },
+        { "name": "Apache Airflow" }
       ]
     },
     {
@@ -560,7 +571,26 @@
         { "name": "Microsoft Azure", "level": 82 },
         { "name": "GitHub Actions", "level": 90 },
         { "name": "Istio", "level": 78 },
-        { "name": "CI/CD", "level": 87 }
+        { "name": "CI/CD", "level": 87 },
+        { "name": "Terraform" },
+        { "name": "Helm" },
+        { "name": "Google Cloud (GCP)" },
+        { "name": "Jenkins" },
+        { "name": "Docker Swarm" },
+        { "name": "DevSecOps" }
+      ]
+    },
+    {
+      "name": "Security & Identity",
+      "icon": "🔐",
+      "skills": [
+        { "name": "OIDC / OAuth 2.0" },
+        { "name": "IAM Architecture" },
+        { "name": "HashiCorp Vault" },
+        { "name": "Secret Management" },
+        { "name": "Supply Chain Security" },
+        { "name": "CIS Benchmark Hardening" },
+        { "name": "Multi-Tenant Access Control" }
       ]
     },
     {
@@ -572,7 +602,10 @@
         { "name": "PMM", "level": 80 },
         { "name": "Superset", "level": 82 },
         { "name": "GoAlert", "level": 78 },
-        { "name": "ELK Stack", "level": 85 }
+        { "name": "ELK Stack", "level": 85 },
+        { "name": "Prometheus" },
+        { "name": "SLA / SLO" },
+        { "name": "Slack Alerts" }
       ]
     },
     {
@@ -584,7 +617,14 @@
         { "name": "OpenAI", "level": 82 },
         { "name": "Azure AI", "level": 85 },
         { "name": "RAG", "level": 84 },
-        { "name": "MCP", "level": 80 }
+        { "name": "MCP", "level": 80 },
+        { "name": "PyTorch Fine-Tuning (LoRA / Unsloth)" },
+        { "name": "Multi-Agent Orchestration" },
+        { "name": "Prompt & Context Engineering" },
+        { "name": "Vector Search" },
+        { "name": "Chunking" },
+        { "name": "Harness Engineering" },
+        { "name": "LLM APIs (Claude, GPT, Qwen)" }
       ]
     },
     {
